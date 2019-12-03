@@ -1,0 +1,4 @@
+addons-list:
+    - crnd_web_button_box_full_width
+git-sources:
+    - github: crnd-inc/crnd-web
