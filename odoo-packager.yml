@@ -1,0 +1,14 @@
+addons-list:
+    - generic_request
+    - crnd_service_desk
+    - crnd_wsd
+    - bureaucrat_helpdesk_lite
+git-sources:
+    - crnd: crnd/bureaucrat-generics
+    - crnd: crnd/bureaucrat-service
+    - crnd: crnd/bureaucrat-bundles
+known-addons:
+    - generic_mixin
+    - crnd_web_diagram_plus
+    - crnd_web_list_popover_widget
+    - web_widget_colorpicker
