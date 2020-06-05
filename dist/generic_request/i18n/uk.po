@@ -150,7 +150,7 @@ msgid "<span class=\"text-muted\">\n"
 "                                                    <span>Undefined</span>\n"
 "                                                    </span>"
 msgstr "<span class=\"text-muted\">\n"
--"                                                    <span class=\"fa fa-bars mr4\" title=\"Категорія\"/>\n"
+"                                                    <span class=\"fa fa-bars mr4\" title=\"Категорія\"/>\n"
 "                                                    <span>Невизначено</span>\n"
 "                                                    </span>"
 

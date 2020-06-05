@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-09 16:08+0000\n"
-"PO-Revision-Date: 2020-01-09 16:08+0000\n"
+"POT-Creation-Date: 2020-05-27 13:47+0000\n"
+"PO-Revision-Date: 2020-05-27 13:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -71,12 +71,19 @@ msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
-msgid "<span class=\"wsd_request header-bg-filler\">Request</span>"
+msgid "<span class=\"header-bg-filler\">Request</span>\n"
+"                                    <span class=\"header-separator-splitter\"/>"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
+msgid "<span class=\"pull-right label\" id=\"characters_left_label\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Remaining characters.\"/>"
 msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
-msgid "<span class=\"wsd_request header-bg-filler\">Response</span>"
+msgid "<span class=\"wsd_request header-bg-filler\">Response</span>\n"
+"                                    <span class=\"header-separator-splitter\"/>"
 msgstr ""
 
 #. module: crnd_wsd
@@ -100,11 +107,11 @@ msgid "Accepted"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/helpers.py:86
-#: code:addons/crnd_wsd/controllers/helpers.py:92
-#: code:addons/crnd_wsd/controllers/helpers.py:99
-#: code:addons/crnd_wsd/controllers/helpers.py:125
-#: code:addons/crnd_wsd/controllers/helpers.py:136
+#: code:addons/crnd_wsd/controllers/helpers.py:104
+#: code:addons/crnd_wsd/controllers/helpers.py:110
+#: code:addons/crnd_wsd/controllers/helpers.py:117
+#: code:addons/crnd_wsd/controllers/helpers.py:143
+#: code:addons/crnd_wsd/controllers/helpers.py:154
 #, python-format
 msgid "Access denied"
 msgstr ""
@@ -299,6 +306,21 @@ msgid "Date assigned"
 msgstr ""
 
 #. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+msgid "Deadline date"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
+msgid "Deadline: {{rel_req.deadline_date}}"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
+msgid "Deadline: {{req.deadline_date}}"
+msgstr ""
+
+#. module: crnd_wsd
 #: selection:request.stage.route,website_button_style:0
 msgid "Default"
 msgstr ""
@@ -396,7 +418,12 @@ msgid "Here is just example of instruction."
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/helpers.py:23
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Hours"
+msgstr ""
+
+#. module: crnd_wsd
+#: code:addons/crnd_wsd/controllers/helpers.py:24
 #, python-format
 msgid "Image size excessive, uploaded images must be smaller than 42 million pixel"
 msgstr ""
@@ -462,6 +489,11 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_filterbox
 msgid "Open"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Planned time"
 msgstr ""
 
 #. module: crnd_wsd
@@ -540,6 +572,12 @@ msgid "Request Category"
 msgstr ""
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_company__request_limit_max_text_size
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings__request_limit_max_text_size
+msgid "Request Limit Max Text Size"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.model,name:crnd_wsd.model_request_stage_route
 msgid "Request Stage Route"
 msgstr ""
@@ -583,9 +621,15 @@ msgid "Request kind"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:380
+#: code:addons/crnd_wsd/controllers/main.py:382
 #, python-format
 msgid "Request text is empty!"
+msgstr ""
+
+#. module: crnd_wsd
+#: code:addons/crnd_wsd/controllers/main.py:389
+#, python-format
+msgid "Request text is too long!"
 msgstr ""
 
 #. module: crnd_wsd
@@ -786,6 +830,11 @@ msgid "This request type is used to request access to printer."
 msgstr ""
 
 #. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Time spent"
+msgstr ""
+
+#. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 msgid "To discussion"
 msgstr ""
@@ -793,6 +842,11 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 msgid "To response"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Tracked time"
 msgstr ""
 
 #. module: crnd_wsd
@@ -811,7 +865,7 @@ msgid "Type\n"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:429
+#: code:addons/crnd_wsd/controllers/main.py:443
 #, python-format
 msgid "Unknown server error. See server logs."
 msgstr ""
@@ -918,6 +972,11 @@ msgstr ""
 #: code:addons/crnd_wsd/static/src/js/widgets.js:80
 #, python-format
 msgid "less"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "of"
 msgstr ""
 
 #. module: crnd_wsd
