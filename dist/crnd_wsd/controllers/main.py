@@ -33,7 +33,7 @@ def can_read_request(record):
     :return: True or False
     """
     try:
-        record = record.sudo(http.request.env.user)
+        record = record.with_user(http.request.env.user)
         record.check_access_rights('read')
         record.check_access_rule('read')
     except AccessError:
@@ -375,10 +375,20 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
 
     def _request_new_validate_data(self, req_type, req_category,
                                    req_text, data, **post):
-        errors = []
+        errors = {}
         if not req_text or req_text == '<p><br></p>':
-            errors.append(_(
-                "Request text is empty!"))
+            errors.update({
+                'request_text': {
+                    'error_text': _(
+                        "Request text is empty!")}})
+
+        max_text_size = request.env.user.company_id.request_limit_max_text_size
+        if max_text_size and len(req_text) > max_text_size:
+            errors.update({
+                'request_text': {
+                    'error_text': _(
+                        "Request text is too long!")}})
+
         return errors
 
     def _request_new_prepare_data(self, req_type, req_category,
@@ -409,6 +419,7 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
         values.update({
             'get_redirect': get_redirect,
         })
+        values['validation_errors'] = {}
 
         if request.httprequest.method == 'POST':
             req_data = self._request_new_prepare_data(
@@ -420,21 +431,23 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
             if not validation_errors:
                 try:
                     req = request.env['request.request'].create(req_data)
+                    req._request_bind_attachments()
                 except (UserError, AccessError, ValidationError) as exc:
-                    validation_errors.append(ustr(exc))
+                    validation_errors.update({'error': {
+                        'error_text': ustr(exc)}})
                 except Exception:
                     _logger.error(
                         "Error caught during request creation", exc_info=True)
-                    validation_errors.append(
-                        _("Unknown server error. See server logs."))
+                    validation_errors.update({'error': {
+                        'error_text':
+                            _("Unknown server error. See server logs.")}})
                 else:
                     return request.render(
                         "crnd_wsd.wsd_requests_new_congratulation",
                         {'req': req.sudo()})
 
             values['validation_errors'] = validation_errors
-            # TODO: update values with posted values to save data entered by
-            # user
+            values.update(req_data)
         return request.render(
             "crnd_wsd.wsd_requests_new_request_data", values)
 

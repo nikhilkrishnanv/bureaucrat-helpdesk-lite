@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* crnd_service_desk
+# 	* crnd_service_desk
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-19 12:34+0000\n"
-"PO-Revision-Date: 2019-09-19 12:34+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2020-05-27 17:08+0000\n"
+"PO-Revision-Date: 2020-05-27 17:08+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,48 +19,47 @@ msgstr ""
 #: model:request.stage,name:crnd_service_desk.request_stage_type_incident_classification
 #: model:request.stage.route,name:crnd_service_desk.request_stage_route_type_incident_new_to_classification
 msgid "Classification"
-msgstr "Класифікація"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model:request.stage,name:crnd_service_desk.request_stage_type_incident_done
 #: model:request.stage.route,name:crnd_service_desk.request_stage_route_type_incident_progress_to_done
 msgid "Done"
-msgstr "Виконано"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model:request.stage,name:crnd_service_desk.request_stage_type_incident_draft
 msgid "Draft"
-msgstr "Чорновик"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model:request.type,name:crnd_service_desk.request_type_incident
 msgid "Incident"
-msgstr "Інцидент"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model:request.stage,name:crnd_service_desk.request_stage_type_incident_new
 #: model:request.stage.route,name:crnd_service_desk.request_stage_route_type_incident_draft_to_new
 msgid "New"
-msgstr "Новий"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model:request.stage,name:crnd_service_desk.request_stage_type_incident_progress
 #: model:request.stage.route,name:crnd_service_desk.request_stage_route_type_incident_classification_to_progress
 msgid "Progress"
-msgstr "В процесі"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model:request.stage.route,name:crnd_service_desk.request_stage_route_type_incident_classification_to_rejected
 msgid "Reject"
-msgstr "Відхилити"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model:request.stage,name:crnd_service_desk.request_stage_type_incident_rejected
 msgid "Rejected"
-msgstr "Відхилено"
+msgstr ""
 
 #. module: crnd_service_desk
 #: model_terms:request.type,help_html:crnd_service_desk.request_type_incident
 msgid "This is the type of incident request."
-msgstr "Цей тип запитів призначено для інцидентів."
-
+msgstr ""
