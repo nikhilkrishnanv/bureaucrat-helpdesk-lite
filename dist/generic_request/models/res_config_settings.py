@@ -17,7 +17,6 @@ FEATURE_MODULES = [
     'generic_request_reopen_as',
     'generic_request_route_auto',
     'generic_request_service',
-    'generic_request_tag',
     'generic_request_mail',
     'generic_request_api',
     'generic_request_survey',
@@ -62,8 +61,6 @@ class ResConfigSettings(models.TransientModel):
         string="Use Automatic Routes")
     module_generic_request_service = fields.Boolean(
         string="Use Services")
-    module_generic_request_tag = fields.Boolean(
-        string="Use Tags")
     module_generic_request_mail = fields.Boolean(
         string="Use Mail Sources")
     module_generic_request_api = fields.Boolean(
@@ -108,8 +105,6 @@ class ResConfigSettings(models.TransientModel):
         compute="_compute_generic_request_modules_can_install", readonly=True)
     need_install_generic_request_service = fields.Boolean(
         compute="_compute_generic_request_modules_can_install", readonly=True)
-    need_install_generic_request_tag = fields.Boolean(
-        compute="_compute_generic_request_modules_can_install", readonly=True)
     need_install_generic_request_mail = fields.Boolean(
         compute="_compute_generic_request_modules_can_install", readonly=True)
     need_install_generic_request_api = fields.Boolean(
@@ -130,6 +125,8 @@ class ResConfigSettings(models.TransientModel):
     )
     request_event_auto_remove = fields.Boolean(
         related='company_id.request_event_auto_remove', readonly=False)
+    request_mail_suggest_partner = fields.Boolean(
+        related='company_id.request_mail_suggest_partner', readonly=False)
 
     @api.depends('company_id')
     def _compute_generic_request_modules_can_install(self):

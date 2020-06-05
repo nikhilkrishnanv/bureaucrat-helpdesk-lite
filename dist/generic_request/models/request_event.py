@@ -34,6 +34,10 @@ class RequestEvent(models.Model):
     old_text = fields.Html(readonly=True)
     new_text = fields.Html(readonly=True)
 
+    # Change request deadline
+    old_deadline = fields.Date()
+    new_deadline = fields.Date()
+
     # Request stage change
     route_id = fields.Many2one('request.stage.route', readonly=True)
     old_stage_id = fields.Many2one('request.stage', readonly=True)

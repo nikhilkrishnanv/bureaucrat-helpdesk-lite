@@ -29,6 +29,13 @@ class RequestType(models.Model):
         'request_type_category_rel', 'type_id', 'category_id',
         'Categories', required=False, index=True)
 
+    tag_category_ids = fields.Many2many(
+        'generic.tag.category', 'request_type_tag_category_rel',
+        'type_id', 'category_id', string='Tag Categories',
+        domain=[('model_id.model', '=', 'request.request')],
+        help='Restrict available tags for requests of this type '
+             'by these categories')
+
     # Priority configuration
     complex_priority = fields.Boolean(
         default=False,
@@ -99,6 +106,14 @@ class RequestType(models.Model):
     send_default_reopened_notification = fields.Boolean(default=True)
     reopened_notification_show_request_text = fields.Boolean(default=True)
     reopened_notification_show_response_text = fields.Boolean(default=False)
+
+    # Timesheets
+    use_timesheet = fields.Boolean()
+    timesheet_activity_ids = fields.Many2many(
+        comodel_name='request.timesheet.activity',
+        relation='request_type__timesheet_activity__rel',
+        column1='request_type_id',
+        column2='activity_id')
 
     _sql_constraints = [
         ('name_uniq',

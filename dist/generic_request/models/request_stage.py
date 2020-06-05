@@ -104,6 +104,15 @@ class RequestStage(models.Model):
                 rec.res_bg_color = DEFAULT_BG_COLOR
                 rec.res_label_color = DEFAULT_LABEL_COLOR
 
+    @api.model
+    def _add_missing_default_values(self, values):
+        res = super(RequestStage, self)._add_missing_default_values(values)
+        if 'sequence' not in values and res.get('request_type_id'):
+            stages = self.search(
+                [('request_type_id', '=', res['request_type_id'])])
+            res['sequence'] = max(s.sequence for s in stages) + 1
+        return res
+
     def action_show_incoming_routes(self):
         self.ensure_one()
         action = self.env.ref(

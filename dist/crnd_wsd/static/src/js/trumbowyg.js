@@ -21,12 +21,23 @@ odoo.define('crnd_wsd.trumbowyg', function (require) {
                             pasteEvent.originalEvent || pasteEvent
                         ).clipboardData;
 
+                        var request_id = trumbowyg.$box.closest(
+                            '.wsd_request').data('request-id');
+
                         $.each(clipboardData.files, function (index, file) {
                             if (file.type.match(/^image\//)) {
-                                ajax.post('/crnd_wsd/file_upload', {
+                                var ajax_data = {
                                     'upload': file,
                                     'is_image': true,
-                                }).done(function (result) {
+                                };
+                                if (request_id) {
+                                    ajax_data.request_id = request_id;
+                                }
+
+                                ajax.post(
+                                    '/crnd_wsd/file_upload',
+                                    ajax_data
+                                ).done(function (result) {
                                     var data = JSON.parse(result);
                                     if (data.status === 'OK') {
                                         trumbowyg.execCmd(

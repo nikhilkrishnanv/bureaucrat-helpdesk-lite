@@ -165,6 +165,12 @@
                             <field string="Requests" name="request_count"
                                    widget="statinfo"/>
                         </button>
+                        <button name="action_request_type_diagram"
+                                type="object"
+                                string="View Flow"
+                                class="oe_stat_button"
+                                icon="fa-code-fork">
+                        </button>
                         <button name="%(action_request_type_routes)d"
                                 type="action"
                                 class="oe_stat_button" icon="fa-random">
@@ -176,12 +182,6 @@
                                 class="oe_stat_button" icon="fa-bars">
                             <field string="Stages" name="stage_count"
                                    widget="statinfo"/>
-                        </button>
-                        <button name="action_request_type_diagram"
-                                type="object"
-                                string="View Flow"
-                                class="oe_stat_button"
-                                icon="fa-code-fork">
                         </button>
                         <button name="toggle_active" type="object" groups="base.group_user"
                                 class="oe_stat_button" icon="fa-archive">
@@ -202,26 +202,38 @@
                                    options="{'color_field': 'color'}"
                                    widget="many2many_tags"/>
                         </h3>
+                        <h3 name="header_kind">
+                            <field name="kind_id" placeholder="Request kind..."/>
+                        </h3>
                     </div>
                     <notebook>
                         <page string="Description" name="page_description">
                             <group>
-                                <field name="start_stage_id"/>
-                                <field name="sequence_id" placeholder="Sequence..."/>
-                                <field name="color" widget="colorpicker"/>
-                                <field name="complex_priority"/>
-                                <field name="default_priority"
-                                    widget="priority"
-                                    attrs="{'invisible': [('complex_priority', '=', True)]}"
-                                />
-                                <field name="default_impact"
-                                    widget="priority"
-                                    attrs="{'invisible': [('complex_priority', '=', False)]}"
-                                />
-                                <field name="default_urgency"
-                                    widget="priority"
-                                    attrs="{'invisible': [('complex_priority', '=', False)]}"
-                                />
+                                <group name="group_description_left">
+                                    <field name="start_stage_id"/>
+                                    <field name="sequence_id" placeholder="Sequence..."/>
+                                    <field name="color" widget="colorpicker"/>
+                                    <field name="complex_priority"/>
+                                    <field name="default_priority"
+                                           widget="priority"
+                                           attrs="{'invisible': [('complex_priority', '=', True)]}"/>
+                                    <field name="default_impact"
+                                           widget="priority"
+                                           attrs="{'invisible': [('complex_priority', '=', False)]}"/>
+                                    <field name="default_urgency"
+                                           widget="priority"
+                                           attrs="{'invisible': [('complex_priority', '=', False)]}"/>
+                                    <field name="use_timesheet" string="Use Timesheet"/>
+                                    <field name="timesheet_activity_ids"
+                                           widget="many2many_tags"
+                                           options="{'color_field': 'color'}"
+                                           attrs="{'invisible': [('use_timesheet', '=', False)]}"
+                                           string="Timesheet Activities"/>
+                                </group>
+                                <group name="group_description_right">
+                                    <field name="tag_category_ids"
+                                           widget="many2many_tags"/>
+                                </group>
                             </group>
 
                             <separator colspan="4" string="Description"/>
