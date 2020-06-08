@@ -168,7 +168,7 @@ class TestRequestAuthor(RequestCase):
 
         self.simple_type.message_subscribe(self.demo_user.partner_id.ids)
 
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.demo_user
         ).with_context(
             default_author_id=partner.id
