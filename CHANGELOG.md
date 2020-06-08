@@ -1,12 +1,12 @@
 # Changelog
 
-## Release (2020-Jun-05 19:33:37)
+## Release (2020-Jun-08 19:03:07)
 
 ### Updated addons:
 
 - bureaucrat_helpdesk_lite (12.0.1.0.14 -> 12.0.1.1.0)
 - crnd_service_desk (12.0.1.2.0 -> 12.0.1.3.0)
-- crnd_wsd (12.0.1.26.0 -> 12.0.1.41.0)
+- crnd_wsd (12.0.1.26.0 -> 12.0.1.41.1)
 - generic_request (12.0.1.40.0 -> 12.0.1.62.0)
 
 ### Notable changes:

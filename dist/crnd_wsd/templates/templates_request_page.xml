@@ -239,12 +239,12 @@
                   title="Tracked time">
                 <span class="fa fa-hourglass-end mr4"/>
                 <span t-field="req.timesheet_amount"
-                      t-field-options="{'widget': 'float_time'}"
+                      t-options="{'widget': 'float_time'}"
                       title="Time spent"/>
                 <t t-if="req.timesheet_planned_amount">
                     of
                     <span t-field="req.timesheet_planned_amount"
-                          t-field-options="{'widget': 'float_time'}"
+                          t-options="{'widget': 'float_time'}"
                           title="Planned time"/>
                 </t>
                 Hours
