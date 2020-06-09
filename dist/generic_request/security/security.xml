@@ -211,4 +211,27 @@
         <field eval="1" name="perm_read"/>
         <field eval="1" name="perm_create"/>
     </record>
+
+<!--    timesheets    -->
+    <record id="rule_request_timesheet_line_by_creator_id" model="ir.rule">
+        <field name="name">Created by me timesheet lines</field>
+        <field name="model_id" ref="generic_request.model_request_timesheet_line"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('generic_request.group_request_user_implicit'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="0" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+
+        <record id="rule_request_timesheet_line_by_manager" model="ir.rule">
+        <field name="name">Timesheet lines</field>
+        <field name="model_id" ref="generic_request.model_request_timesheet_line"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('generic_request.group_request_manager'))]"/>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="0" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
 </odoo>

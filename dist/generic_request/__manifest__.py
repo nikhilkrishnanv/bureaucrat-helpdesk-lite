@@ -10,7 +10,7 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
     'category': 'Generic Request',
-    'version': '11.0.1.40.0',
+    'version': '11.0.1.62.0',
     'external_dependencies': {
         'python': [
             'html2text',
@@ -25,8 +25,10 @@
         'base',
         'mail',
         'generic_mixin',
+        'generic_tag',
         'crnd_web_diagram_plus',
         'crnd_web_list_popover_widget',
+        'crnd_web_tree_colored_field',
         'web_widget_colorpicker',
         'web_settings_dashboard',
         'base_setup',
@@ -42,6 +44,10 @@
         'data/request_stage_type.xml',
         'data/request_event_type.xml',
         'data/ir_cron.xml',
+        'data/generic_tag_model.xml',
+        'data/generic_tag_category.xml',
+        'data/generic_tag.xml',
+        'data/request_timesheet_activity.xml',
 
         'views/templates.xml',
         'views/request_views.xml',
@@ -59,10 +65,17 @@
         'views/request_event.xml',
         'views/request_event_category.xml',
         'views/request_event_type.xml',
+        'views/request_creation_template.xml',
+        'views/generic_tag_menu.xml',
+        'views/request_timesheet_activity.xml',
+        'views/request_timesheet_line.xml',
         'wizard/request_wizard_close_views.xml',
         'wizard/request_wizard_assign.xml',
+        'wizard/request_wizard_stop_work.xml',
 
         'templates/templates.xml',
+
+        'reports/request_timesheet_report.xml',
     ],
 
     'qweb': [
@@ -78,10 +91,12 @@
         'demo/request_type_non_ascii.xml',
         'demo/request_type_with_complex_priority.xml',
         'demo/request_mail_activity.xml',
+        'demo/request_creation_template.xml',
+        'demo/demo_request_timesheet_activity.xml',
     ],
 
     'images': ['static/description/banner.gif'],
     'installable': True,
     'application': True,
-    'license': 'OPL-1',
+    'license': 'LGPL-3',
 }

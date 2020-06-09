@@ -1,42 +1,38 @@
 .o_form_view {
-    .request_title {
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+    .request-head-info {
+        margin-bottom: 0;
+
+        .request-head-info-left .request-head-info-item {
+            padding-right: 8px;
+        }
+
+        .field-with-icon {
             display: flex;
+            align-items: center;
 
-            .field-with-icon {
-                min-width: 200px;
+            .field-icon {
+                display: inline-flex;
+                min-width: 15px;
+            }
 
-                .field-icon {
-                    margin-top: 4px;
-                    padding-right: 7px;
-                    display: inline-flex;
-                    min-width: 23px;
+            .o_field_widget {
+                display: inline-flex;
+                margin-bottom: 0;
+                width: 100% !important;
+
+                &.w_auto {
+                    width: auto !important;
                 }
 
-                .o_field_widget {
-                    display: inline-flex;
+                .o_input_dropdown {
+                    width: auto;
                 }
             }
         }
+    }
 
-        h2 .field-with-icon .field-icon {
-            margin-top: 4px;
-        }
-
-        h3 .field-with-icon .field-icon {
-            margin-top: 3px;
-        }
-
-        h4,
-        h5,
-        h6 {
-            margin-top: 3px;
-            margin-bottom: 3px;
-        }
+    .request-notebook {
+        margin-top: 0;
     }
 
     // Based on mail chatter date separator
@@ -45,6 +41,7 @@
         margin-bottom: 30px;
         border-bottom: 1px solid #d9d7d7;
         text-align: center;
+        height: 10px;
 
         &.request-separator-info {
             margin-bottom: 10px;
@@ -53,7 +50,6 @@
 
         .request-separator-text {
             position: relative;
-            top: 10px;
             margin: 0 auto;
             padding: 0 10px;
             font-weight: bold;
@@ -92,13 +88,7 @@
         }
     }
 
-    &.o_form_readonly .request_title {
-        h4,
-        h5,
-        h6 {
-            .field-with-icon .field-icon {
-                margin-top: 1px;
-            }
-        }
+    &.o_form_editable .field-with-icon {
+        margin-bottom: 2px;
     }
 }
