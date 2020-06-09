@@ -12,3 +12,5 @@ known-addons:
     - crnd_web_diagram_plus
     - crnd_web_list_popover_widget
     - web_widget_colorpicker
+    - generic_tag
+    - crnd_web_tree_colored_field

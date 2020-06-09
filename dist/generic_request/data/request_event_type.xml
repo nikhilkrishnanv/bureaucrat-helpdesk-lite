@@ -67,5 +67,10 @@
         <field name="code">urgency-changed</field>
         <field name="category_id" ref="event_category_request_events"/>
     </record>
+    <record id="request_event_type_deadline_changed" model="request.event.type">
+        <field name="name">Deadline Changed</field>
+        <field name="code">deadline-changed</field>
+        <field name="category_id" ref="event_category_request_events"/>
+    </record>
 </odoo>
 

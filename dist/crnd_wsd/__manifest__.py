@@ -4,8 +4,8 @@
     'summary': 'Website UI for Service Desk',
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'license': 'OPL-1',
-    'version': '12.0.1.26.0',
+    'license': 'LGPL-3',
+    'version': '12.0.1.41.1',
 
     'depends': [
         'mail',

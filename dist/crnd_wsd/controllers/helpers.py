@@ -3,6 +3,7 @@ import json
 import base64
 import logging
 from PIL import Image
+from werkzeug.urls import url_quote
 
 from odoo import http, tools, _
 from odoo.tools import ustr
@@ -33,22 +34,34 @@ class WSDHelpers(WSDControllerMixin, http.Controller):
                 auth='user', methods=['POST'], website=True)
     def wsd_upload_file(self, upload, alt='File', filename=None,
                         is_image=False, **post_data):
-        Attachments = request.env['ir.attachment']
+        Attachments = request.env['ir.attachment'].sudo()
+        attachment_data = {
+            'name': alt,
+            'datas_fname': filename or 'upload',
+            'public': False,
+        }
 
-        # TODO: bound attachemnts to request
+        if post_data.get('request_id'):
+            try:
+                attachment_data['res_id'] = int(post_data.get('request_id'))
+            except (ValueError, TypeError):
+                _logger.debug(
+                    "Cannon convert request_id %r",
+                    post_data.get('request_id'),
+                    exc_info=True)
+            else:
+                attachment_data['res_model'] = 'request.request'
+
         try:
             data = upload.read()
 
             if is_image:
                 data = self._optimize_image(data, disable_optimization=False)
 
-            attachment = Attachments.create({
-                'name': alt,
-                'datas': base64.b64encode(data),
-                'datas_fname': filename or 'upload',
-                'public': True,   # TODO: should it be public?
-                # 'res_model': 'ir.ui.view',
-            })
+            attachment = Attachments.create(dict(
+                attachment_data,
+                datas=base64.b64encode(data),
+            ))
         except Exception as e:
             _logger.exception("Failed to upload file to attachment")
             message = ustr(e)
@@ -58,15 +71,20 @@ class WSDHelpers(WSDControllerMixin, http.Controller):
                 'message': message,
             })
 
+        attachment.generate_access_token()
         if is_image:
-            attachment_url = "/web/image/%d/%s" % (
-                attachment.id,
-                attachment.datas_fname,
+            attachment_url = "%s?access_token=%s" % (
+                url_quote("/web/image/%d/%s" % (
+                    attachment.id,
+                    attachment.datas_fname)),
+                attachment.sudo().access_token,
             )
         else:
-            attachment_url = "/web/content/%d/%s" % (
-                attachment.id,
-                attachment.datas_fname,
+            attachment_url = "%s?access_token=%s&download" % (
+                url_quote("/web/content/%d/%s" % (
+                    attachment.id,
+                    attachment.datas_fname)),
+                attachment.sudo().access_token,
             )
 
         return json.dumps({
