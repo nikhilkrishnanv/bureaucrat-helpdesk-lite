@@ -1,3 +1,4 @@
+import re
 from odoo import models, fields
 
 
@@ -42,6 +43,23 @@ class RequestRequest(models.Model):
                 'res_id': self.id,
             }
         return super(RequestRequest, self).get_access_action(access_uid)
+
+    def _request_bind_attachments(self):
+        self.ensure_one()
+        attachment_ids = []
+        for m in re.finditer(r"/web/(?:content|image)/(\d+)/",
+                             self.request_text):
+            att_id = int(m[1])
+            attachment_ids.append(att_id)
+
+        self.env['ir.attachment'].sudo().search([
+            ('res_model', '=', False),
+            ('res_id', '=', False),
+            ('id', 'in', attachment_ids),
+        ]).sudo().write({
+            'res_model': 'request.request',
+            'res_id': self.id,
+        })
 
     def _notification_recipients(self, message, groups):
         """ Display access button in mails to portal users

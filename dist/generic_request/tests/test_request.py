@@ -460,3 +460,76 @@ class TestRequestBase(RequestCase):
         # Check that changing category not allowed
         self.assertEqual(self.request_1.stage_id, self.stage_sent)
         self.assertFalse(self.request_1.can_change_category)
+
+    def test_request_can_change_deadline(self):
+        self.assertEqual(self.request_1.stage_id, self.stage_draft)
+        self.assertTrue(self.request_1.can_change_deadline)
+
+        # move request to sent stage
+        self.request_1.stage_id = self.stage_sent
+
+        # Check that changing deadline is allowed
+        self.assertEqual(self.request_1.stage_id, self.stage_sent)
+        self.assertTrue(self.request_1.can_change_deadline)
+
+        # move request to confirmed stage
+        self.request_1.stage_id = self.stage_confirmed
+
+        # Check that changing deadline not allowed
+        self.assertEqual(self.request_1.stage_id, self.stage_confirmed)
+        self.assertFalse(self.request_1.can_change_deadline)
+
+    def test_request_create_new_stage(self):
+        stage = self.env['request.stage'].create({
+            'request_type_id': self.simple_type.id,
+            'name': 'Test',
+            'code': 'test',
+        })
+        # Ensure that new stage is last stage
+        self.assertEqual(stage, self.simple_type.stage_ids.sorted()[-1])
+
+    def test_request_create_new_stage_with_sequence(self):
+        stage = self.env['request.stage'].create({
+            'request_type_id': self.simple_type.id,
+            'name': 'Test',
+            'code': 'test',
+            'sequence': 0,
+        })
+        # Ensure that new stage is first stage
+        self.assertEqual(stage, self.simple_type.stage_ids.sorted()[0])
+
+    def test_request_suggested_recipients(self):
+        author = self.env.ref('base.res_partner_address_7')
+        partner = self.env.ref('base.res_partner_4')
+
+        request = self.env.ref(
+            'generic_request.request_request_type_simple_demo_3')
+
+        # Check that author is auto subscribed, but partner is not subscribed
+        self.assertIn(author, request.message_partner_ids)
+        self.assertNotIn(partner, request.message_partner_ids)
+
+        # By default suggestion for partner disabled, thus no partner
+        # have to be suggested
+        result = request._message_get_suggested_recipients()[request.id]
+        partner_ids = [r[0] for r in result]
+        self.assertFalse(partner_ids)
+
+        # Enable suggestion for partner
+        self.env.user.company_id.request_mail_suggest_partner = True
+
+        result = request._message_get_suggested_recipients()[request.id]
+        partner_ids = [r[0] for r in result]
+        self.assertEqual(len(partner_ids), 1)
+
+        # Ensure that partner is in suggested recipients
+        self.assertNotIn(author.id, partner_ids)
+        self.assertIn(partner.id, partner_ids)
+
+        request.message_subscribe(partner_ids=partner.ids)
+
+        # Ensure that after we subscribe partner it disappears from suggested
+        # list
+        result = request._message_get_suggested_recipients()[request.id]
+        partner_ids = [r[0] for r in result]
+        self.assertFalse(partner_ids)

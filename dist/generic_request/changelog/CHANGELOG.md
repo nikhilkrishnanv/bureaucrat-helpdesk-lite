@@ -1,5 +1,70 @@
 # Changelog
 
+## Version 1.58.0
+
+Merge with generic_request_timesheet module
+
+
+## Version 1.56.0
+
+Enable *create_edit* and *quick_create* features of *author* and *partner*
+fields of request 
+
+
+## Version 1.54.0
+
+Added ability to assign multiple requests with a single operations.
+Just select requests from list view and call context action *Assign*.
+
+
+## Version 1.53.0
+
+- Automatically move created stage to the end of list of stages.
+  This is required to avoid case when new stage become first one and
+  thus it become starting stage for requests.
+- Better support for handling mails received from unknown contacts.
+  In this case `email_from` will be saved on request
+- Save `email_cc` on request (if first email contains `cc`)
+- Automatically subscribe partners mentioned in ``CC`` header of incoming mail
+- Implement partner suggestions for mailing for requests.
+  Odoo will automatically suggest to subscribe partner and / or author of request
+  if that is not following request yet
+
+
+## Version 1.52.0
+
+Use different colors for deadline icon, depending on its value.
+
+
+## Version 1.47.0
+
+Update form view of Request Type
+
+
+## Version 1.46.0
+
+Module `generic_request_tag` merged into `generic_request`
+
+
+## Version 1.45.0
+
+- Intoruced new field: *Deadline*
+- Small improvements to UI
+- Fixed regression, missing *Kind* field on request form view
+
+
+## Version 1.44.0
+
+Fix regression in detection of author when creator is specified directly,
+but author is not specified.
+
+
+## Version 1.41.0
+
+Introduced *Request Creation Templates* feature,
+that have to be used mostly by other modules to create requests with default values.
+
+
 ## Version 1.39.0
 
 - Fixed bug when with incorrect display of images in request text,
