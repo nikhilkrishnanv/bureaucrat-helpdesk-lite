@@ -3,7 +3,7 @@ from odoo import models, fields, api
 
 class RequestWizardStopWork(models.TransientModel):
     _name = 'request.wizard.stop.work'
-    _desctiption = 'Request Wizard: Stop Work'
+    _description = 'Request Wizard: Stop Work'
 
     timesheet_line_id = fields.Many2one(
         'request.timesheet.line', required=True)
@@ -44,14 +44,19 @@ class RequestWizardStopWork(models.TransientModel):
 
         return res
 
-    def do_stop_work(self):
-        self.ensure_one()
-
-        self.timesheet_line_id.write({
+    def _prepare_timesheet_line_data(self):
+        return {
             'amount': self.amount,
             'activity_id': self.activity_id.id,
             'description': self.description,
-        })
+        }
+
+    def do_stop_work(self):
+        self.ensure_one()
+
+        self.timesheet_line_id.write(
+            self._prepare_timesheet_line_data()
+        )
 
         if self.env.context.get('request_timesheet_start_request_id'):
             self.env['request.request'].browse(

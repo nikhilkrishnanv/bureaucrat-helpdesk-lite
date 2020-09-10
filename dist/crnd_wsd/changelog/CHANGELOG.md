@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 1.47.0
+
+Automatically set channel to Website for requests created from website
+
+
 ## Version 1.40.0
 
 - Added ability to restrict max text size of request text on website UI and

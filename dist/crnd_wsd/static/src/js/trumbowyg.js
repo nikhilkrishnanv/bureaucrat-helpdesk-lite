@@ -24,7 +24,14 @@ odoo.define('crnd_wsd.trumbowyg', function (require) {
                         var request_id = trumbowyg.$box.closest(
                             '.wsd_request').data('request-id');
 
+                        var preventDefaultDone = false;
+
                         $.each(clipboardData.files, function (index, file) {
+                            if (!preventDefaultDone) {
+                                // Prevent default handling if required
+                                pasteEvent.preventDefault();
+                                preventDefaultDone = true;
+                            }
                             if (file.type.match(/^image\//)) {
                                 var ajax_data = {
                                     'upload': file,
