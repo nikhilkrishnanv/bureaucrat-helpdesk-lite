@@ -7,6 +7,7 @@ from odoo import SUPERUSER_ID
 class RequestStageRoute(models.Model):
     _name = "request.stage.route"
     _inherit = [
+        'generic.mixin.track.changes',
         'mail.thread',
     ]
     _description = "Request Stage Route"

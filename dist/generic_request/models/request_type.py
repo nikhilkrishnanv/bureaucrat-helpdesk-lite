@@ -9,6 +9,7 @@ class RequestType(models.Model):
     _inherit = [
         'mail.thread',
         'generic.mixin.name_with_code',
+        'generic.mixin.track.changes',
     ]
     _description = "Request Type"
 
