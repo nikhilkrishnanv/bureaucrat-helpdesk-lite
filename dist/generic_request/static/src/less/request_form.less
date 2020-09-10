@@ -1,4 +1,18 @@
 .o_form_view {
+    .request_title h2 {
+        > * {
+            display: inline;
+        }
+
+        > div.request-kanban-state {
+            display: inline-flex;
+
+            > a {
+                display: flex;
+            }
+        }
+    }
+
     .request-head-info {
         margin-bottom: 0;
 
@@ -58,6 +72,8 @@
     }
 
     .request-html-field {
+        width: 100%;
+
         img {
             max-width: 100%;
         }

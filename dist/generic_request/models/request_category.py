@@ -5,8 +5,9 @@ class RequestCategory(models.Model):
     _name = "request.category"
     _inherit = [
         'generic.mixin.parent.names',
-        'mail.thread',
         'generic.mixin.name_with_code',
+        'generic.mixin.track.changes',
+        'mail.thread',
     ]
     _description = "Request Category"
     _order = 'sequence, name'

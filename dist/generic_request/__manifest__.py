@@ -10,7 +10,7 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
     'category': 'Generic Request',
-    'version': '12.0.1.62.0',
+    'version': '12.0.1.80.1',
     'external_dependencies': {
         'python': [
             'html2text',
@@ -48,6 +48,7 @@
         'data/generic_tag_category.xml',
         'data/generic_tag.xml',
         'data/request_timesheet_activity.xml',
+        'data/request_channel.xml',
 
         'views/templates.xml',
         'views/request_views.xml',
@@ -59,6 +60,7 @@
         'views/request_stage_view.xml',
         'views/request_stage_type_view.xml',
         'views/request_request_view.xml',
+        'views/request_channel_view.xml',
         'views/res_partner_view.xml',
         'views/res_users.xml',
         'views/mail_templates.xml',

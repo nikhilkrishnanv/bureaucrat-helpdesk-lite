@@ -9,6 +9,7 @@ class RequestStage(models.Model):
     _name = "request.stage"
     _inherit = [
         'generic.mixin.name_with_code',
+        'generic.mixin.track.changes',
     ]
     _description = "Request Stage"
     _order = "sequence"
@@ -110,7 +111,8 @@ class RequestStage(models.Model):
         if 'sequence' not in values and res.get('request_type_id'):
             stages = self.search(
                 [('request_type_id', '=', res['request_type_id'])])
-            res['sequence'] = max(s.sequence for s in stages) + 1
+            if stages:
+                res['sequence'] = max(s.sequence for s in stages) + 1
         return res
 
     def action_show_incoming_routes(self):

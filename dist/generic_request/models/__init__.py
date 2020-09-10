@@ -17,4 +17,5 @@ from . import (
     generic_tag_category,
     request_timesheet_activity,
     request_timesheet_line,
+    request_channel,
 )

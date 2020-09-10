@@ -72,5 +72,10 @@
         <field name="code">deadline-changed</field>
         <field name="category_id" ref="event_category_request_events"/>
     </record>
+    <record id="request_event_type_kanban_state_changed" model="request.event.type">
+        <field name="name">Kanban State Changed</field>
+        <field name="code">kanban-state-changed</field>
+        <field name="category_id" ref="event_category_request_events"/>
+    </record>
 </odoo>
 
