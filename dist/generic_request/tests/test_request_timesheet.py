@@ -1,19 +1,22 @@
 from odoo import fields
-from odoo.tests.common import TransactionCase
-from .common import freeze_time
+from .common import (
+    RequestCase,
+    freeze_time
+)
 
 
-class TestWizardLogTime(TransactionCase):
+class TestWizardLogTime(RequestCase):
 
-    def setUp(self):
-        super(TestWizardLogTime, self).setUp()
-        self.request_type = self.env.ref(
+    @classmethod
+    def setUpClass(cls):
+        super(TestWizardLogTime, cls).setUpClass()
+        cls.request_type = cls.env.ref(
             'generic_request.request_type_simple')
-        self.activity_id_1 = self.env.ref(
+        cls.activity_id_1 = cls.env.ref(
             'generic_request.request_timesheet_activity_coding')
-        self.activity_id_2 = self.env.ref(
+        cls.activity_id_2 = cls.env.ref(
             'generic_request.request_timesheet_activity_analysis')
-        self.user = self.env.ref('generic_request.user_demo_request')
+        cls.user = cls.env.ref('generic_request.user_demo_request')
 
     def test_log_time_start_stop(self):
         Timesheet = self.env['request.timesheet.line']

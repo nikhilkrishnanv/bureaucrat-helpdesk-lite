@@ -7,6 +7,7 @@ class RequestStageType(models.Model):
     _inherit = [
         'generic.mixin.name_with_code',
         'generic.mixin.uniq_name_code',
+        'generic.mixin.track.changes',
     ]
     _description = 'Request Stage Type'
 

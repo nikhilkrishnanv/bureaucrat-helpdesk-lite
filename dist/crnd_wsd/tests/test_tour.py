@@ -87,6 +87,9 @@ class TestWebsiteServiceDesk(TestPhantomTour):
         self.assertTrue(
             new_requests.request_text.startswith(
                 u'<h1>Test generic request (modified)</h1>'))
+        channel_website = self.env.ref(
+            'generic_request.request_channel_website')
+        self.assertEqual(new_requests.channel_id, channel_website)
 
     def test_tour_request_new_default_text(self):
         with self.phantom_env as env:

@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 13:48+0000\n"
-"PO-Revision-Date: 2020-05-27 13:48+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -222,6 +220,20 @@ msgid "<strong>Response text:</strong>"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,help:generic_request.field_request_request__kanban_state
+msgid ""
+"A requests kanban state indicates special situations affecting it:\n"
+" * Grey is the default situation\n"
+" * Red indicates something is preventing theprogress of this request\n"
+" * Green indicates the request is ready to be pulledto the next stage"
+msgstr ""
+
+#. module: generic_request
+#: model:request.channel,name:generic_request.request_channel_api
+msgid "API"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_stage_route_form
 msgid "Access"
 msgstr ""
@@ -241,7 +253,13 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_action_invoice
+msgid "Action invoice"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__active
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__active
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__active
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__active
 #: model:ir.model.fields,field_description:generic_request.field_request_stage__active
@@ -283,6 +301,28 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Add a tree-like list of available templates for the message composer."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Add ability to create requests directtly from CRM Leads."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Add ability to create requests when sale order confirmed."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid ""
+"Add ability to require user to accept terms and conditions before he could "
+"send request."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Add configurable fields to requests"
 msgstr ""
 
@@ -316,6 +356,18 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_route__allowed_user_ids
 msgid "Allowed users"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid ""
+"Allows automatically sort requests by predefined rules depending on SLA, "
+"Priority, Kanban State, Request Type, etc."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Allows to set a default view for sending a message to chatter."
 msgstr ""
 
 #. module: generic_request
@@ -465,6 +517,11 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Automatically create invoices for requests"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Automatically create project tasks"
 msgstr ""
 
@@ -494,6 +551,12 @@ msgid "Below is example of list, that describes steps to solve request"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields.selection,name:generic_request.selection__request_request__kanban_state__blocked
+msgid "Blocked"
+msgstr ""
+
+#. module: generic_request
+#: model:request.channel,name:generic_request.request_channel_call
 #: model:request.timesheet.activity,name:generic_request.request_timesheet_activity_call
 msgid "Call"
 msgstr ""
@@ -611,6 +674,18 @@ msgid "Changed"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.actions.act_window,name:generic_request.action_channel_window
+#: model:ir.model.fields,field_description:generic_request.field_request_request__channel_id
+#: model:ir.ui.menu,name:generic_request.menu_channel_view
+msgid "Channel"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,help:generic_request.field_request_request__channel_id
+msgid "Channel of request"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:request.request,note_html:generic_request.request_request_type_sequence_demo_1
 #: model_terms:request.request,note_html:generic_request.request_request_type_sequence_printer_request
 #: model_terms:request.type,note_html:generic_request.request_type_sequence
@@ -691,12 +766,14 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__code
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__code
 #: model:ir.model.fields,field_description:generic_request.field_request_event__event_code
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__code
 #: model:ir.model.fields,field_description:generic_request.field_request_event_type__code
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__code
 #: model:ir.model.fields,field_description:generic_request.field_request_stage__code
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_type__code
+#: model:ir.model.fields,field_description:generic_request.field_request_timesheet_activity__code
 #: model:ir.model.fields,field_description:generic_request.field_request_type__code
 msgid "Code"
 msgstr ""
@@ -711,6 +788,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:generic_request.request_event_type_view_form
 #: model_terms:ir.ui.view,arch_db:generic_request.request_stage_type_view_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
 msgid "Code..."
 msgstr ""
@@ -747,11 +825,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_request__is_priority_complex
 #: model:ir.model.fields,field_description:generic_request.field_request_type__complex_priority
 msgid "Complex Priority"
-msgstr ""
-
-#. module: generic_request
-#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_action_condition
-msgid "Conditional Actions"
 msgstr ""
 
 #. module: generic_request
@@ -793,11 +866,6 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
-msgid "Contact us"
-msgstr ""
-
-#. module: generic_request
-#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Create And Use Custom Assignment Policies"
 msgstr ""
 
@@ -821,6 +889,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__create_uid
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__create_uid
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__create_uid
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__create_uid
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__create_uid
@@ -842,6 +911,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__create_date
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__create_date
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__create_date
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__create_date
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__create_date
@@ -1027,6 +1097,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__display_name
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__display_name
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__display_name
 #: model:ir.model.fields,field_description:generic_request.field_request_event__display_name
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__display_name
@@ -1085,6 +1156,27 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid "Duration (Hours)"
+msgstr ""
+
+#. module: generic_request
+#: model:request.channel,name:generic_request.request_channel_email
+msgid "E-Mail"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Easilly create invoices for time tracked on request."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Easilly schedule meetings related to request."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid ""
+"Easily launch web-conference / web meeting related to request / ticket."
 msgstr ""
 
 #. module: generic_request
@@ -1316,6 +1408,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__id
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__id
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__id
 #: model:ir.model.fields,field_description:generic_request.field_request_event__id
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__id
@@ -1398,6 +1491,7 @@ msgid "Impact Changed"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields.selection,name:generic_request.selection__request_request__kanban_state__normal
 #: model:request.stage,name:generic_request.request_type_with_complex_priority_in_progress
 msgid "In Progress"
 msgstr ""
@@ -1437,6 +1531,11 @@ msgid "Instruction Visible"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_invoicing
+msgid "Invoicing"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__message_is_follower
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__message_is_follower
 #: model:ir.model.fields,field_description:generic_request.field_request_request__message_is_follower
@@ -1465,6 +1564,11 @@ msgstr ""
 #. module: generic_request
 #: model:request.stage,description:generic_request.request_stage_type_sequence_new
 msgid "Just created request"
+msgstr ""
+
+#. module: generic_request
+#: model:request.event.type,name:generic_request.request_event_type_kanban_state_changed
+msgid "Kanban State Changed"
 msgstr ""
 
 #. module: generic_request
@@ -1503,6 +1607,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category____last_update
+#: model:ir.model.fields,field_description:generic_request.field_request_channel____last_update
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template____last_update
 #: model:ir.model.fields,field_description:generic_request.field_request_event____last_update
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category____last_update
@@ -1529,6 +1634,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__write_uid
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__write_uid
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__write_uid
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__write_uid
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__write_uid
@@ -1547,6 +1653,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__write_date
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__write_date
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__write_date
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__write_date
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__write_date
@@ -1618,17 +1725,32 @@ msgid "Mac OS"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Mail"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_crnd_mail_chatter_send_composer
+msgid "Mail Chatter Send Composer"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_crnd_mail_composer_chat_history
+msgid "Mail Composer Chat History"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_crnd_mail_composer_template_tree
+msgid "Mail Composer Template Tree"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__message_main_attachment_id
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__message_main_attachment_id
 #: model:ir.model.fields,field_description:generic_request.field_request_request__message_main_attachment_id
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_route__message_main_attachment_id
 #: model:ir.model.fields,field_description:generic_request.field_request_type__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
-
-#. module: generic_request
-#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
-msgid "Make request actions conditional"
 msgstr ""
 
 #. module: generic_request
@@ -1692,6 +1814,11 @@ msgid "Messages"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Module allows to use Generic Assignments in request actions."
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields.selection,name:generic_request.selection__res_company__request_event_live_time_uom__months
 msgid "Months"
 msgstr ""
@@ -1728,6 +1855,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__name
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__name
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__name
 #: model:ir.model.fields,field_description:generic_request.field_request_event_category__name
 #: model:ir.model.fields,field_description:generic_request.field_request_event_type__name
@@ -1739,6 +1867,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_type__name
 #: model_terms:ir.ui.view,arch_db:generic_request.message_request_notification__request_info
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_tree
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_tree
 msgid "Name"
 msgstr ""
 
@@ -1757,9 +1886,35 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:generic_request.request_event_type_view_form
 #: model_terms:ir.ui.view,arch_db:generic_request.request_stage_type_view_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_stage_route_form
 msgid "Name..."
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_crnd_mail_chatter_send_composer
+msgid "Need Install Crnd Mail Chatter Send Composer"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_crnd_mail_composer_chat_history
+msgid "Need Install Crnd Mail Composer Chat History"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_crnd_mail_composer_template_tree
+msgid "Need Install Crnd Mail Composer Template Tree"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_crnd_wsd_broadcast
+msgid "Need Install Crnd Wsd Broadcast"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_crnd_wsd_legal
+msgid "Need Install Crnd Wsd Legal"
 msgstr ""
 
 #. module: generic_request
@@ -1778,8 +1933,18 @@ msgid "Need Install Generic Request Action"
 msgstr ""
 
 #. module: generic_request
-#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_action_condition
-msgid "Need Install Generic Request Action Condition"
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_action_assignment
+msgid "Need Install Generic Request Action Assignment"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_action_invoice
+msgid "Need Install Generic Request Action Invoice"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_action_priority
+msgid "Need Install Generic Request Action Priority"
 msgstr ""
 
 #. module: generic_request
@@ -1803,18 +1968,28 @@ msgid "Need Install Generic Request Action Tag"
 msgstr ""
 
 #. module: generic_request
-#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_api
-msgid "Need Install Generic Request Api"
-msgstr ""
-
-#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_assignment
 msgid "Need Install Generic Request Assignment"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_calendar
+msgid "Need Install Generic Request Calendar"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_crm
+msgid "Need Install Generic Request Crm"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_field
 msgid "Need Install Generic Request Field"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_invoicing
+msgid "Need Install Generic Request Invoicing"
 msgstr ""
 
 #. module: generic_request
@@ -1848,6 +2023,11 @@ msgid "Need Install Generic Request Route Auto"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_sale
+msgid "Need Install Generic Request Sale"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_service
 msgid "Need Install Generic Request Service"
 msgstr ""
@@ -1863,8 +2043,28 @@ msgid "Need Install Generic Request Sla Log"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_sla_priority
+msgid "Need Install Generic Request Sla Priority"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_sla_service
+msgid "Need Install Generic Request Sla Service"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_survey
 msgid "Need Install Generic Request Survey"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_web_conference
+msgid "Need Install Generic Request Web Conference"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_weight
+msgid "Need Install Generic Request Weight"
 msgstr ""
 
 #. module: generic_request
@@ -1889,6 +2089,11 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_event__new_impact
 msgid "New Impact"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_event__new_kanban_state
+msgid "New Kanban State"
 msgstr ""
 
 #. module: generic_request
@@ -2072,6 +2277,11 @@ msgid "Old Impact"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_event__old_kanban_state
+msgid "Old Kanban State"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_event__old_priority
 msgid "Old Priority"
 msgstr ""
@@ -2124,6 +2334,7 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+#: model:request.channel,name:generic_request.request_channel_other
 msgid "Other"
 msgstr ""
 
@@ -2236,7 +2447,13 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+#: model:request.stage.type,name:generic_request.request_stage_type_progress
 msgid "Progress"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields.selection,name:generic_request.selection__request_request__kanban_state__done
+msgid "Ready for next stage"
 msgstr ""
 
 #. module: generic_request
@@ -2313,6 +2530,13 @@ msgid "Reports"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid ""
+"Represents incident management system for logging, recording, tracking, addressing, handling and archiving issues that occur in daily routine.\n"
+"                                    Also provides website user interface for Service Desk."
+msgstr ""
+
+#. module: generic_request
 #: model:generic.tag.model,name:generic_request.generic_request_tag_model
 #: model:ir.model,name:generic_request.generic_request_tag_model_ir_model
 #: model:ir.model.fields,field_description:generic_request.field_request_event__request_id
@@ -2335,6 +2559,16 @@ msgid "Request %s successfully created!"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_action_assignment
+msgid "Request Action Assignment"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_action_priority
+msgid "Request Action Priority"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_timesheet_report__request_author_id
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_report_search
 msgid "Request Author"
@@ -2353,11 +2587,26 @@ msgid "Request By Partner"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_crm
+msgid "Request CRM"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_calendar
+msgid "Request Calendar"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model,name:generic_request.model_request_category
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__request_category_id
 #: model:ir.model.fields,field_description:generic_request.field_request_timesheet_report__request_category_id
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_report_search
 msgid "Request Category"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model,name:generic_request.model_request_channel
+msgid "Request Channel"
 msgstr ""
 
 #. module: generic_request
@@ -2425,6 +2674,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_timesheet_report__request_partner_id
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_report_search
 msgid "Request Partner"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_sale
+msgid "Request Sale"
 msgstr ""
 
 #. module: generic_request
@@ -2500,6 +2754,16 @@ msgid "Request Types"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_web_conference
+msgid "Request Web Conference"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_weight
+msgid "Request Weight"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model,name:generic_request.model_request_wizard_assign
 msgid "Request Wizard: Assign"
 msgstr ""
@@ -2507,6 +2771,11 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model,name:generic_request.model_request_wizard_close
 msgid "Request Wizard: Close"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model,name:generic_request.model_request_wizard_stop_work
+msgid "Request Wizard: Stop Work"
 msgstr ""
 
 #. module: generic_request
@@ -2833,6 +3102,16 @@ msgid "Run routes automatially on trigger conditions"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_sla_priority
+msgid "SLA Priority"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_sla_service
+msgid "SLA Service"
+msgstr ""
+
+#. module: generic_request
 #: model:request.category,name:generic_request.request_category_demo_technical_security
 msgid "Security"
 msgstr ""
@@ -2877,11 +3156,6 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_type__send_default_reopened_notification
 msgid "Send Default Reopened Notification"
-msgstr ""
-
-#. module: generic_request
-#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
-msgid "Send surveys from request"
 msgstr ""
 
 #. module: generic_request
@@ -2948,7 +3222,19 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid ""
+"Set different time limits for one rule of SLA for requests with different "
+"priority."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Set relations between requests"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Set urgency, impact, or priority directly, depending on settings."
 msgstr ""
 
 #. module: generic_request
@@ -2991,6 +3277,11 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Show chat history directly in the composer view."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
 "Show request's Partner as suggested recipient when sending new message via "
 "chatter."
@@ -3006,6 +3297,11 @@ msgstr ""
 #. module: generic_request
 #: model:request.type,name:generic_request.request_type_simple
 msgid "Simple Request"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Specify different SLA limit and warn times per service."
 msgstr ""
 
 #. module: generic_request
@@ -3100,6 +3396,11 @@ msgid "Started"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__kanban_state
+msgid "State"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_request__activity_state
 msgid ""
 "Status based on activities\n"
@@ -3163,9 +3464,13 @@ msgid "Support"
 msgstr ""
 
 #. module: generic_request
-#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_action_survey
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_survey
 msgid "Surveys"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_action_survey
+msgid "Surveys (Action)"
 msgstr ""
 
 #. module: generic_request
@@ -3482,16 +3787,6 @@ msgid "Urgency Changed"
 msgstr ""
 
 #. module: generic_request
-#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_api
-msgid "Use API endpoints"
-msgstr ""
-
-#. module: generic_request
-#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
-msgid "Use API endpoints to create requests (<i>Alpha</i>)"
-msgstr ""
-
-#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_action
 msgid "Use Automated Actions"
 msgstr ""
@@ -3514,6 +3809,11 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_field
 msgid "Use Custom Fields in Requests"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Use Generic Assignments in request actions."
 msgstr ""
 
 #. module: generic_request
@@ -3541,6 +3841,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_type__use_timesheet
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
 msgid "Use Timesheet"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Use broadcast messages on the Service Desk."
 msgstr ""
 
 #. module: generic_request
@@ -3601,6 +3906,31 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:generic_request.message_request_notification__header
 #, python-format
 msgid "View Request"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_crnd_wsd_broadcast
+msgid "WSD Broadcast"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_crnd_wsd_legal
+msgid "WSD Legal"
+msgstr ""
+
+#. module: generic_request
+#: model:request.channel,name:generic_request.request_channel_web
+msgid "Web"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Web Service Desk"
+msgstr ""
+
+#. module: generic_request
+#: model:request.channel,name:generic_request.request_channel_website
+msgid "Website"
 msgstr ""
 
 #. module: generic_request
@@ -3723,16 +4053,6 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid "of"
-msgstr ""
-
-#. module: generic_request
-#: model:ir.model,name:generic_request.model_request_wizard_stop_work
-msgid "request.wizard.stop.work"
-msgstr ""
-
-#. module: generic_request
-#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
-msgid "to download."
 msgstr ""
 
 #. module: generic_request
