@@ -5,8 +5,13 @@ class RequestTimesheetActivity(models.Model):
     _name = 'request.timesheet.activity'
     _description = 'Request Timesheet Activity'
     _order = 'name'
+    _inherit = [
+        'generic.mixin.name_with_code',
+        'generic.mixin.uniq_name_code',
+    ]
 
     name = fields.Char(translate=True, index=True, required=True)
+    code = fields.Char()
     description = fields.Text(translate=True)
     active = fields.Boolean(index=True, default=True)
     color = fields.Integer()

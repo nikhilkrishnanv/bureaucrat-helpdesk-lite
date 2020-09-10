@@ -3,6 +3,7 @@ import logging
 from datetime import datetime
 from odoo import models, fields, api, tools, _, exceptions, SUPERUSER_ID
 from odoo.addons.generic_mixin import pre_write, post_write
+from odoo import http
 from odoo.osv import expression
 from ..tools.utils import html2text
 from ..constants import (
@@ -68,7 +69,7 @@ class RequestRequest(models.Model):
         index=True,
     )
     is_priority_complex = fields.Boolean(
-        related='type_id.complex_priority'
+        related='type_id.complex_priority', readonly=True,
     )
 
     # Type and stage related fields
@@ -85,6 +86,12 @@ class RequestRequest(models.Model):
         'request.category', 'Category', index=True,
         required=False, ondelete="restrict", track_visibility='onchange',
         help="Category of request")
+    channel_id = fields.Many2one(
+        'request.channel', 'Channel', index=True,
+        required=False,
+        default=lambda self: self.env.ref(
+            'generic_request.request_channel_other', raise_if_not_found=False),
+        help="Channel of request")
     stage_id = fields.Many2one(
         'request.stage', 'Stage', ondelete='restrict',
         required=True, index=True, track_visibility="onchange", copy=False)
@@ -100,6 +107,23 @@ class RequestRequest(models.Model):
         related='stage_id.closed', store=True, index=True, readonly=True)
     can_be_closed = fields.Boolean(
         compute='_compute_can_be_closed', readonly=True)
+
+    kanban_state = fields.Selection(
+        selection=[
+            ('normal', 'In Progress'),
+            ('blocked', 'Blocked'),
+            ('done', 'Ready for next stage')],
+        string='State',
+        required='True',
+        default='normal',
+        track_visibility='onchange',
+        help="A requests kanban state indicates special"
+             " situations affecting it:\n"
+             " * Grey is the default situation\n"
+             " * Red indicates something is preventing the"
+             "progress of this request\n"
+             " * Green indicates the request is ready to be pulled"
+             "to the next stage")
 
     # 12.0 compatability. required to generate xmlid for this field
     tag_ids = fields.Many2many()
@@ -235,6 +259,18 @@ class RequestRequest(models.Model):
          'UNIQUE (name)',
          'Request name must be unique.'),
     ]
+
+    @api.model
+    def default_get(self, fields_list):
+        r = http.request
+        if r:
+            path = r.httprequest.path
+            if path.startswith('/web') or path == '/web':
+                res = super(RequestRequest, self).default_get(fields_list)
+                res.update({'channel_id': self.env.ref(
+                    'generic_request.request_channel_web').id})
+                return res
+        return super(RequestRequest, self).default_get(fields_list)
 
     @api.depends('deadline_date', 'date_closed')
     def _compute_deadline_state(self):
@@ -586,6 +622,12 @@ class RequestRequest(models.Model):
         self.trigger_event('deadline-changed', {
             'old_deadline': changes['deadline_date'][0],
             'new_deadline': changes['deadline_date'][1]})
+
+    @post_write('kanban_state')
+    def _after_kanban_state_changed(self, changes):
+        self.trigger_event('kanban-state-changed', {
+            'old_kanban_state': changes['kanban_state'][0],
+            'new_kanban_state': changes['kanban_state'][1]})
 
     def _track_subtype(self, init_values):
         """ Give the subtypes triggered by the changes on the record according
@@ -955,6 +997,9 @@ class RequestRequest(models.Model):
             defaults['partner_id'] = False
             defaults['author_name'] = Partner._parse_partner_name(
                 msg['from'])[0] if msg.get('from') else False
+
+        defaults.update({'channel_id': self.env.ref(
+            'generic_request.request_channel_email').id})
 
         defaults.update(custom_values)
 

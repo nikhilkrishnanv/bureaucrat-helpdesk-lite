@@ -1,5 +1,49 @@
 # Changelog
 
+## Release (2020-Sep-09 12:08:53)
+
+### Updated addons:
+
+- bureaucrat_helpdesk_lite (12.0.1.1.0 -> 12.0.1.2.0)
+- crnd_wsd (12.0.1.41.1 -> 12.0.1.47.0)
+- generic_request (12.0.1.62.0 -> 12.0.1.80.1)
+
+### Notable changes:
+
+#### crnd_wsd
+##### Version 1.47.0
+
+Automatically set channel to Website for requests created from website
+
+
+#### generic_request
+##### Version 1.72.0
+
+Added new request stage type 'Progress'
+
+
+##### Version 1.70.0
+
+Added new field Channel to request. The field could be used to determine source of request Website / Web / Mail / Other
+Automatically set correct channels for requests created from Web and E-mail
+
+
+##### Version 1.68.0
+
+Remove obsolete modules from settings page.
+Obsolte modules are:
+- `generic_request_action_condition`
+
+
+##### Version 1.67.0
+
+Added *kanban_state* feature to requests.
+Now it is possible to define additional Blocked or Ready states on request.
+Also, changes of kanban state triggers event *Kanban State*
+
+
+
+
 ## Release (2020-Jun-08 19:03:07)
 
 ### Updated addons:
