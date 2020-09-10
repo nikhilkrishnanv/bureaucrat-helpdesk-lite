@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 17:42+0000\n"
-"PO-Revision-Date: 2020-05-27 17:42+0000\n"
+"POT-Creation-Date: 2020-07-27 15:52+0000\n"
+"PO-Revision-Date: 2020-07-27 15:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -78,6 +78,14 @@ msgstr ""
 msgid ""
 "<span class=\"header-bg-filler\">Request</span>\n"
 "                                    <span class=\"header-separator-splitter\"/>"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
+msgid ""
+"<span class=\"pull-right label\" id=\"characters_left_label\" data-"
+"toggle=\"tooltip\" data-placement=\"bottom\" title=\"Remaining "
+"characters.\"/>"
 msgstr ""
 
 #. module: crnd_wsd
@@ -350,6 +358,7 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #, python-format
 msgid "Discard"
@@ -648,6 +657,7 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #: code:addons/crnd_wsd/static/src/xml/templates.xml:0
 #, python-format

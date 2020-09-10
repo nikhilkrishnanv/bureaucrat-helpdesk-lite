@@ -1,3 +1,4 @@
+from urllib.parse import urlsplit, urlunsplit
 import logging
 import functools
 import werkzeug
@@ -63,10 +64,9 @@ def get_redirect():
     Note, that 'redirect' param has quoted value that allows to keep
     query parametrs.
     """
-
     full_url = request.httprequest.url
-    host = request.httprequest.environ['HTTP_HOST']
-    url = full_url.split(host)[1]
+    s = urlsplit(full_url)
+    url = urlunsplit(['', '', s.path, s.query, s.fragment])
     return werkzeug.urls.url_encode({'redirect': url})
 
 
@@ -393,10 +393,13 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
 
     def _request_new_prepare_data(self, req_type, req_category,
                                   req_text, **post):
+        channel_website = request.env.ref(
+            'generic_request.request_channel_website')
         return {
             'category_id': req_category and req_category.id,
             'type_id': req_type.id,
             'request_text': req_text,
+            'channel_id': channel_website.id,
         }
 
     @http.route(["/requests/new/step/data"],

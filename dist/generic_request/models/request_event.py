@@ -5,7 +5,6 @@ from odoo import models, fields, api
 from .request_request import (AVAILABLE_PRIORITIES,
                               AVAILABLE_IMPACTS,
                               AVAILABLE_URGENCIES)
-
 _logger = logging.getLogger(__name__)
 
 
@@ -63,6 +62,18 @@ class RequestEvent(models.Model):
     new_urgency = fields.Selection(
         selection=AVAILABLE_URGENCIES, readonly=True)
 
+    # Kanban state changed
+
+    old_kanban_state = fields.Selection(
+        selection="_get_selection_kanban_state",
+        readonly=True)
+    new_kanban_state = fields.Selection(
+        selection="_get_selection_kanban_state",
+        readonly=True)
+
+    def _get_selection_kanban_state(self):
+        return self.env['request.request']._fields['kanban_state'].selection
+
     def name_get(self):
         res = []
         for record in self:
@@ -88,6 +99,8 @@ class RequestEvent(models.Model):
             'new_stage': self.new_stage_id,
             'old_priority': self.old_priority,
             'new_priority': self.new_priority,
+            'old_kanban_state': self.old_kanban_state,
+            'new_kanban_state': self.new_kanban_state,
             'request_event': self,
         }
 

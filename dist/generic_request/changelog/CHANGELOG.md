@@ -1,5 +1,30 @@
 # Changelog
 
+## Version 1.72.0
+
+Added new request stage type 'Progress'
+
+
+## Version 1.70.0
+
+Added new field Channel to request. The field could be used to determine source of request Website / Web / Mail / Other
+Automatically set correct channels for requests created from Web and E-mail
+
+
+## Version 1.68.0
+
+Remove obsolete modules from settings page.
+Obsolte modules are:
+- `generic_request_action_condition`
+
+
+## Version 1.67.0
+
+Added *kanban_state* feature to requests.
+Now it is possible to define additional Blocked or Ready states on request.
+Also, changes of kanban state triggers event *Kanban State*
+
+
 ## Version 1.58.0
 
 Merge with generic_request_timesheet module
