@@ -40,6 +40,15 @@ msgid ""
 msgstr ""
 
 #. module: generic_request
+#: model:res.groups,comment:generic_request.group_request_show_stat_on_kanban_views
+msgid ""
+"\n"
+"            If this group enabled, then users will see request statistics on kanban views\n"
+"            of request related models like: Request Type, Request Category, etc\n"
+"        "
+msgstr ""
+
+#. module: generic_request
 #: model:res.groups,comment:generic_request.group_request_manager
 msgid ""
 "\n"
@@ -109,12 +118,33 @@ msgid "%s [Running]"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
+msgid "24 hours"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
+msgid "24h"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
 "<b>Note</b>: Setting the checkboxes will automatically install additional "
 "modules that provide selected functionality. Inactive checkbox means you "
 "don't have the required module in your system. You can download it from Odoo"
 " marketplace individually or as part of a bundle. Look at the"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid ""
+"<span class=\"fa fa-arrow-right mr16\" title=\"Urgency and Impact converted "
+"to Priority\" attrs=\"{'invisible': ['|', ('is_priority_complex', '=', "
+"False), ('id', '=', False)]}\"/>"
 msgstr ""
 
 #. module: generic_request
@@ -344,6 +374,11 @@ msgid "All Requests"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
+msgid "All requests"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Allow users to reopen requests with another request type"
 msgstr ""
@@ -398,6 +433,11 @@ msgid "Assign"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_event__assign_comment
+msgid "Assign Comment"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Assign Users By Position (HR)"
 msgstr ""
@@ -405,6 +445,11 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Assign Users By Team"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.message_request_notification__request_info
+msgid "Assign comment"
 msgstr ""
 
 #. module: generic_request
@@ -425,10 +470,15 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__date_assigned
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
-#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
 #: model:request.event.type,name:generic_request.request_event_type_assigned
 msgid "Assigned"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__assigned_request_closed_count
+msgid "Assigned Closed Requests"
 msgstr ""
 
 #. module: generic_request
@@ -439,6 +489,21 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_type__assigned_notification_show_response_text
 msgid "Assigned Notification Show Response Text"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__assigned_request_open_count
+msgid "Assigned Open Requests To User"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__assigned_request_count
+msgid "Assigned Requests Count"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__assigned_request_ids
+msgid "Assigned Requests To User"
 msgstr ""
 
 #. module: generic_request
@@ -453,6 +518,7 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.message_request_notification__request_info
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
 msgid "Assignee"
 msgstr ""
 
@@ -503,6 +569,16 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid "Author..."
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__authored_request_count
+msgid "Authored Requests"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
+msgid "Authored requests"
 msgstr ""
 
 #. module: generic_request
@@ -714,6 +790,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_request__date_closed
 #: model:ir.model.fields,field_description:generic_request.field_request_stage__closed
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_route__close
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
@@ -750,6 +830,38 @@ msgid "Closed Requests"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_closed_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_closed_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_closed_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_closed_last_24h_count
+msgid "Closed Requests For Last 24 Hour"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_closed_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_closed_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_closed_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_closed_month_count
+msgid "Closed Requests For Month"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_closed_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_closed_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_closed_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_closed_today_count
+msgid "Closed Requests For Today"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_closed_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_closed_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_closed_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_closed_week_count
+msgid "Closed Requests For Week"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__closed_by_id
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
 msgid "Closed by"
@@ -760,7 +872,9 @@ msgstr ""
 #: model:ir.actions.act_window,name:generic_request.act_request_dashboard_type_2_closed_requests
 #: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
 #: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
 msgid "Closed requests"
 msgstr ""
 
@@ -870,11 +984,21 @@ msgid "Create And Use Custom Assignment Policies"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "Create default"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__date_created
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
 #: model:request.event.type,name:generic_request.request_event_type_created
 msgid "Created"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
+msgid "Created & Authored"
 msgstr ""
 
 #. module: generic_request
@@ -885,6 +1009,16 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_type__created_notification_show_response_text
 msgid "Created Notification Show Response Text"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__created_request_count
+msgid "Created Requests"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__created_request_ids
+msgid "Created Requests By User"
 msgstr ""
 
 #. module: generic_request
@@ -926,6 +1060,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_wizard_close__create_date
 #: model:ir.model.fields,field_description:generic_request.field_request_wizard_stop_work__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
+msgid "Created requests"
 msgstr ""
 
 #. module: generic_request
@@ -971,6 +1110,10 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__deadline_date
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_kanban
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_tree
 msgid "Deadline"
@@ -979,6 +1122,38 @@ msgstr ""
 #. module: generic_request
 #: model:request.event.type,name:generic_request.request_event_type_deadline_changed
 msgid "Deadline Changed"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_deadline_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_deadline_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_deadline_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_deadline_last_24h_count
+msgid "Deadline Requests For Last 24 Hour"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_deadline_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_deadline_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_deadline_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_deadline_month_count
+msgid "Deadline Requests For Month"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_deadline_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_deadline_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_deadline_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_deadline_today_count
+msgid "Deadline Requests For Today"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_deadline_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_deadline_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_deadline_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_deadline_week_count
+msgid "Deadline Requests For Week"
 msgstr ""
 
 #. module: generic_request
@@ -1070,6 +1245,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_type__description
 #: model:ir.model.fields,field_description:generic_request.field_request_wizard_stop_work__description
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_tree
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_stage_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
@@ -1301,6 +1477,11 @@ msgid "Group By"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__group_request_show_stat_on_kanban_views
+msgid "Group Request Show Stat On Kanban Views"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.request_event_type_view_search
 #: model_terms:ir.ui.view,arch_db:generic_request.request_event_view_search
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
@@ -1462,6 +1643,13 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid ""
+"If enabled then users will see request statistics on kanban views\n"
+"                                    of request related models like: Request Type, Request Category, etc"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_stage_route__close
 msgid "If set, then this route will close request"
 msgstr ""
@@ -1510,6 +1698,7 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_stage_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_stage_route_form
 msgid "Info"
 msgstr ""
 
@@ -1536,6 +1725,11 @@ msgid "Invoicing"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__is_assigned
+msgid "Is Assigned"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__message_is_follower
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__message_is_follower
 #: model:ir.model.fields,field_description:generic_request.field_request_request__message_is_follower
@@ -1547,6 +1741,16 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__is_new_request
 msgid "Is New Request"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
+msgid "Is assigned"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
+msgid "Is closed"
 msgstr ""
 
 #. module: generic_request
@@ -1564,6 +1768,11 @@ msgstr ""
 #. module: generic_request
 #: model:request.stage,description:generic_request.request_stage_type_sequence_new
 msgid "Just created request"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__kanban_state
+msgid "Kanban State"
 msgstr ""
 
 #. module: generic_request
@@ -1603,6 +1812,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_stage__res_label_color
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_type__label_color
 msgid "Label Color"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
+msgid "Last 24 hours"
 msgstr ""
 
 #. module: generic_request
@@ -1816,6 +2033,15 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Module allows to use Generic Assignments in request actions."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
+msgid "Month"
 msgstr ""
 
 #. module: generic_request
@@ -2069,6 +2295,10 @@ msgstr ""
 
 #. module: generic_request
 #: code:addons/generic_request/models/request_type.py:0
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
 #: model:request.stage,name:generic_request.request_stage_type_access_new
 #: model:request.stage,name:generic_request.request_stage_type_sequence_new
 #: model:request.stage,name:generic_request.request_type_with_complex_priority_new
@@ -2099,6 +2329,38 @@ msgstr ""
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_event__new_priority
 msgid "New Priority"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_open_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_open_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_open_last_24h_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_open_last_24h_count
+msgid "New Requests For Last 24 Hour"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_open_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_open_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_open_month_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_open_month_count
+msgid "New Requests For Month"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_open_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_open_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_open_today_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_open_today_count
+msgid "New Requests For Today"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_open_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_open_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_open_week_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_open_week_count
+msgid "New Requests For Week"
 msgstr ""
 
 #. module: generic_request
@@ -2322,7 +2584,9 @@ msgstr ""
 #: model:ir.actions.act_window,name:generic_request.act_request_dashboard_type_2_open_requests
 #: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
 #: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
 msgid "Open requests"
 msgstr ""
 
@@ -2525,6 +2789,11 @@ msgid "Reopened Notification Show Response Text"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.actions.act_window,name:generic_request.action_graph_report_by_count
+msgid "Report Requests By Count"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.ui.menu,name:generic_request.menu_request_report
 msgid "Reports"
 msgstr ""
@@ -2610,11 +2879,14 @@ msgid "Request Channel"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_closed_count
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__request_closed_count
 msgid "Request Closed Count"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.actions.act_window,name:generic_request.action_stat_request_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_count
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__request_count
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_type__request_count
 msgid "Request Count"
@@ -2666,6 +2938,7 @@ msgid "Request Kind"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_open_count
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__request_open_count
 msgid "Request Open Count"
 msgstr ""
@@ -3001,12 +3274,15 @@ msgstr ""
 #: model:ir.actions.act_window,name:generic_request.action_request_type_requests
 #: model:ir.actions.act_window,name:generic_request.action_request_window
 #: model:ir.model.fields,field_description:generic_request.field_request_category__request_ids
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_ids
 #: model:ir.model.fields,field_description:generic_request.field_request_kind__request_ids
 #: model:ir.model.fields,field_description:generic_request.field_request_type__request_ids
 #: model:ir.model.fields,field_description:generic_request.field_request_wizard_assign__request_ids
 #: model:ir.model.fields,field_description:generic_request.field_res_partner__request_count
 #: model:ir.model.fields,field_description:generic_request.field_res_users__request_count
 #: model:ir.ui.menu,name:generic_request.menu_configuration_requests
+#: model:ir.ui.menu,name:generic_request.menu_graph_report_requests_by_count
+#: model:ir.ui.menu,name:generic_request.menu_graph_requests_report
 #: model:ir.ui.menu,name:generic_request.menu_request
 #: model:ir.ui.menu,name:generic_request.menu_request_root
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
@@ -3282,6 +3558,16 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Show request stat on kanban views"
+msgstr ""
+
+#. module: generic_request
+#: model:res.groups,name:generic_request.group_request_show_stat_on_kanban_views
+msgid "Show request statistics on kanban views"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
 "Show request's Partner as suggested recipient when sending new message via "
 "chatter."
@@ -3396,8 +3682,16 @@ msgid "Started"
 msgstr ""
 
 #. module: generic_request
-#: model:ir.model.fields,field_description:generic_request.field_request_request__kanban_state
-msgid "State"
+#: model:ir.model.fields,field_description:generic_request.field_res_users__statbutton_total_request_count
+msgid "Statbutton Total Request Count"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "Statistics"
 msgstr ""
 
 #. module: generic_request
@@ -3622,6 +3916,11 @@ msgid "This week"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_report_search
+msgid "This year"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid "Time log"
 msgstr ""
@@ -3687,6 +3986,21 @@ msgid "Timesheet Start Status"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_event__timesheet_line_id
+msgid "Timesheet line"
+msgstr ""
+
+#. module: generic_request
+#: model:request.event.type,name:generic_request.request_event_type_timetracking_start_work
+msgid "Timetracking / Start Work"
+msgstr ""
+
+#. module: generic_request
+#: model:request.event.type,name:generic_request.request_event_type_timetracking_stop_work
+msgid "Timetracking / Stop Work"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_route__stage_to_id
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_stage_route_tree
 msgid "To"
@@ -3694,9 +4008,24 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields.selection,name:generic_request.selection__request_request__deadline_state__today
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_line_search
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_report_search
 msgid "Today"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
+msgid "Total"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__total_request_closed_count
+msgid "Total Closed Requests"
 msgstr ""
 
 #. module: generic_request
@@ -3707,6 +4036,21 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid "Total Duration (Hours)"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__total_request_open_count
+msgid "Total Open Requests"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_users__total_request_count
+msgid "Total Requests"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_users_form
+msgid "Total requests"
 msgstr ""
 
 #. module: generic_request
@@ -3747,9 +4091,21 @@ msgid "Types"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
 #: model:request.event.type,name:generic_request.request_event_type_unassigned
 msgid "Unassigned"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_category__request_unassigned_count
+#: model:ir.model.fields,field_description:generic_request.field_request_channel__request_unassigned_count
+#: model:ir.model.fields,field_description:generic_request.field_request_kind__request_unassigned_count
+#: model:ir.model.fields,field_description:generic_request.field_request_type__request_unassigned_count
+msgid "Unassigned Requests"
 msgstr ""
 
 #. module: generic_request
@@ -3934,6 +4290,15 @@ msgid "Website"
 msgstr ""
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_kanban
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
+msgid "Week"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields.selection,name:generic_request.selection__res_company__request_event_live_time_uom__weeks
 msgid "Weeks"
 msgstr ""
@@ -3954,6 +4319,11 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
 msgid "Write control"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
+msgid "Year"
 msgstr ""
 
 #. module: generic_request
@@ -4008,6 +4378,70 @@ msgstr ""
 #: code:addons/generic_request/models/request_request.py:0
 #, python-format
 msgid "Your request %s has been reopened!"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[24 h]Last 24 Hour"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[C] Closed"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[D] Deadline"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[M] Month"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[N] New"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[T] Today"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[U] Unassigned"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_category_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_kind_form
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "[W] Week"
 msgstr ""
 
 #. module: generic_request

@@ -4,5 +4,6 @@ from . import (
     test_access_rights,
     test_request_author,
     test_mail,
-    test_request_timesheet
+    test_request_timesheet,
+    test_rpc_channel,
 )

@@ -197,6 +197,10 @@ class ResConfigSettings(models.TransientModel):
         related='company_id.request_event_auto_remove', readonly=False)
     request_mail_suggest_partner = fields.Boolean(
         related='company_id.request_mail_suggest_partner', readonly=False)
+    group_request_show_stat_on_kanban_views = fields.Boolean(
+        group='base.group_user',
+        implied_group='generic_request.'
+                      'group_request_show_stat_on_kanban_views')
 
     @api.depends('company_id')
     def _compute_generic_request_modules_can_install(self):

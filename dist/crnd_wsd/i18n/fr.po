@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2020-07-27 16:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -61,8 +62,8 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
 msgid ""
-"<span class=\"fa fa-info-circle info-toggle mr8\" title=\"Show request "
-"info\"/>"
+"<span class=\"fa fa-info-circle info-toggle mr8\" title=\"Show request info"
+"\"/>"
 msgstr ""
 
 #. module: crnd_wsd
@@ -77,22 +78,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 msgid ""
 "<span class=\"header-bg-filler\">Request</span>\n"
-"                                    <span class=\"header-separator-splitter\"/>"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
 msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid ""
-"<span class=\"pull-right label\" id=\"characters_left_label\" data-"
-"toggle=\"tooltip\" data-placement=\"bottom\" title=\"Remaining "
-"characters.\"/>"
+"<span class=\"pull-right label\" id=\"characters_left_label\" data-toggle="
+"\"tooltip\" data-placement=\"bottom\" title=\"Remaining characters.\"/>"
 msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 msgid ""
 "<span class=\"wsd_request header-bg-filler\">Response</span>\n"
-"                                    <span class=\"header-separator-splitter\"/>"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
 msgstr ""
 
 #. module: crnd_wsd
@@ -116,10 +118,6 @@ msgid "Accepted"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/helpers.py:0
-#: code:addons/crnd_wsd/controllers/helpers.py:0
-#: code:addons/crnd_wsd/controllers/helpers.py:0
-#: code:addons/crnd_wsd/controllers/helpers.py:0
 #: code:addons/crnd_wsd/controllers/helpers.py:0
 #, python-format
 msgid "Access denied"
@@ -359,7 +357,6 @@ msgstr ""
 #. module: crnd_wsd
 #. openerp-web
 #: code:addons/crnd_wsd/static/src/js/request_actions.js:0
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #, python-format
 msgid "Discard"
 msgstr ""
@@ -385,9 +382,6 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #, python-format
 msgid "Error"
@@ -658,7 +652,6 @@ msgstr ""
 #. module: crnd_wsd
 #. openerp-web
 #: code:addons/crnd_wsd/static/src/js/request_actions.js:0
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #: code:addons/crnd_wsd/static/src/xml/templates.xml:0
 #, python-format
 msgid "Save"
@@ -823,7 +816,8 @@ msgstr ""
 #: model_terms:request.type,help_html:crnd_wsd.request_type_generic
 msgid ""
 "This is request type for generic questions related to our SaaS service\n"
-"            Use this request type if you cannot find exact request type for your question"
+"            Use this request type if you cannot find exact request type for "
+"your question"
 msgstr ""
 
 #. module: crnd_wsd
@@ -916,7 +910,11 @@ msgid "Warning"
 msgstr ""
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_category__website_ids
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request__website_id
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_ids
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_website_request_request_search
 msgid "Website"
 msgstr ""
 

@@ -2,7 +2,7 @@ import logging
 import time
 import hashlib
 import hmac
-from odoo.tests.common import HOST, PORT
+from odoo.addons.generic_mixin.tests.common import TEST_URL
 from .phantom_common import TestPhantomTour
 
 _logger = logging.getLogger(__name__)
@@ -30,15 +30,14 @@ class TestUploadFile(TestPhantomTour):
 
     def test_upload_file_existing_request(self):
         self.authenticate('demo-sd-website', 'demo-sd-website')  # nosec
-        with self.phantom_env as env:
-            test_request = env['request.request'].search(
-                [('created_by_id', '=', self.user.id)], limit=1)
-        url = 'http://%s:%s/requests/request/%s' % (
-            HOST, PORT, str(test_request.id))
+        test_request = self.env['request.request'].search(
+            [('created_by_id', '=', self.user.id)], limit=1)
+        url = '%s/requests/request/%s' % (
+            TEST_URL, str(test_request.id))
         response = self.opener.get(url)
         self.assertEqual(response.status_code, 200)
 
-        url = "http://%s:%s/crnd_wsd/file_upload" % (HOST, PORT)
+        url = "%s/crnd_wsd/file_upload" % TEST_URL
 
         data = {
             'csrf_token': self.get_csrf_token(),
@@ -54,14 +53,13 @@ class TestUploadFile(TestPhantomTour):
         self.assertEqual(response_json['success'], True)
         attachment_url_file = response_json['attachment_url']
         response_attachment = self.opener.get(
-            "http://%s:%s%s" % (HOST, PORT, attachment_url_file))
+            "%s%s" % (TEST_URL, attachment_url_file))
         self.assertEqual(response_attachment.status_code, 200)
         self.assertEqual(attachment_url_file[:13], '/web/content/')
 
-        with self.phantom_env as env:
-            attachments = env['ir.attachment'].search(
-                [('res_model', '=', 'request.request'),
-                 ('res_id', '=', test_request.id)])
+        attachments = self.env['ir.attachment'].search(
+            [('res_model', '=', 'request.request'),
+             ('res_id', '=', test_request.id)])
         self.assertEqual(len(attachments), 1)
 
         # test upload image
@@ -79,20 +77,19 @@ class TestUploadFile(TestPhantomTour):
         self.assertEqual(response_json['success'], True)
         attachment_url_image = response_json['attachment_url']
         response_attachment = self.opener.get(
-            "http://%s:%s%s" % (HOST, PORT, attachment_url_image))
+            "%s%s" % (TEST_URL, attachment_url_image))
         self.assertEqual(response_attachment.status_code, 200)
         self.assertEqual(attachment_url_image[:11], '/web/image/')
 
-        with self.phantom_env as env:
-            attachments = env['ir.attachment'].search(
-                [('res_model', '=', 'request.request'),
-                 ('res_id', '=', test_request.id)])
+        attachments = self.env['ir.attachment'].search(
+            [('res_model', '=', 'request.request'),
+             ('res_id', '=', test_request.id)])
         self.assertEqual(len(attachments), 2)
 
     def test_upload_file_new_request(self):
         self.authenticate('demo-sd-website', 'demo-sd-website')  # nosec
 
-        url = "http://%s:%s/crnd_wsd/file_upload" % (HOST, PORT)
+        url = "%s/crnd_wsd/file_upload" % TEST_URL
 
         data = {
             'csrf_token': self.get_csrf_token(),
@@ -107,7 +104,7 @@ class TestUploadFile(TestPhantomTour):
         self.assertEqual(response_json['success'], True)
         attachment_url_file = response_json['attachment_url']
         response_attachment = self.opener.get(
-            "http://%s:%s%s" % (HOST, PORT, attachment_url_file))
+            "%s%s" % (TEST_URL, attachment_url_file))
         self.assertEqual(response_attachment.status_code, 200)
         self.assertEqual(attachment_url_file[:13], '/web/content/')
 
@@ -125,11 +122,11 @@ class TestUploadFile(TestPhantomTour):
         self.assertEqual(response_json['success'], True)
         attachment_url_image = response_json['attachment_url']
         response_attachment = self.opener.get(
-            "http://%s:%s%s" % (HOST, PORT, attachment_url_image))
+            "%s%s" % (TEST_URL, attachment_url_image))
         self.assertEqual(response_attachment.status_code, 200)
         self.assertEqual(attachment_url_image[:11], '/web/image/')
 
-        url = 'http://%s:%s/requests/new/step/data' % (HOST, PORT)
+        url = '%s/requests/new/step/data' % TEST_URL
         data = {
             'type_id': self.request_type.id,
             'req_text': 'test request with attachment' +
@@ -139,14 +136,12 @@ class TestUploadFile(TestPhantomTour):
         response = self.opener.post(url=url, data=data)
         self.assertEqual(response.status_code, 200)
 
-        with self.phantom_env as env:
-            test_request = env['request.request'].search(
-                [('request_text', 'like', 'test request with attachment')],
-                limit=1)
+        test_request = self.env['request.request'].search(
+            [('request_text', 'like', 'test request with attachment')],
+            limit=1)
         self.assertEqual(len(test_request), 1)
 
-        with self.phantom_env as env:
-            attachments = env['ir.attachment'].search(
-                [('res_model', '=', 'request.request'),
-                 ('res_id', '=', test_request.id)])
+        attachments = self.env['ir.attachment'].search(
+            [('res_model', '=', 'request.request'),
+             ('res_id', '=', test_request.id)])
         self.assertEqual(len(attachments), 2)

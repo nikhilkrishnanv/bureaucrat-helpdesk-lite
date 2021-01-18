@@ -130,6 +130,7 @@
         <field name="category_id" ref="request_category_demo_general"/>
         <field name="tag_ids"
                eval="[(4, ref('generic_request.tag_severity_medium')), (4, ref('generic_request.tag_platform_linux')), (4, ref('generic_request.tag_platform_mac'))]"/>
+        <field name="date_created" eval="time.strftime('%Y-%m-16 %H:%M:%S')"/>
         <field name="deadline_date" eval="time.strftime('%Y-%m-21')"/>
     </record>
 
@@ -241,6 +242,7 @@
         <field name="partner_id" ref="base.res_partner_2"/>
         <field name="category_id" ref="request_category_demo_general"/>
         <field name="user_id" ref="base.demo_user0"/>
+        <field name="date_created" eval="time.strftime('%Y-%m-01 %H:%M:%S')"/>
         <field name="deadline_date" eval="time.strftime('%Y-%m-01')"/>
     </record>
 
@@ -260,6 +262,7 @@
         <field name="author_name">Joey	Kington</field>
         <field name="category_id" ref="request_category_demo_general"/>
         <field name="priority">5</field>
+        <field name="date_created" eval="time.strftime('%Y-%m-09 %H:%M:%S')"/>
     </record>
     <record id="request_request_type_simple_demo_2" model="request.request">
         <field name="request_text"><![CDATA[
@@ -278,6 +281,7 @@
         <field name="partner_id" ref="base.res_partner_4"/>
         <field name="category_id" ref="request_category_demo_general"/>
         <field name="email_cc">lquixley3@ning.com,"Julita Haddeston &lt;jhaddeston5@cafepress.com&gt;"</field>
+        <field name="date_created" eval="time.strftime('%Y-%m-11 %H:%M:%S')"/>
         <field name="deadline_date" eval="time.strftime('%Y-%m-18')"/>
     </record>
     <record id="request_request_type_simple_demo_3" model="request.request">
@@ -293,6 +297,7 @@
         <field name="partner_id" ref="base.res_partner_4"/>
         <field name="category_id" ref="request_category_demo_general"/>
         <field name="email_cc">lquixley3@ning.com,"Julita Haddeston &lt;jhaddeston5@cafepress.com&gt;"</field>
+        <field name="date_created" eval="time.strftime('%Y-%m-12 %H:%M:%S')"/>
         <field name="deadline_date" eval="time.strftime('%Y-%m-18')"/>
     </record>
 </odoo>

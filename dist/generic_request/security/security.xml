@@ -91,6 +91,13 @@
         </field>
     </record>
 
+    <record id="group_request_show_stat_on_kanban_views" model="res.groups">
+        <field name="name">Show request statistics on kanban views</field>
+        <field name="comment">
+            If this group enabled, then users will see request statistics on kanban views
+            of request related models like: Request Type, Request Category, etc
+        </field>
+    </record>
     <!-- Access rights for requests implicit user
          - write/create/unlink access rights are restricted by ir.model.access.csv
          - these rules will be transfered to Request user and Request manager groups

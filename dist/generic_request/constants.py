@@ -1,4 +1,6 @@
 from odoo import _
+# TODO, do we need this constant? It seems that only 'partner_id' is mentioned
+# here, but have no pre/post write handlers
 TRACK_FIELD_CHANGES = set((
     'stage_id', 'user_id', 'type_id', 'category_id', 'request_text',
     'partner_id', 'category_id', 'priority', 'impact', 'urgency'))
