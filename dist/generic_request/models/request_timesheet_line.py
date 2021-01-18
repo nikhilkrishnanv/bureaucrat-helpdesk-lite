@@ -65,16 +65,11 @@ class RequestTimesheetLine(models.Model):
 
     def action_edit_wizard(self):
         self.ensure_one()
-        action = self.env.ref(
-            'generic_request'
-            '.action_request_wizard_add_timesheet_line').read()[0]
-        ctx = dict()
-        ctx.update({
-            'default_request_id': self.request_id.id,
-            'default_activity_id': self.activity_id.id,
-            'default_amount': self.amount,
-            'default_description': self.description,
-            'default_edit_line_id': self.id})
-        return dict(
-            action,
-            context=ctx)
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_wizard_add_timesheet_line',
+            context={
+                'default_request_id': self.request_id.id,
+                'default_activity_id': self.activity_id.id,
+                'default_amount': self.amount,
+                'default_description': self.description,
+                'default_edit_line_id': self.id})

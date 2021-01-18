@@ -26,6 +26,7 @@ class RequestRequest(models.Model):
         'mail.activity.mixin',
         'generic.mixin.track.changes',
         'generic.tag.mixin',
+        'generic.mixin.get.action',
     ]
     _description = 'Request'
     _order = 'date_created DESC'
@@ -107,13 +108,15 @@ class RequestRequest(models.Model):
         related='stage_id.closed', store=True, index=True, readonly=True)
     can_be_closed = fields.Boolean(
         compute='_compute_can_be_closed', readonly=True)
+    is_assigned = fields.Boolean(
+        compute="_compute_is_assigned",
+        store=True, readonly=True)
 
     kanban_state = fields.Selection(
         selection=[
             ('normal', 'In Progress'),
             ('blocked', 'Blocked'),
             ('done', 'Ready for next stage')],
-        string='State',
         required='True',
         default='normal',
         track_visibility='onchange',
@@ -168,7 +171,7 @@ class RequestRequest(models.Model):
     date_moved = fields.Datetime('Moved', readonly=True, copy=False)
     created_by_id = fields.Many2one(
         'res.users', 'Created by', readonly=True, ondelete='restrict',
-        default=lambda self: self.env.user,
+        default=lambda self: self.env.user, index=True,
         help="Request was created by this user", copy=False)
     moved_by_id = fields.Many2one(
         'res.users', 'Moved by', readonly=True, ondelete='restrict',
@@ -187,7 +190,7 @@ class RequestRequest(models.Model):
         help="Author of this request")
     user_id = fields.Many2one(
         'res.users', 'Assigned to',
-        ondelete='restrict', track_visibility='onchange',
+        ondelete='restrict', track_visibility='onchange', index=True,
         help="User responsible for next action on this request.")
 
     # Email support
@@ -262,15 +265,20 @@ class RequestRequest(models.Model):
 
     @api.model
     def default_get(self, fields_list):
-        r = http.request
-        if r:
-            path = r.httprequest.path
-            if path.startswith('/web') or path == '/web':
-                res = super(RequestRequest, self).default_get(fields_list)
-                res.update({'channel_id': self.env.ref(
-                    'generic_request.request_channel_web').id})
-                return res
-        return super(RequestRequest, self).default_get(fields_list)
+        res = super(RequestRequest, self).default_get(fields_list)
+
+        path = http.request.httprequest.path if http.request else False
+        if path and path.startswith('/web') or path == '/web':
+            res.update({'channel_id': self.env.ref(
+                'generic_request.request_channel_web').id})
+        elif path and path.startswith('/xmlrpc') or path == '/xmlrpc':
+            res.update({'channel_id': self.env.ref(
+                'generic_request.request_channel_api').id})
+        elif path and path.startswith('/jsonrpc') or path == '/jsonrpc':
+            res.update({'channel_id': self.env.ref(
+                'generic_request.request_channel_api').id})
+
+        return res
 
     @api.depends('deadline_date', 'date_closed')
     def _compute_deadline_state(self):
@@ -432,6 +440,11 @@ class RequestRequest(models.Model):
             else:
                 rec.priority = rec._priority
 
+    @api.depends('user_id')
+    def _compute_is_assigned(self):
+        for rec in self:
+            rec.is_assigned = bool(rec.user_id)
+
     # When priority is complex, it is computed from impact and urgency
     # We do not need to write it directly from the field
     def _inverse_priority(self):
@@ -565,7 +578,11 @@ class RequestRequest(models.Model):
     @post_write('user_id')
     def _after_user_id_changed(self, changes):
         old_user, new_user = changes['user_id']
-        event_data = {'old_user_id': old_user.id, 'new_user_id': new_user.id}
+        event_data = {
+            'old_user_id': old_user.id,
+            'new_user_id': new_user.id,
+            'assign_comment': self.env.context.get('assign_comment', False)
+        }
         if not old_user and new_user:
             self.trigger_event('assigned', event_data)
         elif old_user and new_user:
@@ -743,12 +760,9 @@ class RequestRequest(models.Model):
 
     def action_request_assign(self):
         self.ensure_can_assign()
-        action = self.env.ref('generic_request.action_request_wizard_assign')
-        action = action.read()[0]
-        action['context'] = {
-            'default_request_ids': [(6, 0, self.ids)],
-        }
-        return action
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_wizard_assign',
+            context={'default_request_ids': [(6, 0, self.ids)]})
 
     def action_request_assign_to_me(self):
         self.ensure_can_assign()
@@ -813,6 +827,19 @@ class RequestRequest(models.Model):
                 partner=partner,
             )
             self_ctx = self.sudo()
+
+            # remove default author from context
+            # This is required to fix bug in generic_request_crm:
+            # when use create new request from lead, and there is default
+            # author specified in context, then all notification messages use
+            # that author as author of message. This way customer notification
+            # has customer as author. Next block of code have to fix
+            # this issue.
+            if self_ctx.env.context.get('default_author_id'):
+                new_ctx = dict(self_ctx.env.context)
+                new_ctx.pop('default_author_id')
+                self_ctx = self_ctx.with_context(new_ctx)
+
             if partner.lang:
                 self_ctx = self_ctx.with_context(lang=partner.sudo().lang)
             message_data = dict(
@@ -942,7 +969,7 @@ class RequestRequest(models.Model):
 
     def _message_auto_subscribe_notify(self, partner_ids, template):
         # Disable sending mail to assigne, when request was assigned.
-        # See _postprocess_write_changes
+        # Custom notification will be sent, see _after_user_id_changed method
         return super(
             RequestRequest,
             self.with_context(mail_auto_subscribe_no_notify=True)
@@ -964,7 +991,7 @@ class RequestRequest(models.Model):
             This override updates the document according to the email.
         """
         Partner = self.env['res.partner']
-        custom_values = custom_values if custom_values is not None else {}
+        defaults = dict(custom_values) if custom_values is not None else {}
 
         # Ensure we have message_id
         if not msg.get('message_id'):
@@ -977,13 +1004,13 @@ class RequestRequest(models.Model):
         }
 
         # Update defaults with partner and created_by_id if possible
-        defaults = {
+        defaults.update({
             'name': "###new###",  # Spec name to avoid using subj as req name
             'request_text': request_text,
             'original_message_id': msg['message_id'],
             'email_from': msg.get('from', ''),
             'email_cc': msg.get('cc', ''),
-        }
+        })
         author_id = msg.get('author_id')
         if author_id:
             author = self.env['res.partner'].browse(author_id)
@@ -1000,8 +1027,6 @@ class RequestRequest(models.Model):
 
         defaults.update({'channel_id': self.env.ref(
             'generic_request.request_channel_email').id})
-
-        defaults.update(custom_values)
 
         request = super(RequestRequest, self).message_new(
             msg, custom_values=defaults)
@@ -1085,10 +1110,9 @@ class RequestRequest(models.Model):
 
     def action_show_request_events(self):
         self.ensure_one()
-        action = self.env.ref(
-            'generic_request.action_request_event_view').read()[0]
-        action['domain'] = [('request_id', '=', self.id)]
-        return action
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_event_view',
+            domain=[('request_id', '=', self.id)])
 
     # Timesheets
     @api.depends('timesheet_line_ids', 'timesheet_line_ids.amount',
@@ -1143,45 +1167,35 @@ class RequestRequest(models.Model):
         TimesheetLines = self.env['request.timesheet.line']
         running_lines = TimesheetLines._find_running_lines()
         if running_lines:
-            action = self.env.ref(
-                'generic_request.action_request_wizard_stop_work'
-            ).read()[0]
-            action['context'] = {
-                'default_timesheet_line_id': running_lines[0].id,
-                'request_timesheet_start_request_id': self.id,
-            }
-            return action
+            return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+                'generic_request.action_request_wizard_stop_work',
+                context={
+                    'default_timesheet_line_id': running_lines[0].id,
+                    'request_timesheet_start_request_id': self.id,
+                })
 
         data = self._request_timesheet_get_defaults()
         data.update({
             'date_start': fields.Datetime.now(),
         })
-        TimesheetLines.create(data)
+        timesheet_line = TimesheetLines.create(data)
+        self.trigger_event('timetracking-start-work', {
+            'timesheet_line_id': timesheet_line.id,
+        })
 
     def action_stop_work(self):
         self.ensure_one()
         TimesheetLines = self.env['request.timesheet.line']
         running_lines = TimesheetLines._find_running_lines()
         if running_lines:
-            action = self.env.ref(
-                'generic_request.action_request_wizard_stop_work'
-            ).read()[0]
-            action['context'] = {
-                'default_timesheet_line_id': running_lines[0].id,
-            }
-            return action
+            return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+                'generic_request.action_request_wizard_stop_work',
+                context={'default_timesheet_line_id': running_lines[0].id})
 
     def action_request_view_timesheet_lines(self):
         self.ensure_one()
-        action = self.env.ref(
-            'generic_request'
-            '.action_timesheet_line').read()[0]
-        ctx = dict(self.env.context)
-        ctx.update({
-            'default_request_id': self.id,
-        })
-        return dict(
-            action,
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_timesheet_line',
             context={'default_request_id': self.id},
             domain=[('request_id', '=', self.id)],
         )

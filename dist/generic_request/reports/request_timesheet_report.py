@@ -5,6 +5,7 @@ class RequestTimesheetReport(models.Model):
     _name = "request.timesheet.report"
     _description = "Request Timesheet Report"
     _auto = False
+    _order = 'date DESC, id DESC'
 
     date = fields.Date(readonly=True)
 

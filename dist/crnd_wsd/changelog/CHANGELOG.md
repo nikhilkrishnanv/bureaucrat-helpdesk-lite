@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 1.50.0
+
+Added mult-site support for requests
+
+
 ## Version 1.47.0
 
 Automatically set channel to Website for requests created from website

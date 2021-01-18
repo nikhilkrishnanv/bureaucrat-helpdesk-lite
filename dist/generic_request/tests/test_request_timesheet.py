@@ -20,19 +20,26 @@ class TestWizardLogTime(RequestCase):
 
     def test_log_time_start_stop(self):
         Timesheet = self.env['request.timesheet.line']
-        request = self.env['request.request'].create({
-            'type_id': self.request_type.id,
-            'request_text': 'test request',
-        })
-
-        self.assertEqual(len(request.timesheet_line_ids), 0)
-        self.assertEqual(request.timesheet_start_status, 'not-started')
-        self.assertFalse(Timesheet._find_running_lines())
 
         with freeze_time("2020-01-14 03:00:00"):
+            request = self.env['request.request'].create({
+                'type_id': self.request_type.id,
+                'request_text': 'test request',
+            })
+
+            self.assertEqual(len(request.timesheet_line_ids), 0)
+            self.assertEqual(request.timesheet_start_status, 'not-started')
+            self.assertFalse(Timesheet._find_running_lines())
+
             request.action_start_work()
             self.assertEqual(request.timesheet_start_status, 'started')
             self.assertEqual(len(request.timesheet_line_ids), 1)
+            self.assertEqual(
+                request.request_event_ids.sorted()[0].event_code,
+                'timetracking-start-work')
+            self.assertEqual(
+                request.request_event_ids.sorted()[0].timesheet_line_id,
+                request.timesheet_line_ids)
 
             running = Timesheet._find_running_lines()
             self.assertEqual(running.request_id, request)
@@ -62,6 +69,12 @@ class TestWizardLogTime(RequestCase):
             self.assertEqual(
                 request.timesheet_line_ids.date_end,
                 fields.Datetime.from_string("2020-01-14 05:00:00"))
+            self.assertEqual(
+                request.request_event_ids.sorted()[0].event_code,
+                'timetracking-stop-work')
+            self.assertEqual(
+                request.request_event_ids.sorted()[0].timesheet_line_id,
+                request.timesheet_line_ids)
 
     def test_log_time_start_stop_running(self):
         # Start work on request when another request is already running

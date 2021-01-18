@@ -10,7 +10,7 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
     'category': 'Generic Request',
-    'version': '12.0.1.80.1',
+    'version': '12.0.1.99.0',
     'external_dependencies': {
         'python': [
             'html2text',
@@ -78,6 +78,7 @@
         'templates/templates.xml',
 
         'reports/request_timesheet_report.xml',
+        'reports/request_graph_reports.xml',
     ],
 
     'qweb': [

@@ -86,6 +86,7 @@
         <field name="created_by_id" ref="user_demo_request"/>
         <field name="category_id" ref="request_category_demo_technical_configuration"/>
         <field name="user_id" ref="base.user_demo"/>
+        <field name="date_created" eval="time.strftime('%Y-%m-05 %H:%M:%S')"/>
         <field name="deadline_date" eval="time.strftime('%Y-%m-07')"/>
     </record>
 </odoo>
