@@ -209,6 +209,9 @@ class RequestType(models.Model):
 
         return r_type
 
+    def action_create_default_stage_and_routes(self):
+        self._create_default_stages_and_routes()
+
     def action_request_type_diagram(self):
         self.ensure_one()
         action = self.env.ref(

@@ -1,5 +1,18 @@
 # Changelog
 
+## Version 1.83.0
+
+Added button to generate default stages and route on request type that has no
+request stages.
+
+
+## Version 1.81.0
+
+Added new request event types:
+- Timetracking / Start Work
+- Timetracking / Stop Work
+
+
 ## Version 1.72.0
 
 Added new request stage type 'Progress'

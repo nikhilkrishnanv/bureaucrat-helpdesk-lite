@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* crnd_wsd
+# 	* crnd_wsd
 #
 msgid ""
 msgstr ""
@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2020-08-09 18:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,19 +18,23 @@ msgstr ""
 
 #. module: crnd_wsd
 #: model:request.category,description:crnd_wsd.request_category_demo_website
-msgid "\n"
+msgid ""
+"\n"
 "            SaAS related requests\n"
 "        "
-msgstr "\n"
+msgstr ""
+"\n"
 "            SaAS related requests\n"
 "        "
 
 #. module: crnd_wsd
 #: model:request.category,description:crnd_wsd.request_category_demo_website_tech
-msgid "\n"
+msgid ""
+"\n"
 "            Technical requests\n"
 "        "
-msgstr "\n"
+msgstr ""
+"\n"
 "            Technical requests\n"
 "        "
 
@@ -62,8 +67,12 @@ msgstr "<span class=\"fa fa-hashtag mr4\" title=\"Type\"/>"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
-msgid "<span class=\"fa fa-info-circle info-toggle mr8\" title=\"Show request info\"/>"
-msgstr "<span class=\"fa fa-info-circle info-toggle mr8\" title=\"Show request info\"/>"
+msgid ""
+"<span class=\"fa fa-info-circle info-toggle mr8\" title=\"Show request info"
+"\"/>"
+msgstr ""
+"<span class=\"fa fa-info-circle info-toggle mr8\" title=\"Show request info"
+"\"/>"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.request_short_info
@@ -75,22 +84,34 @@ msgstr "<span class=\"fa fa-square mr4\" title=\"Kind\"/>"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
-msgid "<span class=\"header-bg-filler\">Request</span>\n"
-"                                    <span class=\"header-separator-splitter\"/>"
-msgstr "<span class=\"header-bg-filler\">Request</span>\n"
-"                                    <span class=\"header-separator-splitter\"/>"
+msgid ""
+"<span class=\"header-bg-filler\">Request</span>\n"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
+msgstr ""
+"<span class=\"header-bg-filler\">Request</span>\n"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
-msgid "<span class=\"pull-right label\" id=\"characters_left_label\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Remaining characters.\"/>"
-msgstr "<span class=\"pull-right label\" id=\"characters_left_label\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Remaining characters.\"/>"
+msgid ""
+"<span class=\"pull-right label\" id=\"characters_left_label\" data-toggle="
+"\"tooltip\" data-placement=\"bottom\" title=\"Remaining characters.\"/>"
+msgstr ""
+"<span class=\"pull-right label\" id=\"characters_left_label\" data-toggle="
+"\"tooltip\" data-placement=\"bottom\" title=\"Remaining characters.\"/>"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
-msgid "<span class=\"wsd_request header-bg-filler\">Response</span>\n"
-"                                    <span class=\"header-separator-splitter\"/>"
-msgstr "<span class=\"wsd_request header-bg-filler\">Response</span>\n"
-"                                    <span class=\"header-separator-splitter\"/>"
+msgid ""
+"<span class=\"wsd_request header-bg-filler\">Response</span>\n"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
+msgstr ""
+"<span class=\"wsd_request header-bg-filler\">Response</span>\n"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
@@ -202,9 +223,11 @@ msgstr "Category"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
-msgid "Category\n"
+msgid ""
+"Category\n"
 "                <span/>"
-msgstr "Category\n"
+msgstr ""
+"Category\n"
 "                <span/>"
 
 #. module: crnd_wsd
@@ -412,8 +435,10 @@ msgstr "Hours"
 #. module: crnd_wsd
 #: code:addons/crnd_wsd/controllers/helpers.py:24
 #, python-format
-msgid "Image size excessive, uploaded images must be smaller than 42 million pixel"
-msgstr "Image size excessive, uploaded images must be smaller than 42 million pixel"
+msgid ""
+"Image size excessive, uploaded images must be smaller than 42 million pixel"
+msgstr ""
+"Image size excessive, uploaded images must be smaller than 42 million pixel"
 
 #. module: crnd_wsd
 #: selection:request.stage.route,website_button_style:0
@@ -520,12 +545,14 @@ msgstr "Redirect to login"
 
 #. module: crnd_wsd
 #: model:ir.model.fields,help:crnd_wsd.field_res_config_settings_request_wsd_public_ui_visibility
-msgid "Redirect to login - unauthorized users will be\n"
+msgid ""
+"Redirect to login - unauthorized users will be\n"
 "         automatically redirected to login page.\n"
 "         Restricted UI - unauthorized users will be able to pass\n"
 "         all steps of creating a request but unable to submit\n"
 "         request until logged in."
-msgstr "Redirect to login - unauthorized users will be\n"
+msgstr ""
+"Redirect to login - unauthorized users will be\n"
 "         automatically redirected to login page.\n"
 "         Restricted UI - unauthorized users will be able to pass\n"
 "         all steps of creating a request but unable to submit\n"
@@ -548,9 +575,11 @@ msgstr "Request"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
-msgid "Request\n"
+msgid ""
+"Request\n"
 "                <span/>"
-msgstr "Request\n"
+msgstr ""
+"Request\n"
 "                <span/>"
 
 #. module: crnd_wsd
@@ -723,8 +752,14 @@ msgstr "Sign Up"
 #: model:ir.model.fields,help:crnd_wsd.field_request_request_author_avatar
 #: model:ir.model.fields,help:crnd_wsd.field_request_request_closed_by_avatar
 #: model:ir.model.fields,help:crnd_wsd.field_request_request_created_by_avatar
-msgid "Small-sized image of this contact. It is automatically resized as a 64x64px image, with aspect ratio preserved. Use this field anywhere a small image is required."
-msgstr "Small-sized image of this contact. It is automatically resized as a 64x64px image, with aspect ratio preserved. Use this field anywhere a small image is required."
+msgid ""
+"Small-sized image of this contact. It is automatically resized as a 64x64px "
+"image, with aspect ratio preserved. Use this field anywhere a small image is "
+"required."
+msgstr ""
+"Small-sized image of this contact. It is automatically resized as a 64x64px "
+"image, with aspect ratio preserved. Use this field anywhere a small image is "
+"required."
 
 #. module: crnd_wsd
 #: model:request.request,help_html:crnd_wsd.demo_request_request_upgrade_request_1
@@ -801,18 +836,24 @@ msgstr "There you should ask a questions related to our SaaS service."
 
 #. module: crnd_wsd
 #: model:request.request,stage_help_html:crnd_wsd.demo_request_request_printer_1
-msgid "This is draft request. You can still edit it.\n"
+msgid ""
+"This is draft request. You can still edit it.\n"
 "             When you think it is finished, send it."
-msgstr "This is draft request. You can still edit it.\n"
+msgstr ""
+"This is draft request. You can still edit it.\n"
 "             When you think it is finished, send it."
 
 #. module: crnd_wsd
 #: model:request.request,help_html:crnd_wsd.demo_request_request_generic_question_1
 #: model:request.type,help_html:crnd_wsd.request_type_generic
-msgid "This is request type for generic questions related to our SaaS service\n"
-"            Use this request type if you cannot find exact request type for your question"
-msgstr "This is request type for generic questions related to our SaaS service\n"
-"            Use this request type if you cannot find exact request type for your question"
+msgid ""
+"This is request type for generic questions related to our SaaS service\n"
+"            Use this request type if you cannot find exact request type for "
+"your question"
+msgstr ""
+"This is request type for generic questions related to our SaaS service\n"
+"            Use this request type if you cannot find exact request type for "
+"your question"
 
 #. module: crnd_wsd
 #: model:request.request,help_html:crnd_wsd.demo_request_request_printer_1
@@ -850,9 +891,11 @@ msgstr "Type"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
-msgid "Type\n"
+msgid ""
+"Type\n"
 "                <span/>"
-msgstr "Type\n"
+msgstr ""
+"Type\n"
 "                <span/>"
 
 #. module: crnd_wsd
@@ -873,8 +916,12 @@ msgstr "Upgraded"
 
 #. module: crnd_wsd
 #: model:res.groups,comment:crnd_wsd.group_service_desk_website_user_all_requests
-msgid "Users in this groups can see all requests in system, but still not have access to internal UI."
-msgstr "Users in this groups can see all requests in system, but still not have access to internal UI."
+msgid ""
+"Users in this groups can see all requests in system, but still not have "
+"access to internal UI."
+msgstr ""
+"Users in this groups can see all requests in system, but still not have "
+"access to internal UI."
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.view_request_request_form
@@ -928,8 +975,14 @@ msgstr "Website Service Desk (Public Visibility)"
 
 #. module: crnd_wsd
 #: model:res.groups,comment:crnd_wsd.group_service_desk_website_user_advanced
-msgid "Website advanced users of service desk. Users in this group can create requests with request types and categories they are subscribed for, even if these types and categories not website published."
-msgstr "Website advanced users of service desk. Users in this group can create requests with request types and categories they are subscribed for, even if these types and categories not website published."
+msgid ""
+"Website advanced users of service desk. Users in this group can create "
+"requests with request types and categories they are subscribed for, even if "
+"these types and categories not website published."
+msgstr ""
+"Website advanced users of service desk. Users in this group can create "
+"requests with request types and categories they are subscribed for, even if "
+"these types and categories not website published."
 
 #. module: crnd_wsd
 #: model:request.category,description:crnd_wsd.request_category_demo_website_support
@@ -950,8 +1003,10 @@ msgstr "You can use here html, for formatting."
 #. openerp-web
 #: code:addons/crnd_wsd/static/src/js/blockui.js:14
 #, python-format
-msgid "You may not believe it, <br/> but the application is actually loading..."
-msgstr "You may not believe it, <br/> but the application is actually loading..."
+msgid ""
+"You may not believe it, <br/> but the application is actually loading..."
+msgstr ""
+"You may not believe it, <br/> but the application is actually loading..."
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
@@ -990,4 +1045,3 @@ msgstr "res.config.settings"
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_select_type
 msgid "to be able to view and create requests."
 msgstr "to be able to view and create requests."
-

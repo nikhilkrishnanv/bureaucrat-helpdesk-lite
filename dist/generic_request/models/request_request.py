@@ -113,7 +113,6 @@ class RequestRequest(models.Model):
             ('normal', 'In Progress'),
             ('blocked', 'Blocked'),
             ('done', 'Ready for next stage')],
-        string='State',
         required='True',
         default='normal',
         track_visibility='onchange',
@@ -1163,7 +1162,10 @@ class RequestRequest(models.Model):
         data.update({
             'date_start': fields.Datetime.now(),
         })
-        TimesheetLines.create(data)
+        timesheet_line = TimesheetLines.create(data)
+        self.trigger_event('timetracking-start-work', {
+            'timesheet_line_id': timesheet_line.id,
+        })
 
     def action_stop_work(self):
         self.ensure_one()
