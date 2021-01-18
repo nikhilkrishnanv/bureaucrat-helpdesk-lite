@@ -1,0 +1,66 @@
+variables:
+    SERIES_BRANCH: '14.0'
+    CI_JOB_TOKEN_GIT_HOST: 'gitlab.crnd.pro'
+
+    PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.hidden-pip-cache"
+
+# Disable global cache
+cache: {}
+
+.pip_cache: &pip_cache_definition
+    cache:
+        key: ${CI_JOB_NAME}
+        paths:
+            - "${PIP_CACHE_DIR}"
+
+stages:
+    - package
+    - test
+    - deploy
+
+tests:
+    image: registry.crnd.pro/crnd/docker/odoo-ci-x:${SERIES_BRANCH}-ci
+    stage: test
+    <<: *pip_cache_definition
+    before_script:
+        - odoo-helper link .
+    script:
+        - odoo-helper --use-unbuffer test --coverage-report --create-test-db --dir-r . --skip-re "^theme_.*"
+
+    coverage: '/^TOTAL\s+\d+\s+\d+\s+(\d+\%%)/'
+    except:
+        - web
+    only:
+        variables:
+            # Run tests only on commits created by odoo-packager
+            - $CI_COMMIT_MESSAGE =~ /\[odoo-packager\]/
+            - $CI_COMMIT_MESSAGE =~ /\[enforce-run-tests\]/
+    when: manual
+
+.do_package_definition: &do_package_definition
+    image: registry.crnd.pro/crnd/docker/odoo-apps-packager:d
+    stage: package
+    before_script:
+        - odoo-packager --info-only
+        - odoo-packager --version
+    script:
+        - odoo-packager
+
+do_package_on_commit:
+    <<: *do_package_definition
+    except:
+        variables:
+            # Do not run package on commits created by packager itself
+            - $CI_COMMIT_MESSAGE =~ /\[odoo-packager\]/
+        refs:
+            - web
+    only:
+        - /^14.0-.*$/
+
+do_package_manual_trigger:
+    <<: *do_package_definition
+    except:
+        - "14.0"
+    only:
+        - web
+
