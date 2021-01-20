@@ -59,6 +59,17 @@ msgstr ""
 "        "
 
 #. module: generic_request
+#: model:res.groups,comment:generic_request.group_request_show_stat_on_kanban_views
+msgid ""
+"\n"
+"            If this group enabled, then users will see request statistics on "
+"kanban views\n"
+"            of request related models like: Request Type, Request Category, "
+"etc\n"
+"        "
+msgstr ""
+
+#. module: generic_request
 #: model:res.groups,comment:generic_request.group_request_manager
 msgid ""
 "\n"
@@ -1585,6 +1596,11 @@ msgid "Group By"
 msgstr "Групувати за"
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__group_request_show_stat_on_kanban_views
+msgid "Group Request Show Stat On Kanban Views"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.request_event_type_view_search
 #: model_terms:ir.ui.view,arch_db:generic_request.request_event_view_search
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
@@ -1751,6 +1767,14 @@ msgstr "Якщо відмічено, то нові повідомлення бу
 #: model:ir.model.fields,help:generic_request.field_request_type__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Якщо позначено, деякі повідомлення мають помилку доставки."
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid ""
+"If enabled then users will see request statistics on kanban views\n"
+"                                    of request related models like: Request "
+"Type, Request Category, etc"
+msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_stage_route__close
@@ -3699,6 +3723,16 @@ msgstr "Показати відповідь запиту"
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Show chat history directly in the composer view."
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Show request stat on kanban views"
+msgstr ""
+
+#. module: generic_request
+#: model:res.groups,name:generic_request.group_request_show_stat_on_kanban_views
+msgid "Show request statistics on kanban views"
 msgstr ""
 
 #. module: generic_request
