@@ -1,3 +1,4 @@
+from odoo import SUPERUSER_ID
 from .common import RequestCase
 
 
@@ -180,6 +181,13 @@ class TestRequestAuthor(RequestCase):
         self.assertEqual(request.created_by_id, self.demo_user)
         self.assertFalse(request.partner_id)
         self.assertEqual(request.author_id, partner)
+        notification_msg = request.message_ids.filtered(
+            lambda r: r.subject == (
+                'Request %s successfully created!' % request.name))
+        self.assertTrue(notification_msg)
+        self.assertEqual(
+            notification_msg[0].author_id,
+            self.env['res.users'].browse(SUPERUSER_ID).partner_id)
 
     def test_author_compute_user_explicit(self):
         partner = self.env.ref('base.res_partner_3')

@@ -108,6 +108,7 @@
         <field name="created_by_id" ref="user_demo_request"/>
         <field name="partner_id" ref="base.res_partner_2"/>
         <field name="category_id" ref="request_category_demo_technical_configuration"/>
+        <field name="date_created" eval="time.strftime('%Y-%m-06 %H:%M:%S')"/>
         <field name="tag_ids"
                eval="[(4, ref('generic_request.tag_priority_low')), (4, ref('generic_request.tag_platform_windows'))]"/>
     </record>

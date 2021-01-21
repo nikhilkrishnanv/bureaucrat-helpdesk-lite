@@ -620,13 +620,13 @@ msgid "Request kind"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:382
+#: code:addons/crnd_wsd/controllers/main.py:397
 #, python-format
 msgid "Request text is empty!"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:389
+#: code:addons/crnd_wsd/controllers/main.py:404
 #, python-format
 msgid "Request text is too long!"
 msgstr ""
@@ -865,7 +865,7 @@ msgid "Type\n"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:446
+#: code:addons/crnd_wsd/controllers/main.py:462
 #, python-format
 msgid "Unknown server error. See server logs."
 msgstr ""
@@ -911,7 +911,11 @@ msgid "Warning"
 msgstr ""
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_category__website_ids
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request__website_id
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_ids
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_website_request_request_search
 msgid "Website"
 msgstr ""
 

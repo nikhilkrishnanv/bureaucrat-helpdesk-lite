@@ -109,6 +109,7 @@
         <field name="type_id" ref="request_type_sequence"/>
         <field name="created_by_id" ref="user_demo_request"/>
         <field name="category_id" ref="request_category_demo_resource"/>
+        <field name="date_created" eval="time.strftime('%Y-%m-07 %H:%M:%S')"/>
         <field name="author_id" ref="base.res_partner_address_3"/>
     </record>
 

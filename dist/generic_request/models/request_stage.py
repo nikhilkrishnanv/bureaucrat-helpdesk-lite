@@ -117,25 +117,21 @@ class RequestStage(models.Model):
 
     def action_show_incoming_routes(self):
         self.ensure_one()
-        action = self.env.ref(
-            'generic_request.action_request_stage_incoming_routes')
-        result = action.read()[0]
-        result['context'] = {
-            'default_stage_to_id': self.id,
-            'default_request_type_id': self.request_type_id.id,
-        }
-        return result
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_stage_incoming_routes',
+            context={
+                'default_stage_to_id': self.id,
+                'default_request_type_id': self.request_type_id.id,
+            })
 
     def action_show_outgoing_routes(self):
         self.ensure_one()
-        action = self.env.ref(
-            'generic_request.action_request_stage_outgoing_routes')
-        result = action.read()[0]
-        result['context'] = {
-            'default_stage_from_id': self.id,
-            'default_request_type_id': self.request_type_id.id,
-        }
-        return result
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_stage_outgoing_routes',
+            context={
+                'default_stage_from_id': self.id,
+                'default_request_type_id': self.request_type_id.id,
+            })
 
     def unlink(self):
         messages = []

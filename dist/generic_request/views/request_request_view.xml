@@ -57,7 +57,9 @@
                                 </div>
                             </div>
                             <div>
-                                <span class="fa fa-arrow-right mr16" attrs="{'invisible': [('is_priority_complex', '=', False)]}"/>
+                                <span class="fa fa-arrow-right mr16"
+                                      title="Urgency and Impact converted to Priority"
+                                      attrs="{'invisible': ['|', ('is_priority_complex', '=', False), ('id', '=', False)]}"/>
                                 <field name="is_priority_complex" invisible="1"/>
                                 <field name="priority"
                                     widget="priority"
@@ -647,6 +649,8 @@
                 <field name="partner_id"/>
                 <field name="author_id"/>
                 <field name="user_id"/>
+                <field name="is_assigned"/>
+                <field name="closed"/>
                 <field name="tag_ids"/>
                 <field name="search_tag_id"/>
                 <field name="search_no_tag_id"/>
@@ -671,11 +675,29 @@
                         string="My requests"
                         domain="[('created_by_id', '=', uid)]"/>
                 <separator/>
+                <filter name="filter_today"
+                        string="Today"
+                        domain="[('date_created', '&gt;', (context_today() - relativedelta(days=1)).strftime('%%Y-%%m-%%d') )]"/>
+                <filter name="filter_24h"
+                        string="24 hours"
+                        domain="[('date_created', '&gt;', (datetime.datetime.now() - relativedelta(days=1)).strftime('%%Y-%%m-%%d %H:%M:%S') )]"/>
+                <filter name="filter_week"
+                        string="Week"
+                        domain="[('date_created', '&gt;', (context_today() - relativedelta(weeks=1)).strftime('%%Y-%%m-%%d') )]"/>
+                <filter name="filter_month"
+                        string="Month"
+                        domain="[('date_created', '&gt;', (context_today() - relativedelta(months=1)).strftime('%%Y-%%m-%%d') )]"/>
+                <filter name="filter_year"
+                        string="Year"
+                        domain="[('date_created', '&gt;', (context_today() - relativedelta(years=1)).strftime('%%Y-%%m-%%d') )]"/>
+                <separator/>
                 <filter string="Unread Messages"
                         name="message_needaction"
                         domain="[('message_needaction','=',True)]"/>
 
                 <group name="group_group_by" expand="0" string="Group by...">
+                    <filter name="filter_group_by_creation_date"
+                            string="Creation date" context="{'group_by': 'date_created'}"/>
                     <filter name="filter_group_by_type"
                             string="Type" context="{'group_by': 'type_id'}"/>
                     <filter name="filter_group_by_kind"
@@ -688,16 +710,18 @@
                             string="Stage Type" context="{'group_by': 'stage_type_id'}"/>
                     <filter name="filter_group_by_partner"
                             string="Partner" context="{'group_by': 'partner_id'}"/>
-                    <filter name="filter_group_by_assigned"
-                            string="Assigned" context="{'group_by': 'user_id'}"/>
+                    <filter name="filter_group_by_assignee"
+                            string="Assignee" context="{'group_by': 'user_id'}"/>
+                    <filter name="filter_group_by_is_assigned"
+                            string="Is assigned" context="{'group_by': 'is_assigned'}"/>
                     <filter name="filter_group_by_author"
                             string="Author" context="{'group_by': 'author_id'}"/>
                     <filter name="filter_group_by_created_by"
                             string="Created by" context="{'group_by': 'created_by_id'}"/>
+                    <filter name="filter_group_by_is_closed"
+                            string="Is closed" context="{'group_by': 'closed'}"/>
                     <filter name="filter_group_by_closed_by"
                             string="Closed by" context="{'group_by': 'closed_by_id'}"/>
-                    <filter name="filter_group_by_creation_date"
-                            string="Creation date" context="{'group_by': 'date_created'}"/>
                     <filter name="filter_group_by_priority"
                             string="Priority"
                             context="{'group_by': 'priority'}"/>
@@ -730,6 +754,12 @@
         <field name="res_model">request.request</field>
         <field name="view_mode">kanban,tree,graph,pivot,form,activity</field>
         <field name="context">{'search_default_filter_open': 1, 'search_default_filter_assigned_to_me': 1, 'search_default_filter_created_by_me': 1, 'search_default_filter_unassigned': 1}</field>
+    </record>
+
+    <record id="action_stat_request_count" model="ir.actions.act_window">
+        <field name="name">Request Count</field>
+        <field name="res_model">request.request</field>
+        <field name="view_mode">kanban,tree,graph,pivot,form,activity</field>
     </record>
 
     <menuitem id="menu_request_type_view"

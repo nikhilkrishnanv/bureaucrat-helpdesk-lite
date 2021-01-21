@@ -44,7 +44,7 @@ class RequestEvent(models.Model):
 
     # Request Category Change
     old_category_id = fields.Many2one('request.category', readonly=True)
-    new_category_id = fields.Many2one('request.category', readonly=True)
+    new_category_id = fields.Many2one('request.category', readonly=True,)
 
     # Priority changed
     old_priority = fields.Selection(
@@ -63,13 +63,19 @@ class RequestEvent(models.Model):
         selection=AVAILABLE_URGENCIES, readonly=True)
 
     # Kanban state changed
-
     old_kanban_state = fields.Selection(
         selection="_get_selection_kanban_state",
         readonly=True)
     new_kanban_state = fields.Selection(
         selection="_get_selection_kanban_state",
         readonly=True)
+
+    # Timetracking
+    timesheet_line_id = fields.Many2one(
+        'request.timesheet.line', 'Timesheet line',
+        readonly=True, ondelete='cascade')
+
+    assign_comment = fields.Text()
 
     def _get_selection_kanban_state(self):
         return self.env['request.request']._fields['kanban_state'].selection

@@ -20,6 +20,7 @@ class RequestRequest(models.Model):
         "Assignee (Avatar)", related='user_id.image_small')
     closed_by_avatar = fields.Binary(
         "Closed By (Avatar)", related='closed_by_id.image_small')
+    website_id = fields.Many2one('website')
 
     def _compute_access_url(self):
         res = super(RequestRequest, self)._compute_access_url()
