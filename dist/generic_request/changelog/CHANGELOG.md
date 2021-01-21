@@ -1,5 +1,54 @@
 # Changelog
 
+## Version 1.99.0
+
+Add global setting that could be used to show/hide request statistics on kanban views of
+request-related objects like Request Category, Request type, etc
+
+
+## Version 1.89.0
+
+Now requests created via xml-RPC or json RPC will get *API* channel automatically
+(if not provided in creation parameters)
+
+
+## Version 1.85.0
+
+- Added new search filters for requests
+    - Today
+    - 24 hours
+    - Week
+    - Month
+    - Year
+- Added new group by filters for request's search view
+    - Assignee
+    - Is Closed
+- Added request statistics (requests open/closed for today, 24h, week, etc) to
+  following models:
+    - Request Type
+    - Request Category
+    - Request Channel
+    - Request Kind
+
+
+## Version 1.84.0
+
+Added *Requests* page to user form view, that is used to display request statistics for user.
+
+
+## Version 1.83.0
+
+Added button to generate default stages and route on request type that has no
+request stages.
+
+
+## Version 1.81.0
+
+Added new request event types:
+- Timetracking / Start Work
+- Timetracking / Stop Work
+
+
 ## Version 1.72.0
 
 Added new request stage type 'Progress'

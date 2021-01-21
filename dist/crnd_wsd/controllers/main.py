@@ -102,7 +102,11 @@ def guard_access(func):
 
 class WebsiteRequest(WSDControllerMixin, http.Controller):
     def _requests_get_request_domain_base(self, search, kind_id=None, **post):
-        domain = []
+        domain = [
+            '|',
+            ('website_id', '=', False),
+            ('website_id', '=', request.website.id),
+        ]
         if search:
             domain += [
                 '|', '|', '|', ('name', 'ilike', search),
@@ -240,7 +244,10 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
     def request(self, req_id, **kw):
         values = {}
         reqs = request.env['request.request'].search(
-            [('id', '=', req_id)])
+            [
+                '&', ('id', '=', req_id),
+                '|', ('website_id', '=', False),
+                ('website_id', '=', request.website.id)])
 
         if not reqs:
             raise request.not_found()
@@ -278,15 +285,19 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
     def _request_new_get_public_categs_domain(self, category_id=None, **post):
         if request.env.user.has_group(GROUP_USER_ADVANCED):
             return []
-        return [('website_published', '=', True)]
+        return [
+            '&', ('website_published', '=', True),
+            '|', ('website_ids', '=', False),
+            ('website_ids', 'in', request.website.id)]
 
     def _request_new_get_public_categs(self, category_id=None, **post):
-        categs = request.env['request.category'].search(
-            self._request_new_get_public_categs_domain(
-                category_id=category_id, **post))
-        return categs.filtered(
+        domain = self._request_new_get_public_categs_domain(
+            category_id=category_id, **post)
+        categs = request.env['request.category'].search(domain)
+        result = categs.filtered(
             lambda r: self._request_new_get_public_types(
                 category_id=r.id, **post))
+        return result
 
     @http.route(["/requests/new/step/category"], type='http', auth="public",
                 methods=['GET', 'POST'], website=True)
@@ -329,6 +340,10 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
             domain += [('category_ids.id', '=', category_id)]
         else:
             domain += [('category_ids', '=', False)]
+
+        domain += [
+            '|', ('website_ids', '=', False),
+            ('website_ids', 'in', request.website.id)]
 
         return request.env['request.type'].search(domain)
 
@@ -400,6 +415,7 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
             'type_id': req_type.id,
             'request_text': req_text,
             'channel_id': channel_website.id,
+            'website_id': request.website.id,
         }
 
     @http.route(["/requests/new/step/data"],

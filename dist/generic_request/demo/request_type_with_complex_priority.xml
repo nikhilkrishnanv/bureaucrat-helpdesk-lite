@@ -62,6 +62,7 @@
         <field name="impact">1</field>
         <field name="urgency">2</field>
         <field name="request_text">This is demo request with complex priority</field>
+        <field name="date_created" eval="time.strftime('%Y-%m-05 %H:%M:%S')"/>
         <field name="deadline_date" eval="time.strftime('%Y-%m-%d')"/>
     </record>
 </odoo>

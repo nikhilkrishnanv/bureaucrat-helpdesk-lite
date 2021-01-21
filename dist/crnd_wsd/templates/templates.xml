@@ -8,6 +8,7 @@
             <!-- Trumbowyg -->
             <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/trumbowyg.min.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/langs/ua.min.js"/>
+            <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/langs/ru.min.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/plugins/table/trumbowyg.table.min.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js"/>
             <link rel='stylesheet' type="text/css" href="/crnd_wsd/static/lib/trumbowyg/dist/ui/trumbowyg.min.css"/>
