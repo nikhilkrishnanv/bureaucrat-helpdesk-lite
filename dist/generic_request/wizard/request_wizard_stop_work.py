@@ -57,6 +57,9 @@ class RequestWizardStopWork(models.TransientModel):
         self.timesheet_line_id.write(
             self._prepare_timesheet_line_data()
         )
+        self.request_id.trigger_event('timetracking-stop-work', {
+            'timesheet_line_id': self.timesheet_line_id.id,
+        })
 
         if self.env.context.get('request_timesheet_start_request_id'):
             self.env['request.request'].browse(

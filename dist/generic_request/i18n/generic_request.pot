@@ -386,7 +386,7 @@ msgid "Attachments"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:1049
+#: code:addons/generic_request/models/request_request.py:1048
 #: model:ir.model.fields,field_description:generic_request.field_request_request_author_id
 #: model:ir.ui.view,arch_db:generic_request.message_request_notification__request_info
 #: model:ir.ui.view,arch_db:generic_request.view_request_request_search
@@ -395,7 +395,7 @@ msgid "Author"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:1055
+#: code:addons/generic_request/models/request_request.py:1054
 #, python-format
 msgid "Author Email"
 msgstr ""
@@ -510,7 +510,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:462
+#: code:addons/generic_request/models/request_request.py:461
 #, python-format
 msgid "Cannot create request of type '%s': This type have no start stage defined!"
 msgstr ""
@@ -776,6 +776,11 @@ msgstr ""
 #. module: generic_request
 #: model:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Create And Use Custom Assignment Policies"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.ui.view,arch_db:generic_request.view_request_type_form
+msgid "Create default"
 msgstr ""
 
 #. module: generic_request
@@ -1277,7 +1282,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_request_request_id
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_id
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_route_id
-#: model:ir.model.fields,field_description:generic_request.field_request_stage_type_id_2845
+#: model:ir.model.fields,field_description:generic_request.field_request_stage_type_id_2885
 #: model:ir.model.fields,field_description:generic_request.field_request_timesheet_activity_id
 #: model:ir.model.fields,field_description:generic_request.field_request_timesheet_line_id
 #: model:ir.model.fields,field_description:generic_request.field_request_timesheet_report_id
@@ -1373,7 +1378,7 @@ msgid "Is request on this stage closed?"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:519
+#: code:addons/generic_request/models/request_request.py:518
 #, python-format
 msgid "It is not allowed to change request type"
 msgstr ""
@@ -1381,6 +1386,11 @@ msgstr ""
 #. module: generic_request
 #: model:request.stage,description:generic_request.request_stage_type_sequence_new
 msgid "Just created request"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request_kanban_state
+msgid "Kanban State"
 msgstr ""
 
 #. module: generic_request
@@ -1887,7 +1897,7 @@ msgid "Next Stage"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:988
+#: code:addons/generic_request/models/request_request.py:987
 #, python-format
 msgid "No Subject"
 msgstr ""
@@ -2054,7 +2064,7 @@ msgid "Part of the following bundles:"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:1058
+#: code:addons/generic_request/models/request_request.py:1057
 #: model:ir.model.fields,field_description:generic_request.field_request_request_partner_id
 #: model:ir.ui.view,arch_db:generic_request.view_request_request_search
 #, python-format
@@ -2246,7 +2256,7 @@ msgid "Request"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:836
+#: code:addons/generic_request/models/request_request.py:835
 #, python-format
 msgid "Request %s successfully created!"
 msgstr ""
@@ -3068,11 +3078,6 @@ msgid "Started"
 msgstr ""
 
 #. module: generic_request
-#: model:ir.model.fields,field_description:generic_request.field_request_request_kanban_state
-msgid "State"
-msgstr ""
-
-#. module: generic_request
 #: model:request.request,instruction_html:generic_request.request_request_type_sequence_demo_1
 #: model:request.request,instruction_html:generic_request.request_request_type_sequence_printer_request
 #: model:request.type,instruction_html:generic_request.request_type_sequence
@@ -3336,6 +3341,21 @@ msgid "Timesheet Start Status"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_event_timesheet_line_id
+msgid "Timesheet line"
+msgstr ""
+
+#. module: generic_request
+#: model:request.event.type,name:generic_request.request_event_type_timetracking_start_work
+msgid "Timetracking / Start Work"
+msgstr ""
+
+#. module: generic_request
+#: model:request.event.type,name:generic_request.request_event_type_timetracking_stop_work
+msgid "Timetracking / Stop Work"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_route_stage_to_id
 #: model:ir.ui.view,arch_db:generic_request.view_request_stage_route_tree
 msgid "To"
@@ -3532,7 +3552,7 @@ msgid "View Flow"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:918
+#: code:addons/generic_request/models/request_request.py:917
 #: model:ir.ui.view,arch_db:generic_request.message_request_notification__header
 #, python-format
 msgid "View Request"
@@ -3585,13 +3605,13 @@ msgid "Write control"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:740
+#: code:addons/generic_request/models/request_request.py:739
 #, python-format
 msgid "You can not assign this (%s) request"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:735
+#: code:addons/generic_request/models/request_request.py:734
 #, python-format
 msgid "You can not assign this request (%s), because this request is closed."
 msgstr ""
@@ -3604,7 +3624,7 @@ msgid "You can use here html, for formatting."
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:848
+#: code:addons/generic_request/models/request_request.py:847
 #, python-format
 msgid "You have been assigned to request %s!"
 msgstr ""
@@ -3627,13 +3647,13 @@ msgid "Your request"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:860
+#: code:addons/generic_request/models/request_request.py:859
 #, python-format
 msgid "Your request %s has been closed!"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/models/request_request.py:872
+#: code:addons/generic_request/models/request_request.py:871
 #, python-format
 msgid "Your request %s has been reopened!"
 msgstr ""

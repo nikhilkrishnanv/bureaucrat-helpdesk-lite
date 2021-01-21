@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2019-09-04 15:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -17,23 +18,28 @@ msgstr ""
 
 #. module: crnd_wsd
 #: model:request.category,description:crnd_wsd.request_category_demo_website
-msgid "\n"
+msgid ""
+"\n"
 "            SaAS related requests\n"
 "        "
-msgstr "\n"
+msgstr ""
+"\n"
 "            Запити пов'язані з SaAS\n"
 "        "
 
 #. module: crnd_wsd
 #: model:request.category,description:crnd_wsd.request_category_demo_website_tech
-msgid "\n"
+msgid ""
+"\n"
 "            Technical requests\n"
 "        "
-msgstr "\n"
+msgstr ""
+"\n"
 "            Технічні запити\n"
 "        "
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.request_short_info
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
@@ -43,20 +49,59 @@ msgstr "<span class=\"fa fa-bars mr4\" title=\"Категорія\"/>"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+msgid "<span class=\"fa fa-chevron-down\">Read more</span>"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+msgid "<span class=\"fa fa-chevron-up\">Read less</span>"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.request_short_info
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "<span class=\"fa fa-hashtag mr4\" title=\"Type\"/>"
 msgstr "<span class=\"fa fa-hashtag mr4\" title=\"Тип\"/>"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
+msgid ""
+"<span class=\"fa fa-info-circle info-toggle mr8\" title=\"Show request info"
+"\"/>"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.request_short_info
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
-msgid "<span class=\"wsd_request header-bg-filler\">Request</span>"
-msgstr "<span class=\"wsd_request header-bg-filler\">Запит</span>"
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
+msgid "<span class=\"fa fa-square mr4\" title=\"Kind\"/>"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
-msgid "<span class=\"wsd_request header-bg-filler\">Response</span>"
-msgstr "<span class=\"wsd_request header-bg-filler\">Відповідь</span>"
+msgid ""
+"<span class=\"header-bg-filler\">Request</span>\n"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
+msgid ""
+"<span class=\"pull-right label\" id=\"characters_left_label\" data-toggle="
+"\"tooltip\" data-placement=\"bottom\" title=\"Remaining characters.\"/>"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+msgid ""
+"<span class=\"wsd_request header-bg-filler\">Response</span>\n"
+"                                    <span class=\"header-separator-splitter"
+"\"/>"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
@@ -79,11 +124,11 @@ msgid "Accepted"
 msgstr "Прийнято"
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/helpers.py:86
-#: code:addons/crnd_wsd/controllers/helpers.py:92
-#: code:addons/crnd_wsd/controllers/helpers.py:99
-#: code:addons/crnd_wsd/controllers/helpers.py:125
-#: code:addons/crnd_wsd/controllers/helpers.py:136
+#: code:addons/crnd_wsd/controllers/helpers.py:104
+#: code:addons/crnd_wsd/controllers/helpers.py:110
+#: code:addons/crnd_wsd/controllers/helpers.py:117
+#: code:addons/crnd_wsd/controllers/helpers.py:143
+#: code:addons/crnd_wsd/controllers/helpers.py:154
 #, python-format
 msgid "Access denied"
 msgstr "Доступ заборонено"
@@ -99,9 +144,24 @@ msgid "Are comments not available?"
 msgstr "Чи доступні коментарі?"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
+msgid "Assigned"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
+msgid "Assignee"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request_assignee_avatar
 msgid "Assignee (Avatar)"
 msgstr "Призначений (Аватар)"
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
+msgid "Author"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request_author_avatar
@@ -124,6 +184,11 @@ msgid "Bug Report"
 msgstr "Повідомлення про помилку"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+msgid "Button Style"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.model.fields,help:crnd_wsd.field_request_stage_route_website_button_style
 msgid "Buttons style for website"
 msgstr "Стиль кнопок для вебсайту"
@@ -138,6 +203,7 @@ msgid "Cancel"
 msgstr "Скасувати"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.request_short_info
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
@@ -147,9 +213,11 @@ msgstr "Категорія"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
-msgid "Category\n"
+msgid ""
+"Category\n"
 "                <span/>"
-msgstr "Категорія\n"
+msgstr ""
+"Категорія\n"
 "                <span/>"
 
 #. module: crnd_wsd
@@ -176,9 +244,24 @@ msgid "Closed By (Avatar)"
 msgstr "Закрив (Аватар)"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
+msgid "Closed by"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
+msgid "Closing date"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 msgid "Comments"
 msgstr "Коментар"
+
+#. module: crnd_wsd
+#: model:ir.model,name:crnd_wsd.model_res_company
+msgid "Companies"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
@@ -195,6 +278,16 @@ msgstr "Створити"
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests
 msgid "Create request"
 msgstr "Створити запит"
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
+msgid "Created by"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
+msgid "Creation date"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request_created_by_avatar
@@ -217,9 +310,29 @@ msgid "Dark"
 msgstr "Темний"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
+msgid "Date assigned"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+msgid "Deadline date"
+msgstr ""
+
+#. module: crnd_wsd
 #: selection:request.stage.route,website_button_style:0
 msgid "Default"
 msgstr "За замовчуванням"
+
+#. module: crnd_wsd
+#: model:request.kind,name:crnd_wsd.request_kind_demo_wsd
+msgid "Demo WSD"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:request.kind,description:crnd_wsd.request_kind_demo_wsd
+msgid "Demo website service desk requests"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_select_category
@@ -235,6 +348,7 @@ msgstr "Заборонити коментарі для закритих запи
 #. module: crnd_wsd
 #. openerp-web
 #: code:addons/crnd_wsd/static/src/js/request_actions.js:31
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:261
 #, python-format
 msgid "Discard"
 msgstr "Відхилити"
@@ -260,13 +374,18 @@ msgstr "Редагувати"
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:128
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:140
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:159
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:166
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:201
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:214
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:233
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:244
 #, python-format
 msgid "Error"
 msgstr "Помилка"
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+msgid "Extra Action"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
@@ -299,15 +418,31 @@ msgid "Here is just example of instruction."
 msgstr "Це просто приклад інструкції"
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/helpers.py:23
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Hours"
+msgstr ""
+
+#. module: crnd_wsd
+#: code:addons/crnd_wsd/controllers/helpers.py:24
 #, python-format
-msgid "Image size excessive, uploaded images must be smaller than 42 million pixel"
-msgstr "Розмір зображення завеликий, завантажувані зображення мають бути менші ніж 42 мільйони пікселів"
+msgid ""
+"Image size excessive, uploaded images must be smaller than 42 million pixel"
+msgstr ""
+"Розмір зображення завеликий, завантажувані зображення мають бути менші ніж "
+"42 мільйони пікселів"
 
 #. module: crnd_wsd
 #: selection:request.stage.route,website_button_style:0
 msgid "Info"
 msgstr "Інформація"
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.request_short_info
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
+msgid "Kind"
+msgstr ""
 
 #. module: crnd_wsd
 #: selection:request.stage.route,website_button_style:0
@@ -355,6 +490,11 @@ msgid "Open"
 msgstr "Відкриті"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Planned time"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_select_category
@@ -364,7 +504,7 @@ msgstr "Будь ласка,"
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:181
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:259
 #, python-format
 msgid "Please, fill response text!"
 msgstr "Будь ласка, введіть текст відповіді!"
@@ -373,6 +513,36 @@ msgstr "Будь ласка, введіть текст відповіді!"
 #: selection:request.stage.route,website_button_style:0
 msgid "Primary"
 msgstr "Первинний"
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+msgid "Read less"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+msgid "Read more"
+msgstr ""
+
+#. module: crnd_wsd
+#: selection:request.stage.route,website_extra_action:0
+msgid "Redirect to My Requests"
+msgstr ""
+
+#. module: crnd_wsd
+#: selection:res.company,request_wsd_public_ui_visibility:0
+msgid "Redirect to login"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,help:crnd_wsd.field_res_config_settings_request_wsd_public_ui_visibility
+msgid ""
+"Redirect to login - unauthorized users will be\n"
+"         automatically redirected to login page.\n"
+"         Restricted UI - unauthorized users will be able to pass\n"
+"         all steps of creating a request but unable to submit\n"
+"         request until logged in."
+msgstr ""
 
 #. module: crnd_wsd
 #: model:request.stage,name:crnd_wsd.request_stage_type_upgrade_rejected
@@ -391,15 +561,23 @@ msgstr "Запит"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
-msgid "Request\n"
+msgid ""
+"Request\n"
 "                <span/>"
-msgstr "Запит\n"
+msgstr ""
+"Запит\n"
 "                <span/>"
 
 #. module: crnd_wsd
 #: model:ir.model,name:crnd_wsd.model_request_category
 msgid "Request Category"
 msgstr "Категорія запиту"
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_company_request_limit_max_text_size
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings_request_limit_max_text_size
+msgid "Request Limit Max Text Size"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model,name:crnd_wsd.model_request_stage_route
@@ -410,6 +588,11 @@ msgstr "Маршрут етапів запиту"
 #: model:ir.model,name:crnd_wsd.model_request_type
 msgid "Request Type"
 msgstr "Тип запиту"
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_company_request_wsd_public_ui_visibility
+msgid "Request Wsd Public Ui Visibility"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
@@ -435,15 +618,32 @@ msgid "Request is in stage Sent"
 msgstr "Запит на етапі Відправлено"
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:292
+#: model:ir.model,name:crnd_wsd.model_request_kind
+msgid "Request kind"
+msgstr ""
+
+#. module: crnd_wsd
+#: code:addons/crnd_wsd/controllers/main.py:382
 #, python-format
 msgid "Request text is empty!"
 msgstr "Текст запиту порожній!"
 
 #. module: crnd_wsd
+#: code:addons/crnd_wsd/controllers/main.py:389
+#, python-format
+msgid "Request text is too long!"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_navigation
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_portal_my_home
 msgid "Requests"
 msgstr "Запити"
+
+#. module: crnd_wsd
+#: selection:res.company,request_wsd_public_ui_visibility:0
+msgid "Restricted UI"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:request.category,name:crnd_wsd.request_category_demo_website
@@ -453,6 +653,7 @@ msgstr "SaAS"
 #. module: crnd_wsd
 #. openerp-web
 #: code:addons/crnd_wsd/static/src/js/request_actions.js:26
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:260
 #: code:addons/crnd_wsd/static/src/xml/templates.xml:10
 #, python-format
 msgid "Save"
@@ -512,6 +713,11 @@ msgid "Service Desk Website user (All requests)"
 msgstr "Користувач служби підтримки вебсайту (Всі запити)"
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_kind_show_as_website_filter
+msgid "Show As Website Filter"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_select_category
@@ -532,8 +738,14 @@ msgstr "Зареєструватись"
 #: model:ir.model.fields,help:crnd_wsd.field_request_request_author_avatar
 #: model:ir.model.fields,help:crnd_wsd.field_request_request_closed_by_avatar
 #: model:ir.model.fields,help:crnd_wsd.field_request_request_created_by_avatar
-msgid "Small-sized image of this contact. It is automatically resized as a 64x64px image, with aspect ratio preserved. Use this field anywhere a small image is required."
-msgstr "Маленьке зображення цього контакту. Воно буде автоматично змінено до розміру 64х64 пікселя зі збереженням співвідношення сторін. Використовуйте це поле всюди, де потрібне маленьке зображення."
+msgid ""
+"Small-sized image of this contact. It is automatically resized as a 64x64px "
+"image, with aspect ratio preserved. Use this field anywhere a small image is "
+"required."
+msgstr ""
+"Маленьке зображення цього контакту. Воно буде автоматично змінено до розміру "
+"64х64 пікселя зі збереженням співвідношення сторін. Використовуйте це поле "
+"всюди, де потрібне маленьке зображення."
 
 #. module: crnd_wsd
 #: model:request.request,help_html:crnd_wsd.demo_request_request_upgrade_request_1
@@ -610,23 +822,35 @@ msgstr "Тут ви можете задати питання щодо нашог
 
 #. module: crnd_wsd
 #: model:request.request,stage_help_html:crnd_wsd.demo_request_request_printer_1
-msgid "This is draft request. You can still edit it.\n"
+msgid ""
+"This is draft request. You can still edit it.\n"
 "             When you think it is finished, send it."
-msgstr "Це чорновик запиту. Ви можете його редагувати.\n"
+msgstr ""
+"Це чорновик запиту. Ви можете його редагувати.\n"
 "             Після редагування надішліть запит."
 
 #. module: crnd_wsd
 #: model:request.request,help_html:crnd_wsd.demo_request_request_generic_question_1
 #: model:request.type,help_html:crnd_wsd.request_type_generic
-msgid "This is request type for generic questions related to our SaaS service\n"
-"            Use this request type if you cannot find exact request type for your question"
-msgstr "Даний тип запитів призначений для загальних питань стосовно нашого SaaS сервісу\n"
-"            використовуйте цей тип запитів якщо не можете знайти тип що більше відповідає вашому питанню"
+msgid ""
+"This is request type for generic questions related to our SaaS service\n"
+"            Use this request type if you cannot find exact request type for "
+"your question"
+msgstr ""
+"Даний тип запитів призначений для загальних питань стосовно нашого SaaS "
+"сервісу\n"
+"            використовуйте цей тип запитів якщо не можете знайти тип що "
+"більше відповідає вашому питанню"
 
 #. module: crnd_wsd
 #: model:request.request,help_html:crnd_wsd.demo_request_request_printer_1
 msgid "This request type is used to request access to printer."
 msgstr "Цей тип запиту використовується для запиту доступу до принтера."
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Time spent"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
@@ -639,7 +863,14 @@ msgid "To response"
 msgstr "До відповіді"
 
 #. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "Tracked time"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.request_short_info
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Type"
@@ -647,13 +878,15 @@ msgstr "Тип"
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
-msgid "Type\n"
+msgid ""
+"Type\n"
 "                <span/>"
-msgstr "Тип\n"
+msgstr ""
+"Тип\n"
 "                <span/>"
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:340
+#: code:addons/crnd_wsd/controllers/main.py:446
 #, python-format
 msgid "Unknown server error. See server logs."
 msgstr "Невідома помилка сервера. Дивіться логи сервера."
@@ -670,8 +903,12 @@ msgstr "Оновлено"
 
 #. module: crnd_wsd
 #: model:res.groups,comment:crnd_wsd.group_service_desk_website_user_all_requests
-msgid "Users in this groups can see all requests in system, but still not have access to internal UI."
-msgstr "Користувачі цієї групи можуть бачити всі запити в системі, але при цьому не мають доступу до внутрішнього інтерфейсу."
+msgid ""
+"Users in this groups can see all requests in system, but still not have "
+"access to internal UI."
+msgstr ""
+"Користувачі цієї групи можуть бачити всі запити в системі, але при цьому не "
+"мають доступу до внутрішнього інтерфейсу."
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.view_request_request_form
@@ -689,9 +926,19 @@ msgid "Visible in Website"
 msgstr "Видимий на сайті"
 
 #. module: crnd_wsd
+#: model:request.kind,website_filter_name:crnd_wsd.request_kind_demo_wsd
+msgid "WSD"
+msgstr ""
+
+#. module: crnd_wsd
 #: selection:request.stage.route,website_button_style:0
 msgid "Warning"
 msgstr "Попередження"
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+msgid "Website"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route_website_button_style
@@ -699,9 +946,30 @@ msgid "Website Button Style"
 msgstr "Стиль кнопки на вебсайті"
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route_website_extra_action
+msgid "Website Extra Action"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_kind_website_filter_name
+msgid "Website Filter Name"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings_request_wsd_public_ui_visibility
+msgid "Website Service Desk (Public Visibility)"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:res.groups,comment:crnd_wsd.group_service_desk_website_user_advanced
-msgid "Website advanced users of service desk. Users in this group can create requests with request types and categories they are subscribed for, even if these types and categories not website published."
-msgstr "Просунуті користувачі сервіс-деску. Користувачі що в ходять у цю групу можуть створювати запити із типами та категоріями запитів на які вони підписані, навіть якщо ці типи та категорії не опубліковані на вебсайті."
+msgid ""
+"Website advanced users of service desk. Users in this group can create "
+"requests with request types and categories they are subscribed for, even if "
+"these types and categories not website published."
+msgstr ""
+"Просунуті користувачі сервіс-деску. Користувачі що в ходять у цю групу "
+"можуть створювати запити із типами та категоріями запитів на які вони "
+"підписані, навіть якщо ці типи та категорії не опубліковані на вебсайті."
 
 #. module: crnd_wsd
 #: model:request.category,description:crnd_wsd.request_category_demo_website_support
@@ -722,13 +990,26 @@ msgstr "Ви можете використовувати тут html для фо
 #. openerp-web
 #: code:addons/crnd_wsd/static/src/js/blockui.js:14
 #, python-format
-msgid "You may not believe it, <br/> but the application is actually loading..."
+msgid ""
+"You may not believe it, <br/> but the application is actually loading..."
 msgstr "Ви можете в це не вірити, <br/> але програма насправді працює..."
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
 msgid "Your request will be reviewed soon"
 msgstr "Ваш запит буде опрацьовано найближчим часом"
+
+#. module: crnd_wsd
+#. openerp-web
+#: code:addons/crnd_wsd/static/src/js/widgets.js:80
+#, python-format
+msgid "less"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
+msgid "of"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests
@@ -739,6 +1020,11 @@ msgid "or"
 msgstr "або"
 
 #. module: crnd_wsd
+#: model:ir.model,name:crnd_wsd.model_res_config_settings
+msgid "res.config.settings"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 #: model:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_select_category
@@ -746,3 +1032,8 @@ msgstr "або"
 msgid "to be able to view and create requests."
 msgstr "щоб мати можливість передивлятись і створювати запити."
 
+#~ msgid "<span class=\"wsd_request header-bg-filler\">Request</span>"
+#~ msgstr "<span class=\"wsd_request header-bg-filler\">Запит</span>"
+
+#~ msgid "<span class=\"wsd_request header-bg-filler\">Response</span>"
+#~ msgstr "<span class=\"wsd_request header-bg-filler\">Відповідь</span>"

@@ -1,5 +1,29 @@
 # Changelog
 
+## Release (2021-Jan-18 13:28:15)
+
+### Updated addons:
+
+- generic_request (11.0.1.80.0 -> 11.0.1.83.1)
+
+### Notable changes:
+
+#### generic_request
+##### Version 1.83.0
+
+Added button to generate default stages and route on request type that has no
+request stages.
+
+
+##### Version 1.81.0
+
+Added new request event types:
+- Timetracking / Start Work
+- Timetracking / Stop Work
+
+
+
+
 ## Release (2020-Sep-09 12:08:49)
 
 ### Updated addons:

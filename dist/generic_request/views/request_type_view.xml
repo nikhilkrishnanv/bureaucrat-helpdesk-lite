@@ -210,10 +210,20 @@
                         <page string="Description" name="page_description">
                             <group>
                                 <group name="group_description_left">
-                                    <field name="start_stage_id"/>
+                                    <label for="start_stage_id"/>
+                                    <div>
+                                        <field name="start_stage_id" attrs="{'invisible': [('start_stage_id', '=', False)]}"/>
+                                        <button name="action_create_default_stage_and_routes"
+                                                type="object"
+                                                string="Create default"
+                                                attrs="{'invisible': ['|', ('start_stage_id', '!=', False), ('id', '=', False)]}"
+                                                class="btn-primary"
+                                                style="padding-top: 0; padding-bottom: 0;"/>
+                                    </div>
                                     <field name="sequence_id" placeholder="Sequence..."/>
                                     <field name="color" widget="colorpicker"/>
-                                    <field name="complex_priority"/>
+                                    <field name="complex_priority"
+                                           widget="boolean_toggle"/>
                                     <field name="default_priority"
                                            widget="priority"
                                            attrs="{'invisible': [('complex_priority', '=', True)]}"/>
@@ -223,7 +233,9 @@
                                     <field name="default_urgency"
                                            widget="priority"
                                            attrs="{'invisible': [('complex_priority', '=', False)]}"/>
-                                    <field name="use_timesheet" string="Use Timesheet"/>
+                                    <field name="use_timesheet"
+                                           string="Use Timesheet"
+                                           widget="boolean_toggle"/>
                                     <field name="timesheet_activity_ids"
                                            widget="many2many_tags"
                                            options="{'color_field': 'color'}"

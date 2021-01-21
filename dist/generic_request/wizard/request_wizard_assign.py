@@ -9,7 +9,7 @@ class RequestWizardAssign(models.TransientModel):
         return self.env.user
 
     request_ids = fields.Many2many(
-        'request.request', string='Requests', requeired=True)
+        'request.request', string='Requests', required=True)
     user_id = fields.Many2one(
         'res.users', string="User", default=_default_user_id, required=True)
     partner_id = fields.Many2one(
