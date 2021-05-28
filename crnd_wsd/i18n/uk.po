@@ -276,11 +276,6 @@ msgid "Config Settings"
 msgstr "Налаштування"
 
 #. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Congratulation!"
-msgstr "Вітаємо!"
-
-#. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Create"
 msgstr "Створити"
@@ -429,11 +424,6 @@ msgstr "Додаткова дія"
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
-msgid "Fill request data"
-msgstr "Заповніть дані запиту"
-
-#. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Following errors happened during request creation!"
 msgstr "Наступні помилки стались під час створення запиту!"
 
@@ -478,6 +468,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__info
 msgid "Info"
 msgstr "Інформація"
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
+msgid "It will be reviewed soon"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.request_short_info
@@ -664,11 +659,6 @@ msgstr "Тип запиту"
 #: model:ir.model.fields,field_description:crnd_wsd.field_res_company__request_wsd_public_ui_visibility
 msgid "Request Wsd Public Ui Visibility"
 msgstr ""
-
-#. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Request have been created!"
-msgstr "Запит створено!"
 
 #. module: crnd_wsd
 #: model:request.stage,description:crnd_wsd.request_stage_type_bug_report_closed
@@ -1002,6 +992,7 @@ msgstr "Попередження"
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request__website_id
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_ids
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_type_form
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_website_request_request_search
 msgid "Website"
 msgstr "Веб-сайт"
@@ -1012,6 +1003,16 @@ msgid "Website Button Style"
 msgstr "Стиль кнопок на вебсайті"
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_custom_congratulation_note
+msgid "Website Custom Congratulation Note"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_custom_label_editor
+msgid "Website Custom Label Editor"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route__website_extra_action
 msgid "Website Extra Action"
 msgstr "Додаткова дія на вебсайті"
@@ -1020,6 +1021,16 @@ msgstr "Додаткова дія на вебсайті"
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_kind__website_filter_name
 msgid "Website Filter Name"
 msgstr "Назва фільтру на вебсайті"
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_request_text_help
+msgid "Website Request Text Help"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_request_title
+msgid "Website Request Title"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings__request_wsd_public_ui_visibility
@@ -1062,8 +1073,8 @@ msgstr "Ви можете в це не вірити, <br/> але програм
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Your request will be reviewed soon"
-msgstr "Ваш запит буде опрацьовано найближчим часом"
+msgid "Your request has been submitted."
+msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
@@ -1092,6 +1103,18 @@ msgstr "або"
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_select_type
 msgid "to be able to view and create requests."
 msgstr "щоб мати змогу переглядати та створювати запити."
+
+#~ msgid "Congratulation!"
+#~ msgstr "Вітаємо!"
+
+#~ msgid "Fill request data"
+#~ msgstr "Заповніть дані запиту"
+
+#~ msgid "Request have been created!"
+#~ msgstr "Запит створено!"
+
+#~ msgid "Your request will be reviewed soon"
+#~ msgstr "Ваш запит буде опрацьовано найближчим часом"
 
 #~ msgid "<span class=\"wsd_request header-bg-filler\">Request</span>"
 #~ msgstr "<span class=\"wsd_request header-bg-filler\">Запит</span>"

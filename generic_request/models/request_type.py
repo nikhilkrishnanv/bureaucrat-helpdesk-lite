@@ -316,11 +316,6 @@ class RequestType(models.Model):
             'request_type_id': self.id,
         })
 
-    def name_get(self):
-        # This is required to avoid access rights errors when tracking values
-        # in chatter. (At least in Odoo 10.0)
-        return super(RequestType, self.sudo()).name_get()
-
     @api.model
     def create(self, vals):
         r_type = super(RequestType, self).create(vals)

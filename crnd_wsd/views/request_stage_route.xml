@@ -10,7 +10,7 @@
                         type="object"
                         icon="fa-globe">
                     <field name="website_published"
-                           widget="website_button"/>
+                           widget="website_publish_button"/>
                 </button>
             </div>
             <group name="group_access" position="after">

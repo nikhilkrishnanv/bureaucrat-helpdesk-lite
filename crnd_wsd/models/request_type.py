@@ -14,6 +14,14 @@ class RequestType(models.Model):
     website_published = fields.Boolean('Visible in Website', copy=False)
     website_ids = fields.Many2many('website')
 
+    # Help message for request text
+    website_request_text_help = fields.Text()
+    # Custom title for request
+    website_request_title = fields.Char()
+    # Custom label for request text editor
+    website_custom_label_editor = fields.Char()
+    website_custom_congratulation_note = fields.Html()
+
     def website_publish_button(self):
         for rec in self:
             rec.website_published = not rec.website_published

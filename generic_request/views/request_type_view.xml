@@ -286,12 +286,11 @@
                             <field string="Stages" name="stage_count"
                                    widget="statinfo"/>
                         </button>
-                        <button name="toggle_active" type="object" groups="base.group_user"
-                                class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button"
-                                   options='{"terminology": "archive"}'/>
-                        </button>
                     </div>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived"
+                            bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
                     <div class="oe_title">
                         <h1 name="header_type">
                             <field name="name" placeholder="Request type name..."/>
@@ -310,9 +309,9 @@
                         </h3>
                     </div>
                     <notebook>
-                        <page string="Description" name="page_description">
-                            <group>
-                                <group name="group_description_left">
+                        <page string="Settings" name="page_settings">
+                            <group name="group_settings">
+                                <group name="group_settings_generic" string="Generic Settings">
                                     <label for="start_stage_id"/>
                                     <div>
                                         <field name="start_stage_id" attrs="{'invisible': [('start_stage_id', '=', False)]}"/>
@@ -325,6 +324,10 @@
                                     </div>
                                     <field name="sequence_id" placeholder="Sequence..."/>
                                     <field name="color" widget="color"/>
+                                    <field name="tag_category_ids"
+                                           widget="many2many_tags"/>
+                                </group>
+                                <group name="group_settings_priority" string="Priority">
                                     <field name="complex_priority"
                                            widget="boolean_toggle"/>
                                     <field name="default_priority"
@@ -336,6 +339,8 @@
                                     <field name="default_urgency"
                                            widget="priority"
                                            attrs="{'invisible': [('complex_priority', '=', False)]}"/>
+                                </group>
+                                <group name="group_settings_timesheet" string="Time Tracking">
                                     <field name="use_timesheet"
                                            string="Use Timesheet"
                                            widget="boolean_toggle"/>
@@ -344,10 +349,6 @@
                                            options="{'color_field': 'color'}"
                                            attrs="{'invisible': [('use_timesheet', '=', False)]}"
                                            string="Timesheet Activities"/>
-                                </group>
-                                <group name="group_description_right">
-                                    <field name="tag_category_ids"
-                                           widget="many2many_tags"/>
                                 </group>
                             </group>
 
@@ -508,15 +509,12 @@
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
                 </div>
             </form>
         </field>
     </record>
-
-    <!-- TODO: Uncomment after web_diagram_plus ported to 14.0
-         Comennted for fast port
 
     <record model="ir.ui.view" id="view_request_type_diagram">
         <field name="model">request.type</field>
@@ -543,7 +541,6 @@
             </diagram_plus>
         </field>
     </record>
-    -->
 
     <record model="ir.actions.act_window" id="action_type_window">
         <field name="name">Types</field>

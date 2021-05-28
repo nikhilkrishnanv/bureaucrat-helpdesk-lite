@@ -10,7 +10,7 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
     'category': 'Generic Request',
-    'version': '14.0.1.99.0',
+    'version': '14.0.1.114.3',
     'external_dependencies': {
         'python': [
             'html2text',
@@ -26,7 +26,7 @@
         'mail',
         'generic_mixin',
         'generic_tag',
-        # 'crnd_web_diagram_plus',
+        'crnd_web_diagram_plus',
         'crnd_web_list_popover_widget',
         'crnd_web_tree_colored_field',
         'base_setup',
