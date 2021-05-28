@@ -15,27 +15,7 @@ cache: {}
 
 stages:
     - package
-    - test
     - deploy
-
-tests:
-    image: registry.crnd.pro/crnd/docker/odoo-ci-x:${SERIES_BRANCH}-ci
-    stage: test
-    <<: *pip_cache_definition
-    before_script:
-        - odoo-helper link .
-    script:
-        - odoo-helper --use-unbuffer test --coverage-report --create-test-db --dir-r . --skip-re "^theme_.*"
-
-    coverage: '/^TOTAL\s+\d+\s+\d+\s+(\d+\%%)/'
-    except:
-        - web
-    only:
-        variables:
-            # Run tests only on commits created by odoo-packager
-            - $CI_COMMIT_MESSAGE =~ /\[odoo-packager\]/
-            - $CI_COMMIT_MESSAGE =~ /\[enforce-run-tests\]/
-    when: manual
 
 .do_package_definition: &do_package_definition
     image: registry.crnd.pro/crnd/docker/odoo-apps-packager:d
@@ -44,7 +24,7 @@ tests:
         - odoo-packager --info-only
         - odoo-packager --version
     script:
-        - odoo-packager
+        - odoo-packager --dist .
 
 do_package_on_commit:
     <<: *do_package_definition
@@ -53,14 +33,21 @@ do_package_on_commit:
             # Do not run package on commits created by packager itself
             - $CI_COMMIT_MESSAGE =~ /\[odoo-packager\]/
         refs:
+            - "13.0"
             - web
     only:
-        - /^13.0-.*$/
+        variables:
+            - $CI_MERGE_REQUEST_IID
+        changes:
+            - "odoo-packager.yml"
 
-do_package_manual_trigger:
+do_package_manual_or_api:
     <<: *do_package_definition
     except:
         - "13.0"
     only:
         - web
+        - api
+
+
 
