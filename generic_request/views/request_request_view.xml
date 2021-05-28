@@ -655,6 +655,14 @@
                 <field name="search_tag_id"/>
                 <field name="search_no_tag_id"/>
 
+                <filter name="filter_archived"
+                        string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <filter name="filter_active"
+                        string="Active"
+                        domain="[('active', '=', True)]"/>
+
+                <separator/>
                 <filter name="filter_closed"
                         string="Closed"
                         domain="[('closed', '=', True)]"/>

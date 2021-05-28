@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="ir.ui.view" id="view_request_category_form">
-        <field name="name">view.request.category.form.website</field>
         <field name="model">request.category</field>
         <field name="inherit_id" ref="generic_request.view_request_category_form"/>
         <field name="arch" type="xml">
@@ -17,7 +16,6 @@
         </field>
     </record>
     <record model="ir.ui.view" id="view_request_category_search">
-        <field name="name">view.request.category.search.website</field>
         <field name="model">request.category</field>
         <field name="inherit_id" ref="generic_request.view_request_category_search"/>
         <field name="arch" type="xml">

@@ -93,6 +93,28 @@
                         </div>
                         <div class="col-xs-12 col-md-6 o_setting_box">
                             <div class="o_setting_left_pane">
+                                <field name="request_mail_suggest_global_cc"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="request_mail_suggest_global_cc"/>
+                                <div class="text-muted">
+                                    Show request's Global CC as suggested recipient when sending new message via chatter.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="request_mail_create_partner_from_email"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="request_mail_create_partner_from_email"/>
+                                <div class="text-muted">
+                                    When request created from incoming email, and author of email is not present in odoo's contacts database, then create new contact (partner) for this email address.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
                                 <field name="group_request_show_stat_on_kanban_views"
                                        string="Show request stat on kanban views"/>
                             </div>

@@ -310,9 +310,9 @@
                         </h3>
                     </div>
                     <notebook>
-                        <page string="Description" name="page_description">
-                            <group>
-                                <group name="group_description_left">
+                        <page string="Settings" name="page_settings">
+                            <group name="group_settings">
+                                <group name="group_settings_generic" string="Generic Settings">
                                     <label for="start_stage_id"/>
                                     <div>
                                         <field name="start_stage_id" attrs="{'invisible': [('start_stage_id', '=', False)]}"/>
@@ -325,6 +325,10 @@
                                     </div>
                                     <field name="sequence_id" placeholder="Sequence..."/>
                                     <field name="color" widget="colorpicker"/>
+                                    <field name="tag_category_ids"
+                                           widget="many2many_tags"/>
+                                </group>
+                                <group name="group_settings_priority" string="Priority">
                                     <field name="complex_priority"
                                            widget="boolean_toggle"/>
                                     <field name="default_priority"
@@ -336,6 +340,8 @@
                                     <field name="default_urgency"
                                            widget="priority"
                                            attrs="{'invisible': [('complex_priority', '=', False)]}"/>
+                                </group>
+                                <group name="group_settings_timesheet" string="Time Tracking">
                                     <field name="use_timesheet"
                                            string="Use Timesheet"
                                            widget="boolean_toggle"/>
@@ -344,10 +350,6 @@
                                            options="{'color_field': 'color'}"
                                            attrs="{'invisible': [('use_timesheet', '=', False)]}"
                                            string="Timesheet Activities"/>
-                                </group>
-                                <group name="group_description_right">
-                                    <field name="tag_category_ids"
-                                           widget="many2many_tags"/>
                                 </group>
                             </group>
 

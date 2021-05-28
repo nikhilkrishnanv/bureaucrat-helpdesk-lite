@@ -6,6 +6,7 @@
         <field name="description">Report a bug</field>
         <field name="category_ids" eval="[(4, ref('request_category_demo_website_support'), 0)]"/>
         <field name="website_published" eval="True"/>
+        <field name="website_request_text_help">Describe bug here. And do not forget to attach screenshots or screencasts.</field>
     </record>
 
     <!-- Generic request type stages -->

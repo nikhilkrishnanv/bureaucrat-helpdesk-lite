@@ -262,11 +262,6 @@ msgid "Config Settings"
 msgstr "Konfiguration "
 
 #. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Congratulation!"
-msgstr ""
-
-#. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Create"
 msgstr "Anlegen"
@@ -402,11 +397,6 @@ msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
-msgid "Fill request data"
-msgstr ""
-
-#. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Following errors happened during request creation!"
 msgstr ""
 
@@ -445,6 +435,11 @@ msgstr ""
 #. module: crnd_wsd
 #: selection:request.stage.route,website_button_style:0
 msgid "Info"
+msgstr ""
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
+msgid "It will be reviewed soon"
 msgstr ""
 
 #. module: crnd_wsd
@@ -606,11 +601,6 @@ msgstr ""
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_res_company__request_wsd_public_ui_visibility
 msgid "Request Wsd Public Ui Visibility"
-msgstr ""
-
-#. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Request have been created!"
 msgstr ""
 
 #. module: crnd_wsd
@@ -944,6 +934,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request__website_id
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_ids
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_type_form
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_website_request_request_search
 msgid "Website"
 msgstr ""
@@ -954,6 +945,16 @@ msgid "Website Button Style"
 msgstr ""
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_custom_congratulation_note
+msgid "Website Custom Congratulation Note"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_custom_label_editor
+msgid "Website Custom Label Editor"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route__website_extra_action
 msgid "Website Extra Action"
 msgstr ""
@@ -961,6 +962,16 @@ msgstr ""
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_kind__website_filter_name
 msgid "Website Filter Name"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_request_text_help
+msgid "Website Request Text Help"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_request_title
+msgid "Website Request Title"
 msgstr ""
 
 #. module: crnd_wsd
@@ -1001,7 +1012,7 @@ msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Your request will be reviewed soon"
+msgid "Your request has been submitted."
 msgstr ""
 
 #. module: crnd_wsd
