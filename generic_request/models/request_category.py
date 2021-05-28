@@ -197,11 +197,6 @@ class RequestCategory(models.Model):
         for record in self:
             record.request_type_count = len(record.request_type_ids)
 
-    def name_get(self):
-        # This is required to avoid access rights errors when tracking values
-        # in chatter. (At least in Odoo 10.0)
-        return super(RequestCategory, self.sudo()).name_get()
-
     def action_category_request_open_today_count(self):
         self.ensure_one()
         today_start = datetime.now().replace(

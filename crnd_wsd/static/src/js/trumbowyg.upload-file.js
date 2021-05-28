@@ -80,7 +80,7 @@ odoo.define('crnd_wsd.trumbowyg.upload-file', function (require) {
     $.extend(true, $.trumbowyg, {
         langs: {
             en: {
-                uploadFile: 'Upload File',
+                uploadFile: 'Attach File',
                 file: 'File',
             },
             ua: {
@@ -103,7 +103,8 @@ odoo.define('crnd_wsd.trumbowyg.upload-file', function (require) {
                         trumbowyg.o.plugins.uploadFile || {});
 
                     var btnDef = {
-                        ico: "upload",
+                        class: "fa fa-paperclip",
+                        hasIcon: false,
                         fn: function () {
                             trumbowyg.saveRange();
 

@@ -1,0 +1,8 @@
+### Addons list
+
+| System Name | Name | License | Version | Summary | Price |
+|---|---|---|---|---|---|
+| bureaucrat_helpdesk_lite | Bureaucrat Helpdesk Lite | LGPL-3 | 13.0.1.2.0 |          Help desk      | 0.0 |
+| crnd_service_desk | Service Desk | LGPL-3 | 13.0.1.3.0 |          Process addon for the Website Service Desk application.      |  |
+| crnd_wsd | Website Service Desk | LGPL-3 | 13.0.1.62.1 | Website UI for Service Desk |  |
+| generic_request | Generic Request | LGPL-3 | 13.0.1.114.1 |          Incident management and helpdesk system - logging, recording,         tracking, addressing, handling and archiving         issues that occur in daily routine.      |  |

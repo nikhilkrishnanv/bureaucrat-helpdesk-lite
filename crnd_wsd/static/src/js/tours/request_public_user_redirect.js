@@ -73,7 +73,8 @@ odoo.define('crnd_wsd.tour_request_public_user_redirect', function (require) {
         },
         {
             content: "Wait for congratulation page loaded",
-            trigger: "#wrap:has(h2:contains('Congratulation'))",
+            trigger: "#wrap:has(h3:contains(" +
+                "'Your request has been submitted'))",
         },
         {
             content: "Check request text",

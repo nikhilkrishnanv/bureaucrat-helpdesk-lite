@@ -141,12 +141,12 @@ class RequestStage(models.Model):
                     ["- %s" % r.display_name for r in record.route_in_ids] +
                     ["- %s" % r.display_name for r in record.route_out_ids])
                 msg = _(
-                    "Cannot delete stage %s because it is referenced from "
-                    "following routes:\n%s"
-                ) % (
-                    record.display_name,
-                    routes
-                )
+                    "Cannot delete stage %(stage_name)s because it is "
+                    "referenced from following routes:\n%(routes)s"
+                ) % {
+                    'stage_name': record.display_name,
+                    'routes': routes,
+                }
                 messages += [msg]
         if messages:
             raise exceptions.ValidationError("\n\n".join(messages))
