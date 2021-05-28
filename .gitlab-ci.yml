@@ -24,7 +24,7 @@ stages:
         - odoo-packager --info-only
         - odoo-packager --version
     script:
-        - odoo-packager
+        - odoo-packager --dist .
 
 do_package_on_commit:
     <<: *do_package_definition
