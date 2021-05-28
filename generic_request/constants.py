@@ -10,7 +10,7 @@ MAIL_REQUEST_TEXT_TMPL = "<h1>%(subject)s</h1>\n<br/>\n<br/>%(body)s"
 
 AVAILABLE_PRIORITIES = [
     ('0', _('Not set')),
-    ('1', _('Very Low')),
+    ('1', _('For Information')),
     ('2', _('Low')),
     ('3', _('Medium')),
     ('4', _('High')),

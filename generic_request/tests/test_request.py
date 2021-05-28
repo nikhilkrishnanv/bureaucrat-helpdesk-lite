@@ -557,15 +557,24 @@ class TestRequestBase(RequestCase):
         # By default suggestion for partner disabled, thus no partner
         # have to be suggested
         result = request._message_get_suggested_recipients()[request.id]
-        partner_ids = [r[0] for r in result]
+        partner_ids = [r[0] for r in result if r[0]]
         self.assertFalse(partner_ids)
+
+        # But suggestion of email_cc is enabled
+        partner_emails = [r[1] for r in result]
+        self.assertIn('lquixley3@ning.com', partner_emails)
+        self.assertIn(
+            'Julita Haddeston <jhaddeston5@cafepress.com>', partner_emails)
 
         # Enable suggestion for partner
         self.env.user.company_id.request_mail_suggest_partner = True
 
         result = request._message_get_suggested_recipients()[request.id]
-        partner_ids = [r[0] for r in result]
+        partner_ids = [r[0] for r in result if r[0]]
         self.assertEqual(len(partner_ids), 1)
+
+        partner_emails = [r[1] for r in result]
+        self.assertEqual(len(partner_emails), 3)
 
         # Ensure that partner is in suggested recipients
         self.assertNotIn(author.id, partner_ids)
@@ -576,7 +585,7 @@ class TestRequestBase(RequestCase):
         # Ensure that after we subscribe partner it disappears from suggested
         # list
         result = request._message_get_suggested_recipients()[request.id]
-        partner_ids = [r[0] for r in result]
+        partner_ids = [r[0] for r in result if r[0]]
         self.assertFalse(partner_ids)
 
     def test_request_creation_template(self):
@@ -772,3 +781,69 @@ class TestRequestBase(RequestCase):
         Model.create(dict(data1))
         with self.assertRaises(IntegrityError):
             Model.create(dict(data2))
+
+    def test_request_author_changed_event_created(self):
+        request = self.env.ref(
+            'generic_request.request_request_type_simple_demo_1'
+        )
+        self.assertEqual(request.request_event_count, 1)
+        self.assertEqual(request.request_event_ids.event_type_id.code,
+                         'created')
+        current_author_id = request.author_id.ids[0]
+        author_ids = list(filter(lambda x: x != current_author_id, (
+            self.env['res.partner'].search([('is_company', '=', False)])).ids))
+        request.author_id = author_ids[0]
+        self.assertSetEqual(
+            set(request.request_event_ids.mapped('event_type_id.code')),
+            {'created', 'author-changed'})
+        self.assertEqual(request.request_event_count, 2)
+
+    def test_request_partner_changed_event_created(self):
+        request = self.env.ref(
+            'generic_request.request_request_type_simple_demo_1'
+        )
+        self.assertEqual(request.request_event_count, 1)
+        self.assertEqual(request.request_event_ids.event_type_id.code,
+                         'created')
+        current_partner_id = request.partner_id.ids[0]
+        partner_ids = list(filter(lambda x: x != current_partner_id, (
+            self.env['res.partner'].search([])).ids))
+        request.partner_id = partner_ids[0]
+        self.assertSetEqual(
+            set(request.request_event_ids.mapped('event_type_id.code')),
+            {'created', 'partner-changed'})
+        self.assertEqual(request.request_event_count, 2)
+
+    def test_access_request_to_change_active(self):
+        request = self.env['request.request'].with_user(
+            self.request_manager
+        ).create({
+            'type_id': self.simple_type.id,
+            'request_text': 'test',
+        })
+
+        group_allow_archive = self.env.ref(
+            'generic_request.group_request_manager_can_archive_request')
+
+        # Check user no have group allow archive
+        self.assertNotIn(
+            group_allow_archive.id, self.request_manager.groups_id.ids)
+        self.assertEqual(request.active, True)
+
+        # User wihout Request group allow archive can't change active
+        with self.assertRaises(exceptions.AccessError):
+            request.with_user(self.request_manager).write({
+                'active': False})
+
+        self.request_manager.groups_id |= group_allow_archive
+        self.assertIn(
+            group_allow_archive.id, self.request_manager.groups_id.ids)
+        request.with_user(self.request_manager).write({
+            'active': False})
+
+        # SUPERUSER can archive request witout group
+        user_admin = self.env.ref('base.user_root')
+        self.assertNotIn(
+            group_allow_archive.id, user_admin.groups_id.ids)
+        self.request_1.with_user(user_admin).write({
+            'active': True})

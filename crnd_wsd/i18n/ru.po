@@ -272,11 +272,6 @@ msgid "Config Settings"
 msgstr "Настройки конфигурации"
 
 #. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Congratulation!"
-msgstr "Поздравляем!"
-
-#. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Create"
 msgstr "Создать"
@@ -408,11 +403,6 @@ msgstr "Дополнительное действие"
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
-msgid "Fill request data"
-msgstr "Введите данные запроса"
-
-#. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Following errors happened during request creation!"
 msgstr "Следующие ошибки возникли при создании запроса!"
 
@@ -445,6 +435,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__info
 msgid "Info"
 msgstr "Информация"
+
+#. module: crnd_wsd
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
+msgid "It will be reviewed soon"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.request_short_info
@@ -608,11 +603,6 @@ msgstr "Тип запроса"
 #: model:ir.model.fields,field_description:crnd_wsd.field_res_company__request_wsd_public_ui_visibility
 msgid "Request Wsd Public Ui Visibility"
 msgstr ""
-
-#. module: crnd_wsd
-#: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Request have been created!"
-msgstr "Запрос создан!"
 
 #. module: crnd_wsd
 #: model:request.stage,description:crnd_wsd.request_stage_type_bug_report_closed
@@ -942,6 +932,7 @@ msgstr "Предупреждение"
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request__website_id
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_ids
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
+#: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_type_form
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_website_request_request_search
 msgid "Website"
 msgstr "Вебсайт"
@@ -952,6 +943,16 @@ msgid "Website Button Style"
 msgstr "Стиль кнопок вебсайта"
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_custom_congratulation_note
+msgid "Website Custom Congratulation Note"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_custom_label_editor
+msgid "Website Custom Label Editor"
+msgstr ""
+
+#. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route__website_extra_action
 msgid "Website Extra Action"
 msgstr "Дополнительное действие на вебсайте"
@@ -960,6 +961,16 @@ msgstr "Дополнительное действие на вебсайте"
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_kind__website_filter_name
 msgid "Website Filter Name"
 msgstr "Название фильтра на вебсайте"
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_request_text_help
+msgid "Website Request Text Help"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_request_title
+msgid "Website Request Title"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings__request_wsd_public_ui_visibility
@@ -1002,8 +1013,8 @@ msgstr "Вы не поверите,<br />но приложение на само
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_congratulation
-msgid "Your request will be reviewed soon"
-msgstr "Ваш запрос будет рассмотрен в ближайшее время"
+msgid "Your request has been submitted."
+msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
@@ -1032,6 +1043,18 @@ msgstr "или"
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_select_type
 msgid "to be able to view and create requests."
 msgstr "чтобы просматривать и создавать запросы."
+
+#~ msgid "Congratulation!"
+#~ msgstr "Поздравляем!"
+
+#~ msgid "Fill request data"
+#~ msgstr "Введите данные запроса"
+
+#~ msgid "Request have been created!"
+#~ msgstr "Запрос создан!"
+
+#~ msgid "Your request will be reviewed soon"
+#~ msgstr "Ваш запрос будет рассмотрен в ближайшее время"
 
 #~ msgid "<span class=\"wsd_request header-bg-filler\">Request</span>"
 #~ msgstr "<span class=\"wsd_request header-bg-filler\">Запрос</span>"

@@ -1,5 +1,38 @@
 # Changelog
 
+## Version 1.114.0
+
+- Add new request events (Request Archived / Request Unarchived).
+- Add filters in search view.
+- Add simplet tests.
+
+
+## Version 1.112.0
+
+- Add field `active` to model request.request.
+- Add a group whose users are allowed to archive / unarchive requests.
+
+
+## Version 1.111.0
+
+#### Version 1.111.0
+Added new request event types: 'author-changed' and 'partner-changed'.
+ 
+
+## Version 1.103.0
+
+Added global configuration, that allows to chooses if it is needed to suggest
+Global CC as recipients of request
+
+
+## Version 1.101.0
+
+- Add `email_cc` data to suggested recipients.
+- Add global option that allows to automatically create partners,
+  if request created from incoming email, and author of email and cc of email
+  are not present in odoo's contacts database
+
+
 ## Version 1.99.0
 
 Add global setting that could be used to show/hide request statistics on kanban views of
