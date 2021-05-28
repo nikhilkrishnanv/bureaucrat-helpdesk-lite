@@ -355,9 +355,9 @@
                     </div>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
                 </div>
             </form>
         </field>
@@ -655,6 +655,14 @@
                 <field name="search_tag_id"/>
                 <field name="search_no_tag_id"/>
 
+                <filter name="filter_archived"
+                        string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <filter name="filter_active"
+                        string="Active"
+                        domain="[('active', '=', True)]"/>
+
+                <separator/>
                 <filter name="filter_closed"
                         string="Closed"
                         domain="[('closed', '=', True)]"/>

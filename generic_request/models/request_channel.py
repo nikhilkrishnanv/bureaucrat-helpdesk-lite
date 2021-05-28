@@ -164,6 +164,35 @@ class RequestChannel(models.Model):
                 ('channel_id', '=', record.id)
             ])
 
+    def action_show_all_requests(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_window',
+            context=dict(
+                self.env.context,
+                search_default_channel_id=self.id),
+            domain=[('channel_id', '=', self.id)])
+
+    def action_show_open_requests(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_window',
+            context=dict(
+                self.env.context,
+                search_default_filter_open=1,
+                search_default_channel_id=self.id),
+            domain=[('channel_id', '=', self.id)])
+
+    def action_show_closed_requests(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_window',
+            context=dict(
+                self.env.context,
+                search_default_filter_closed=1,
+                search_default_channel_id=self.id),
+            domain=[('channel_id', '=', self.id)])
+
     def action_channel_request_open_today_count(self):
         self.ensure_one()
         today_start = datetime.now().replace(
