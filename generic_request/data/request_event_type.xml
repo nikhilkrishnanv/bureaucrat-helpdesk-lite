@@ -87,5 +87,24 @@
         <field name="code">timetracking-stop-work</field>
         <field name="category_id" ref="event_category_request_events"/>
     </record>
+    <record id="request_event_type_author_changed" model="request.event.type">
+        <field name="name">Author Changed</field>
+        <field name="code">author-changed</field>
+        <field name="category_id" ref="event_category_request_events"/>
+    </record>
+    <record id="request_event_type_partner_changed" model="request.event.type">
+        <field name="name">Partner Changed</field>
+        <field name="code">partner-changed</field>
+        <field name="category_id" ref="event_category_request_events"/>
+    </record>
+    <record id="request_event_type_request_archived" model="request.event.type">
+        <field name="name">Request Archived</field>
+        <field name="code">request-archived</field>
+        <field name="category_id" ref="event_category_request_events"/>
+    </record>
+    <record id="request_event_type_request_unarchived" model="request.event.type">
+        <field name="name">Request Unarchived</field>
+        <field name="code">request-unarchived</field>
+        <field name="category_id" ref="event_category_request_events"/>
+    </record>
 </odoo>
-

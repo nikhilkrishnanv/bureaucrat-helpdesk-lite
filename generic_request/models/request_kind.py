@@ -248,7 +248,7 @@ class RequestKind(models.Model):
         return self.env['generic.mixin.get.action'].get_action_by_xmlid(
             'generic_request.action_request_window',
             context=dict(
-                self.env.contxt,
+                self.env.context,
                 search_default_filter_open=1,
                 search_default_kind_id=self.id),
             domain=[('kind_id', '=', self.id)])

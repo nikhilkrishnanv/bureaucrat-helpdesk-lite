@@ -1,9 +1,8 @@
 # pylint:disable=too-many-lines
 import logging
 from datetime import datetime
-from odoo import models, fields, api, tools, _, exceptions, SUPERUSER_ID
+from odoo import models, fields, api, tools, _, http, exceptions, SUPERUSER_ID
 from odoo.addons.generic_mixin import pre_write, post_write
-from odoo import http
 from odoo.osv import expression
 from ..tools.utils import html2text
 from ..constants import (
@@ -45,6 +44,7 @@ class RequestRequest(models.Model):
         readonly=True, string='Instruction')
     note_html = fields.Html(
         related='type_id.note_html', readonly=True, string="Note")
+    active = fields.Boolean(default=True, index=True)
 
     # Priority
     _priority = fields.Char(
@@ -343,34 +343,38 @@ class RequestRequest(models.Model):
 
     def _hook_can_change_category(self):
         self.ensure_one()
-        return self.stage_id == self.sudo().type_id.start_stage_id
+        return self.stage_id == self.type_id.sudo().start_stage_id
 
     def _hook_can_change_deadline(self):
         self.ensure_one()
         return not self.closed
 
+    def _hook_can_change_author(self):
+        self.ensure_one()
+        return self.stage_id == self.type_id.sudo().start_stage_id
+
     @api.depends('type_id', 'stage_id', 'user_id',
-                 'partner_id', 'created_by_id')
+                 'partner_id', 'created_by_id', 'category_id')
     def _compute_can_change_request_text(self):
         for rec in self:
             rec.can_change_request_text = rec._hook_can_change_request_text()
 
     @api.depends('type_id', 'stage_id', 'user_id',
-                 'partner_id', 'created_by_id')
+                 'partner_id', 'created_by_id', 'category_id')
     def _compute_can_change_assignee(self):
         for rec in self:
             rec.can_change_assignee = rec._hook_can_change_assignee()
 
-    @api.depends('type_id', 'type_id.start_stage_id', 'stage_id')
+    @api.depends('type_id', 'type_id.start_stage_id', 'stage_id',
+                 'user_id', 'partner_id', 'created_by_id', 'request_text',
+                 'category_id')
     def _compute_can_change_author(self):
         for record in self:
             if not self.env.user.has_group(
                     'generic_request.group_request_user_can_change_author'):
                 record.can_change_author = False
-            elif record.stage_id != record.sudo().type_id.start_stage_id:
-                record.can_change_author = False
             else:
-                record.can_change_author = True
+                record.can_change_author = record._hook_can_change_author()
 
     @api.depends('type_id', 'type_id.start_stage_id', 'stage_id')
     def _compute_can_change_category(self):
@@ -378,7 +382,7 @@ class RequestRequest(models.Model):
             record.can_change_category = record._hook_can_change_category()
 
     @api.depends('type_id', 'type_id.start_stage_id', 'stage_id',
-                 'deadline_date')
+                 'deadline_date', 'category_id')
     def _compute_can_change_deadline(self):
         for record in self:
             record.can_change_deadline = record._hook_can_change_deadline()
@@ -471,9 +475,10 @@ class RequestRequest(models.Model):
         if r_type.start_stage_id:
             vals['stage_id'] = r_type.start_stage_id.id
         else:
-            raise exceptions.ValidationError(
-                _("Cannot create request of type '%s':"
-                  " This type have no start stage defined!") % r_type.name)
+            raise exceptions.ValidationError(_(
+                "Cannot create request of type '%(type_name)s':"
+                " This type have no start stage defined!"
+            ) % {'type_name': r_type.name})
 
         # Set default priority
         if r_type.sudo().complex_priority:
@@ -526,6 +531,15 @@ class RequestRequest(models.Model):
         return super(
             RequestRequest, self
         )._get_generic_tracking_fields() | TRACK_FIELD_CHANGES
+
+    @pre_write('active')
+    def _before_active_changed(self, changes):
+        if self.env.user.id == SUPERUSER_ID:
+            return
+        if not self.env.user.has_group(
+                'generic_request.group_request_manager_can_archive_request'):
+            raise exceptions.AccessError(_(
+                "Operation change active is not allowed!"))
 
     @pre_write('type_id')
     def _before_type_id_changed(self, changes):
@@ -603,6 +617,20 @@ class RequestRequest(models.Model):
             'new_category_id': changes['category_id'][1].id,
         })
 
+    @post_write('author_id')
+    def _after_author_id_changed(self, changes):
+        self.trigger_event('author-changed', {
+            'old_author_id': changes['author_id'][0].id,
+            'new_author_id': changes['author_id'][1].id,
+        })
+
+    @post_write('partner_id')
+    def _after_partner_id_changed(self, changes):
+        self.trigger_event('partner-changed', {
+            'old_partner_id': changes['partner_id'][0].id,
+            'new_partner_id': changes['partner_id'][1].id,
+        })
+
     @post_write('priority', 'impact', 'urgency')
     def _after_priority_changed(self, changes):
         if 'priority' in changes:
@@ -645,6 +673,16 @@ class RequestRequest(models.Model):
         self.trigger_event('kanban-state-changed', {
             'old_kanban_state': changes['kanban_state'][0],
             'new_kanban_state': changes['kanban_state'][1]})
+
+    @post_write('active')
+    def _after_active_changed(self, changes):
+        __, new_active = changes['active']
+        if new_active:
+            event_code = 'request-unarchived'
+        else:
+            event_code = 'request-archived'
+        self.trigger_event(event_code, {
+            'request_active': event_code})
 
     def _track_subtype(self, init_values):
         """ Give the subtypes triggered by the changes on the record according
@@ -750,13 +788,13 @@ class RequestRequest(models.Model):
         for record in self:
             if record.closed:
                 raise exceptions.UserError(_(
-                    "You can not assign this request (%s), "
+                    "You can not assign this request (%(request)s), "
                     "because this request is closed."
-                ) % record.display_name)
+                ) % {'request': record.display_name})
             if not record.can_change_assignee:
                 raise exceptions.UserError(_(
-                    "You can not assign this (%s) request"
-                ) % record.display_name)
+                    "You can not assign this (%(request)s) request"
+                ) % {'request': record.display_name})
 
     def action_request_assign(self):
         self.ensure_can_assign()
@@ -861,7 +899,8 @@ class RequestRequest(models.Model):
             self.sudo().author_id,
             event,
             lazy_subject=lambda self: _(
-                "Request %s successfully created!") % self.name,
+                "Request %(request)s successfully created!"
+            ) % {'request': self.name},
         )
 
     def _send_default_notification_assigned(self, event):
@@ -873,7 +912,8 @@ class RequestRequest(models.Model):
             event.sudo().new_user_id.partner_id,
             event,
             lazy_subject=lambda self: _(
-                "You have been assigned to request %s!") % self.name,
+                "You have been assigned to request %(request)s!"
+            ) % {'request': self.name},
         )
 
     def _send_default_notification_closed(self, event):
@@ -885,7 +925,8 @@ class RequestRequest(models.Model):
             self.sudo().author_id,
             event,
             lazy_subject=lambda self: _(
-                "Your request %s has been closed!") % self.name,
+                "Your request %(request)s has been closed!"
+            ) % {'request': self.name},
         )
 
     def _send_default_notification_reopened(self, event):
@@ -897,7 +938,8 @@ class RequestRequest(models.Model):
             self.sudo().author_id,
             event,
             lazy_subject=lambda self: _(
-                "Your request %s has been reopened!") % self.name,
+                "Your request %(request)s has been reopened!"
+            ) % {'request': self.name},
         )
 
     def handle_request_event(self, event):
@@ -970,6 +1012,7 @@ class RequestRequest(models.Model):
     def _message_auto_subscribe_notify(self, partner_ids, template):
         # Disable sending mail to assigne, when request was assigned.
         # Custom notification will be sent, see _after_user_id_changed method
+        # pylint: disable=useless-super-delegation
         return super(
             RequestRequest,
             self.with_context(mail_auto_subscribe_no_notify=True)
@@ -1032,9 +1075,11 @@ class RequestRequest(models.Model):
             msg, custom_values=defaults)
 
         # Find partners from email and subscribe them
+        company = self.env.user.company_id
         email_list = self._find_emails_from_msg(msg)
         partner_ids = request._find_partner_from_emails(
-            email_list, force_create=False)
+            email_list,
+            force_create=company.request_mail_create_partner_from_email)
         partner_ids = [pid for pid in partner_ids if pid]
 
         if author:
@@ -1065,6 +1110,12 @@ class RequestRequest(models.Model):
                 record._message_add_suggested_recipient(
                     recipients, email=record.email_from,
                     reason=_('Author Email'))
+            if (record.email_cc and
+                    self.env.user.company_id.request_mail_suggest_global_cc):
+                for email in tools.email_split(record.email_cc):
+                    record._message_add_suggested_recipient(
+                        recipients, email=email,
+                        reason=_('Global CC'))
             if (record.partner_id and
                     self.env.user.company_id.request_mail_suggest_partner):
                 reason = _('Partner')
@@ -1182,6 +1233,7 @@ class RequestRequest(models.Model):
         self.trigger_event('timetracking-start-work', {
             'timesheet_line_id': timesheet_line.id,
         })
+        return False
 
     def action_stop_work(self):
         self.ensure_one()
@@ -1191,6 +1243,7 @@ class RequestRequest(models.Model):
             return self.env['generic.mixin.get.action'].get_action_by_xmlid(
                 'generic_request.action_request_wizard_stop_work',
                 context={'default_timesheet_line_id': running_lines[0].id})
+        return False
 
     def action_request_view_timesheet_lines(self):
         self.ensure_one()

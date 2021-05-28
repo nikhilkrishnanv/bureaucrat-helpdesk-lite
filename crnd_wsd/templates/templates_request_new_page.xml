@@ -240,7 +240,9 @@
 
                     <div class="row">
                         <div class="oe_structure col-sm-6">
-                            <h3 class="mt4">Fill request data</h3>
+                            <h3 class="mt4"
+                                t-if="req_type.website_request_title"
+                                t-esc="req_type.website_request_title"/>
                             <div t-field="req_type.note_html"></div>
                         </div>
                         <div id="request-selection-box" class="d-none d-lg-block col-lg-6">
@@ -298,18 +300,24 @@
 
                     <section id="request-data" class="row">
                     </section>
-
-
-
                         <div class="row">
+
                             <div class="oe_structure col-sm-12"/>
+
                             <section id="request-body" class="col-sm-12">
+                                <label class="control-label mb0">
+                                    <t t-if="req_type.website_custom_label_editor"
+                                       t-esc="req_type.website_custom_label_editor"/>
+                                </label>
                                 <t t-if="request.website.is_public_user()">
                                     <textarea required="required" name="req_text" id="request_text"
                                               class="form-control" disabled="disabled"
                                               t-att-data-max_text_size="request.env.user.company_id.request_limit_max_text_size">
                                         <t t-esc="req_type.default_request_text"/>
                                     </textarea>
+                                    <small class="form-text text-muted"
+                                        t-if="req_type.website_request_text_help"
+                                        t-esc="req_type.website_request_text_help"/>
                                 </t>
                                 <t t-else="">
                                     <textarea name="req_text" id="request_text"
@@ -323,6 +331,9 @@
                                             <t t-esc="req_type.default_request_text"/>
                                         </t>
                                     </textarea>
+                                    <small class="form-text text-muted"
+                                        t-if="req_type.website_request_text_help"
+                                        t-esc="req_type.website_request_text_help"/>
                                     <t t-if="request.env.user.company_id.request_limit_max_text_size > 0">
                                         <span class="pull-right label" id="characters_left_label"
                                               data-toggle="tooltip"
@@ -369,12 +380,15 @@
                     </t>
                 </t>
                 <div class="row">
-                    <div class="oe_structure col-md-12">
-                        <h2 class="mt4">Congratulation!</h2>
-                    </div>
-                    <div class="oe_structure col-md-8 offset-md-2 mb16" align="center">
-                        <h3>Request have been created!</h3>
-                        <p>Your request will be reviewed soon</p>
+                    <div class="col-md-8 offset-md-2 mb16" align="center">
+                        <t t-if="req.type_id.website_custom_congratulation_note and req.type_id.website_custom_congratulation_note != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'">
+                            <div t-field="req.type_id.website_custom_congratulation_note">
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <h3>Your request has been submitted.</h3>
+                            <p>It will be reviewed soon</p>
+                        </t>
                     </div>
                 </div>
                 <div class="row">

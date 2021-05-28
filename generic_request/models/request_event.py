@@ -29,6 +29,14 @@ class RequestEvent(models.Model):
     old_user_id = fields.Many2one('res.users', readonly=True)
     new_user_id = fields.Many2one('res.users', readonly=True)
 
+    # Author changed
+    old_author_id = fields.Many2one('res.partner', readonly=True)
+    new_author_id = fields.Many2one('res.partner', readonly=True)
+
+    # Partner changed
+    old_partner_id = fields.Many2one('res.partner', readonly=True)
+    new_partner_id = fields.Many2one('res.partner', readonly=True)
+
     # Change request description
     old_text = fields.Html(readonly=True)
     new_text = fields.Html(readonly=True)
@@ -70,6 +78,13 @@ class RequestEvent(models.Model):
         selection="_get_selection_kanban_state",
         readonly=True)
 
+    # Archive related events
+    request_active = fields.Selection(
+        selection=[
+            ('request-archived', 'Archived'),
+            ('request-unarchived', 'Unarchived')],
+        readonly=True)
+
     # Timetracking
     timesheet_line_id = fields.Many2one(
         'request.timesheet.line', 'Timesheet line',
@@ -107,6 +122,11 @@ class RequestEvent(models.Model):
             'new_priority': self.new_priority,
             'old_kanban_state': self.old_kanban_state,
             'new_kanban_state': self.new_kanban_state,
+            'old_author_id': self.old_author_id,
+            'new_author_id': self.new_author_id,
+            'old_partner_id': self.old_partner_id,
+            'new_partner_id': self.new_partner_id,
+            'request_active': self.request_active,
             'request_event': self,
         }
 

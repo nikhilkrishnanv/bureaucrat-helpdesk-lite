@@ -104,7 +104,8 @@ odoo.define('crnd_wsd.tour_request_new', function (require) {
         },
         {
             content: "Wait for congratulation page loaded",
-            trigger: "#wrap:has(h2:contains('Congratulation'))",
+            trigger: "#wrap:has(h3:contains(" +
+                "'Your request has been submitted'))",
         },
         {
             content: "Click on request name ot open it",

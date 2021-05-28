@@ -139,6 +139,7 @@
 .wsd_request_new {
     .trumbowyg-box {
         min-height: @request-text-height;
+        margin-bottom: 0;
 
         .trumbowyg-editor,
         .trumbowyg-textarea {
@@ -147,6 +148,10 @@
 
         .trumbowyg-dropdown {
             width: 220px;
+        }
+
+        .trumbowyg-textual-button.fa::before {
+            margin-right: 4px;
         }
     }
 }
@@ -292,10 +297,6 @@
                 }
             }
         }
-    }
-
-    #characters_left_label {
-        margin-top: -16px;
     }
 }
 

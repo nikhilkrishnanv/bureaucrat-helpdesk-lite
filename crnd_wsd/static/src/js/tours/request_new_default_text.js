@@ -67,7 +67,8 @@ odoo.define('crnd_wsd.tour_request_new_default_text', function (require) {
         },
         {
             content: "Wait for congratulation page loaded",
-            trigger: "#wrap:has(h2:contains('Congratulation'))",
+            trigger: "#wrap:has(h3:contains(" +
+                "'Your request has been submitted'))",
         },
         {
             content: "Check request text",

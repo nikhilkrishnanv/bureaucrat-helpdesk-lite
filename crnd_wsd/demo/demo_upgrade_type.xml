@@ -9,6 +9,7 @@
         <field name="category_ids" eval="[(4, ref('request_category_demo_website_tech'), 0)]"/>
         <field name="kind_id" ref="request_kind_demo_wsd"/>
         <field name="website_published" eval="True"/>
+        <field name="website_request_text_help">Describe what you have to upgrade</field>
     </record>
 
     <!-- Upgrade request type stages -->

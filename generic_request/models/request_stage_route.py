@@ -48,10 +48,10 @@ class RequestStageRoute(models.Model):
     def name_get(self):
         res = []
         for record in self:
-            name = u"%s -> %s" % (record.stage_from_id.name,
-                                  record.stage_to_id.name)
+            name = "%s -> %s" % (record.stage_from_id.name,
+                                 record.stage_to_id.name)
             if record.name:
-                name = u"%s [%s]" % (name, record.name)
+                name = "%s [%s]" % (name, record.name)
 
             if self.env.context.get('name_only', False) and record.name:
                 name = record.name
@@ -66,38 +66,28 @@ class RequestStageRoute(models.Model):
             # no access rights checks for superuser
             return
 
-        # Access rights checks (user)
-        allowed_users = self.allowed_user_ids
-        if allowed_users and self.env.user not in allowed_users:
+        # Access rights checks (user & group)
+        not_allowed_by_user = (
+            self.allowed_user_ids and
+            self.env.user not in self.allowed_user_ids)
+        not_allowed_by_group = (
+            self.allowed_group_ids and
+            not self.allowed_group_ids & self.env.user.groups_id)
+        if not_allowed_by_user or not_allowed_by_group:
             raise AccessError(
                 _(
-                    "This stage change '%s' restricted by access rights.\n"
-                    "Request: %s\n"
-                    "Request Type: %s\n"
-                    "Request Category: %s\n"
-                ) % (
-                    self.display_name,
-                    request.sudo().display_name,
-                    request.sudo().type_id.display_name,
-                    request.sudo().category_id.display_name,
-                )
-            )
-
-        # Access rights checks (group)
-        allowed_groups = self.allowed_group_ids
-        if allowed_groups and not allowed_groups & self.env.user.groups_id:
-            raise AccessError(
-                _(
-                    "This stage change '%s' restricted by access rights.\n"
-                    "Request: %s\n"
-                    "Request Type: %s\n"
-                    "Request Category: %s\n"
-                ) % (
-                    self.display_name,
-                    request.sudo().display_name,
-                    request.sudo().type_id.display_name,
-                    request.sudo().category_id.display_name,
-                )
+                    "This stage change '%(route)s' restricted by "
+                    "access rights.\n"
+                    "Request: %(request)s\n"
+                    "Request Type: %(request_type)s\n"
+                    "Request Category: %(request_category)s\n"
+                ) % {
+                    'route': self.display_name,
+                    'request': request.sudo().display_name,
+                    'request_type': request.sudo().type_id.display_name,
+                    'request_category': (
+                        request.sudo().category_id.display_name),
+                }
             )
 
     @api.model
@@ -113,17 +103,19 @@ class RequestStageRoute(models.Model):
         if not route:
             RequestStage = self.env['request.stage']
             stage = RequestStage.browse(to_stage_id) if to_stage_id else None
-            raise ValidationError(
-                _("Cannot move request to this stage: no route.\n"
-                  "\tRequest: %s\n"
-                  "\tTo stage id: %s\n"
-                  "\tTo stage name: %s\n"
-                  "\tFrom stage name: %s\n"
-                  "") % (request.name,
-                         to_stage_id,
-                         stage.name if stage else None,
-                         request.stage_id.name if request.stage_id else None)
-            )
+            raise ValidationError(_(
+                "Cannot move request to this stage: no route.\n"
+                "\tRequest: %(request)s\n"
+                "\tTo stage id: %(to_stage_id)s\n"
+                "\tTo stage name: %(to_stage_name)s\n"
+                "\tFrom stage name: %(from_stage_name)s\n"
+            ) % {
+                'request': request.name,
+                'to_stage_id': to_stage_id,
+                'to_stage_name': stage.name if stage else None,
+                'from_stage_name': (
+                    request.stage_id.name if request.stage_id else None),
+            })
 
         route._ensure_can_move(request)
         return route
