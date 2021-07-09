@@ -23,8 +23,8 @@
             <script type="text/javascript" src="/crnd_wsd/static/src/js/request_actions.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/enable_popovers.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/widgets.js"/>
-            <link rel='stylesheet' type="text/less" href='/crnd_wsd/static/src/less/request.less'/>
-            <link rel='stylesheet' type="text/css" href="/crnd_wsd/static/src/less/blockui_spin.css"/>
+            <link rel='stylesheet' type="text/scss" href='/crnd_wsd/static/src/scss/request.scss'/>
+            <link rel='stylesheet' type="text/css" href="/crnd_wsd/static/src/scss/blockui_spin.css"/>
         </xpath>
     </template>
 

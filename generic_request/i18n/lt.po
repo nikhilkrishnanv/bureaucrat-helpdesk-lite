@@ -6,8 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-22 16:09+0000\n"
+"PO-Revision-Date: 2021-06-22 16:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,8 +29,10 @@ msgstr ""
 #: model:res.groups,comment:generic_request.group_request_show_stat_on_kanban_views
 msgid ""
 "\n"
-"            If this group enabled, then users will see request statistics on kanban views\n"
-"            of request related models like: Request Type, Request Category, etc\n"
+"            If this group enabled, then users will see request statistics on "
+"kanban views\n"
+"            of request related models like: Request Type, Request Category, "
+"etc\n"
 "        "
 msgstr ""
 
@@ -35,7 +40,8 @@ msgstr ""
 #: model:res.groups,comment:generic_request.group_request_manager
 msgid ""
 "\n"
-"            Request manager have full control over requests, request types, etc...\n"
+"            Request manager have full control over requests, request types, "
+"etc...\n"
 "        "
 msgstr ""
 
@@ -127,8 +133,8 @@ msgstr ""
 msgid ""
 "<b>Note</b>: Setting the checkboxes will automatically install additional "
 "modules that provide selected functionality. Inactive checkbox means you "
-"don't have the required module in your system. You can download it from Odoo"
-" marketplace individually or as part of a bundle. Look at the"
+"don't have the required module in your system. You can download it from Odoo "
+"marketplace individually or as part of a bundle. Look at the"
 msgstr ""
 
 #. module: generic_request
@@ -176,31 +182,38 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid ""
-"<span class=\"field-icon fa fa-clock-o text-success oe_inline\" title=\"Deadline\" attrs=\"{'invisible': [('deadline_state', '!=', 'ok')]}\"/>\n"
-"                                    <span class=\"field-icon fa fa-clock-o text-warning oe_inline\" title=\"Deadline\" attrs=\"{'invisible': [('deadline_state', '!=', 'today')]}\"/>\n"
-"                                    <span class=\"field-icon fa fa-clock-o text-danger oe_inline\" title=\"Deadline\" attrs=\"{'invisible': [('deadline_state', '!=', 'overdue')]}\"/>\n"
-"                                    <span class=\"field-icon fa fa-clock-o oe_inline\" title=\"Deadline\" attrs=\"{'invisible': [('deadline_state', '!=', False)]}\"/>"
+"<span class=\"field-icon fa fa-clock-o text-success oe_inline\" title="
+"\"Deadline\" attrs=\"{'invisible': [('deadline_state', '!=', 'ok')]}\"/>\n"
+"                                    <span class=\"field-icon fa fa-clock-o "
+"text-warning oe_inline\" title=\"Deadline\" attrs=\"{'invisible': "
+"[('deadline_state', '!=', 'today')]}\"/>\n"
+"                                    <span class=\"field-icon fa fa-clock-o "
+"text-danger oe_inline\" title=\"Deadline\" attrs=\"{'invisible': "
+"[('deadline_state', '!=', 'overdue')]}\"/>\n"
+"                                    <span class=\"field-icon fa fa-clock-o "
+"oe_inline\" title=\"Deadline\" attrs=\"{'invisible': [('deadline_state', '!"
+"=', False)]}\"/>"
 msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid ""
-"<span class=\"field-icon fa fa-hashtag oe_inline\" title=\"Type\" aria-"
-"label=\"Type\"/>"
+"<span class=\"field-icon fa fa-hashtag oe_inline\" title=\"Type\" aria-label="
+"\"Type\"/>"
 msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid ""
-"<span class=\"field-icon fa fa-hourglass-end oe_inline\" title=\"Tracked "
-"time\"/>"
+"<span class=\"field-icon fa fa-hourglass-end oe_inline\" title=\"Tracked time"
+"\"/>"
 msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid ""
-"<span class=\"field-icon fa fa-square oe_inline\" title=\"Kind\" aria-"
-"label=\"Kind\"/>"
+"<span class=\"field-icon fa fa-square oe_inline\" title=\"Kind\" aria-label="
+"\"Kind\"/>"
 msgstr ""
 
 #. module: generic_request
@@ -715,15 +728,16 @@ msgstr ""
 #: code:addons/generic_request/models/request_request.py:0
 #, python-format
 msgid ""
-"Cannot create request of type '%(type_name)s': This type have no start stage"
-" defined!"
+"Cannot create request of type '%(type_name)s': This type have no start stage "
+"defined!"
 msgstr ""
 
 #. module: generic_request
 #: code:addons/generic_request/models/request_stage.py:0
 #, python-format
 msgid ""
-"Cannot delete stage %(stage_name)s because it is referenced from following routes:\n"
+"Cannot delete stage %(stage_name)s because it is referenced from following "
+"routes:\n"
 "%(routes)s"
 msgstr ""
 
@@ -1362,8 +1376,7 @@ msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
-msgid ""
-"Easily launch web-conference / web meeting related to request / ticket."
+msgid "Easily launch web-conference / web meeting related to request / ticket."
 msgstr ""
 
 #. module: generic_request
@@ -1550,8 +1563,6 @@ msgstr ""
 
 #. module: generic_request
 #: code:addons/generic_request/constants.py:0
-#: code:addons/generic_request/constants.py:0
-#: code:addons/generic_request/constants.py:0
 #: model:generic.tag,name:generic_request.tag_priority_high
 #: model:generic.tag,name:generic_request.tag_severity_high
 #: model:ir.model.fields.selection,name:generic_request.selection__request_event__new_impact__3
@@ -1580,7 +1591,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid ""
 "Hours\n"
-"                                    <span class=\"request-timesheet-splitter\" attrs=\"{'invisible': [('timesheet_planned_amount', '!=', 0)]}\"/>"
+"                                    <span class=\"request-timesheet-splitter"
+"\" attrs=\"{'invisible': [('timesheet_planned_amount', '!=', 0)]}\"/>"
 msgstr ""
 
 #. module: generic_request
@@ -1647,15 +1659,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
 "If enabled then users will see request statistics on kanban views\n"
-"                                    of request related models like: Request Type, Request Category, etc"
+"                                    of request related models like: Request "
+"Type, Request Category, etc"
 msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_res_company__request_mail_create_partner_from_email
 #: model:ir.model.fields,help:generic_request.field_res_config_settings__request_mail_create_partner_from_email
 msgid ""
-"If set to True, then if request came from email that has no related partner,"
-" then partner will be created automatically."
+"If set to True, then if request came from email that has no related partner, "
+"then partner will be created automatically."
 msgstr ""
 
 #. module: generic_request
@@ -1911,8 +1924,6 @@ msgstr ""
 
 #. module: generic_request
 #: code:addons/generic_request/constants.py:0
-#: code:addons/generic_request/constants.py:0
-#: code:addons/generic_request/constants.py:0
 #: model:generic.tag,name:generic_request.tag_priority_low
 #: model:generic.tag,name:generic_request.tag_severity_low
 #: model:ir.model.fields.selection,name:generic_request.selection__request_event__new_impact__1
@@ -1966,8 +1977,6 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: generic_request
-#: code:addons/generic_request/constants.py:0
-#: code:addons/generic_request/constants.py:0
 #: code:addons/generic_request/constants.py:0
 #: model:generic.tag,name:generic_request.tag_priority_medium
 #: model:generic.tag,name:generic_request.tag_severity_medium
@@ -2046,7 +2055,6 @@ msgstr ""
 
 #. module: generic_request
 #. openerp-web
-#: code:addons/generic_request/static/src/js/field_request_html.js:0
 #: code:addons/generic_request/static/src/js/field_request_html.js:0
 #, python-format
 msgid "More"
@@ -2433,8 +2441,6 @@ msgstr ""
 
 #. module: generic_request
 #: code:addons/generic_request/constants.py:0
-#: code:addons/generic_request/constants.py:0
-#: code:addons/generic_request/constants.py:0
 #: model:ir.model.fields.selection,name:generic_request.selection__request_event__new_impact__0
 #: model:ir.model.fields.selection,name:generic_request.selection__request_event__new_priority__0
 #: model:ir.model.fields.selection,name:generic_request.selection__request_event__new_urgency__0
@@ -2815,8 +2821,10 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
-"Represents incident management system for logging, recording, tracking, addressing, handling and archiving issues that occur in daily routine.\n"
-"                                    Also provides website user interface for Service Desk."
+"Represents incident management system for logging, recording, tracking, "
+"addressing, handling and archiving issues that occur in daily routine.\n"
+"                                    Also provides website user interface for "
+"Service Desk."
 msgstr ""
 
 #. module: generic_request
@@ -3151,8 +3159,7 @@ msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_request__timesheet_progress
-msgid ""
-"Request progress, calculated as the ratio of time spent to planned time"
+msgid "Request progress, calculated as the ratio of time spent to planned time"
 msgstr ""
 
 #. module: generic_request
@@ -3540,8 +3547,8 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
-"Show request's Global CC as suggested recipient when sending new message via"
-" chatter."
+"Show request's Global CC as suggested recipient when sending new message via "
+"chatter."
 msgstr ""
 
 #. module: generic_request
@@ -3771,8 +3778,8 @@ msgstr ""
 #: model:ir.model.fields,help:generic_request.field_request_type__start_stage_id
 msgid ""
 "The initial stage for new requests of this type. To change, on the Stages "
-"page, click the crossed arrows icon and drag the desired stage to the top of"
-" the list."
+"page, click the crossed arrows icon and drag the desired stage to the top of "
+"the list."
 msgstr ""
 
 #. module: generic_request
@@ -4207,8 +4214,8 @@ msgstr ""
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
-"When request created from incoming email, and author of email is not present"
-" in odoo's contacts database, then create new contact (partner) for this "
+"When request created from incoming email, and author of email is not present "
+"in odoo's contacts database, then create new contact (partner) for this "
 "email address."
 msgstr ""
 

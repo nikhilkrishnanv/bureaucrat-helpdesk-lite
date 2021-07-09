@@ -17,13 +17,26 @@ class RequestWizardAssign(models.TransientModel):
         readonly=True, store=False)
     comment = fields.Text()
 
+    def _prepare_assign(self):
+        """ Prepare assign data
+
+            This method have to prepare dict with data to be written to request
+        """
+        self.ensure_one()
+        return {
+            'user_id': self.user_id.id,
+        }
+
+    def _do_assign(self):
+        self.ensure_one()
+        self.request_ids.with_context(
+            assign_comment=self.comment
+        ).write(self._prepare_assign())
+
     def do_assign(self):
-        for rec in self:
-            rec.request_ids.ensure_can_assign()
-            rec.request_ids.with_context(
-                assign_comment=rec.comment).write({
-                    'user_id': rec.user_id.id,
-                })
-            if rec.comment:
-                for request in rec.request_ids:
-                    request.message_post(body=rec.comment)
+        self.ensure_one()
+        self.request_ids.ensure_can_assign()
+        self._do_assign()
+        if self.comment:
+            for request in self.request_ids:
+                request.message_post(body=self.comment)

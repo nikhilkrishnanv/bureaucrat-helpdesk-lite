@@ -41,6 +41,13 @@ class RequestCreationTemplate(models.Model):
         return data
 
     def do_create_request(self, values):
+        """
+        Do actual creation of request based on this template.
+
+        :param dict values: request values used to create request.
+                            these value could overwrite template's defaults.
+        :return: request.request recordset with created request.
+        """
         data = self.prepare_request_data(values)
         request = self.env['request.request'].create(data)
         return request

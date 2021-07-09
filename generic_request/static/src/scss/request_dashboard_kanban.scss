@@ -1,15 +1,3 @@
-@odoo-horizontal-padding: 16px;
-@odoo-main-text-color: #4c4c4c;
-
-.rd_button(@color) {
-    color: white;
-    background-color: @color;
-
-    &:hover {
-        background-color: darken(@color, 10%);
-    }
-}
-
 .o_request_dashboard_kanban {
     padding: 0 !important;
 
@@ -65,18 +53,28 @@
             }
         }
 
-        .o_request_dashboard_kanban_box:nth-last-child(1) {
-            .rd_button(grey);
+        .o_request_dashboard_kanban_box:nth-child(1) {
+            color: white;
+            background-color: $o-community-color;
         }
 
-        .o_request_dashboard_kanban_box:nth-child(1) {
-            .rd_button(@odoo-brand-optional);
+        .o_request_dashboard_kanban_box:nth-last-child(1) {
+            color: white;
+            background-color: grey;
+        }
+
+        .o_request_dashboard_kanban_box:nth-child(1):hover {
+            background-color: darken($o-community-color, 10%);
+        }
+
+        .o_request_dashboard_kanban_box:nth-last-child(1):hover {
+            background-color: darken(grey, 10%);
         }
     }
 
     .o_request_dashboard_kanban_main {
         flex: 0 0 auto;
-        padding: @odoo-horizontal-padding / 2;
+        padding: $o-horizontal-padding / 2;
         width: 85%;
 
         .o_request_dashboard_content {
@@ -90,10 +88,10 @@
                 a {
                     display: inline-flex;
                     margin: 2px 4px 0 0;
-                    color: @odoo-main-text-color;
+                    color: $o-main-text-color;
 
                     &:hover {
-                        color: @odoo-brand-optional;
+                        color: $o-community-color;
                     }
 
                     span {
@@ -119,10 +117,10 @@
                         width: 100%;
                         height: 100%;
                         padding: 0.75rem;
-                        color: @odoo-main-text-color;
+                        color: $o-main-text-color;
 
                         &:hover {
-                            color: @odoo-brand-optional;
+                            color: $o-community-color;
                             background-color: lightgrey;
                         }
                     }

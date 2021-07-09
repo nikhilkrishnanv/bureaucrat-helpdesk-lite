@@ -5,9 +5,9 @@
             <script type="text/javascript" src="/generic_request/static/src/js/field_request_html.js"></script>
             <script type="text/javascript" src='/generic_request/static/src/js/request_tag_widget.js'/>
             <link rel="stylesheet"
-                  type="text/less"
-                  href='/generic_request/static/src/less/request_kanban_tags.less'/>
-            <link rel='stylesheet' type="text/less" href='/generic_request/static/src/less/request_timesheet.less'/>
+                  type="text/scss"
+                  href='/generic_request/static/src/scss/request_kanban_tags.scss'/>
+            <link rel='stylesheet' type="text/scss" href='/generic_request/static/src/scss/request_timesheet.scss'/>
         </xpath>
     </template>
 </odoo>

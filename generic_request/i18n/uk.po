@@ -20,32 +20,6 @@ msgstr ""
 "X-Generator: Weblate 3.10.3\n"
 
 #. module: generic_request
-#: model:request.category,description:generic_request.request_category_demo_general
-msgid ""
-"\n"
-"             General requests.\n"
-"             If have no found right category for your request, use this "
-"one.\n"
-"        "
-msgstr ""
-"\n"
-"             Загальні запити.\n"
-"             Якщо не знайшли категорію для вашго запиту, то використовуйте "
-"цю категорію.\n"
-"        "
-
-#. module: generic_request
-#: model:request.category,description:generic_request.request_category_demo
-msgid ""
-"\n"
-"             This is category for demo requsets.\n"
-"        "
-msgstr ""
-"\n"
-"             Це категорія для демо-запитів.\n"
-"        "
-
-#. module: generic_request
 #: model:res.groups,comment:generic_request.group_request_user_implicit_ro
 msgid ""
 "\n"
@@ -204,6 +178,26 @@ msgstr ""
 "які забезпечують обрану функціональність. Неактивний прапорець означає, що у "
 "вашій системі немає необхідного модуля. Ви можете завантажити його з Odoo "
 "market окремо або у складі пакета. Дивіться"
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "<i class=\"fa fa-user mr4\" title=\"Assignee\"/>"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "<i class=\"fa fa-user mr4\" title=\"Closed by user\"/>"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "<i class=\"fa fa-user mr4\" title=\"Created by user\"/>"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "<i class=\"fa fa-user mr4\" title=\"Moved by user\"/>"
+msgstr ""
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
@@ -683,6 +677,16 @@ msgid "Author Name"
 msgstr "Ім'я автора"
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__author_related_request_closed_count
+msgid "Author Related Request Closed Count"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__author_related_request_open_count
+msgid "Author Related Request Open Count"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_request__author_id
 msgid "Author of this request"
 msgstr "Автор цього запиту"
@@ -740,13 +744,6 @@ msgstr "Автоматично видаляти події, старіші ні�
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_type__bg_color
 msgid "Backgroung Color"
 msgstr "Колір фону"
-
-#. module: generic_request
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,instruction_html:generic_request.request_type_sequence
-msgid "Below is example of list, that describes steps to solve request"
-msgstr "Нижче наведено приклад списку, що описує кроки для вирішення запиту"
 
 #. module: generic_request
 #: model:ir.model.fields.selection,name:generic_request.selection__request_request__kanban_state__blocked
@@ -888,16 +885,8 @@ msgid "Channel of request"
 msgstr "Категорія запиту"
 
 #. module: generic_request
-#: model_terms:request.request,note_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,note_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,note_html:generic_request.request_type_sequence
-msgid "Choose printer You want to get access for"
-msgstr "Оберіть принтер до якого ви хочете отримати доступ"
-
-#. module: generic_request
 #: code:addons/generic_request/models/request_type.py:0
 #: model:ir.actions.act_window,name:generic_request.action_request_wizard_close
-#: model:request.stage.route,name:generic_request.request_stage_route_type_sequence_sent_to_closed
 #: model_terms:ir.ui.view,arch_db:generic_request.request_wizard_close_form_view
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_stage_route_search
@@ -917,7 +906,6 @@ msgstr "Закрити як"
 #: model:ir.model.fields,field_description:generic_request.field_request_stage__closed
 #: model:ir.model.fields,field_description:generic_request.field_request_stage_route__close
 #: model:request.event.type,name:generic_request.request_event_type_closed
-#: model:request.stage,name:generic_request.request_stage_type_sequence_closed
 #: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
 #: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
@@ -1005,6 +993,16 @@ msgid "Closed requests"
 msgstr "Закриті запити"
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "Closed requests by same author"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "Closed requests by same partner"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__code
 #: model:ir.model.fields,field_description:generic_request.field_request_channel__code
 #: model:ir.model.fields,field_description:generic_request.field_request_event__event_code
@@ -1074,30 +1072,14 @@ msgstr "Налаштування"
 
 #. module: generic_request
 #: model:ir.ui.menu,name:generic_request.menu_configuration
-#: model:request.category,name:generic_request.request_category_demo_technical_configuration
 msgid "Configuration"
 msgstr "Налаштування"
-
-#. module: generic_request
-#: model:request.category,description:generic_request.request_category_demo_technical_configuration
-msgid "Configuration related requests"
-msgstr "Запити пов'язані з налаштуванням"
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid ""
 "Configure actions that will be automatically triggered on request events"
 msgstr "Налаштуйте дії, які будуть автоматично запускатись при подіях запиту"
-
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_simple_sent_confirmed
-msgid "Confirm"
-msgstr "Підтвердити"
-
-#. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_simple_confirmed
-msgid "Confirmed"
-msgstr "Підтверджено"
 
 #. module: generic_request
 #: model:ir.model,name:generic_request.model_res_partner
@@ -1347,22 +1329,6 @@ msgid "Defaults"
 msgstr "Значення за замовчуванням"
 
 #. module: generic_request
-#: model:request.category,name:generic_request.request_category_demo
-#: model:request.kind,website_filter_name:generic_request.request_kind_demo
-msgid "Demo"
-msgstr "Демо"
-
-#. module: generic_request
-#: model:request.kind,name:generic_request.request_kind_demo
-msgid "Demo Request"
-msgstr "Демонстраційний запит"
-
-#. module: generic_request
-#: model:request.kind,description:generic_request.request_kind_demo
-msgid "Demo requests"
-msgstr "Демонстраційні запити"
-
-#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_activity_form
 msgid "Describe this timesheet activity"
 msgstr "Опішіть цю діяльність"
@@ -1441,17 +1407,11 @@ msgid "Documents Related to Requests"
 msgstr "Документи, що пов'язані із запитом"
 
 #. module: generic_request
-#: model:request.stage,name:generic_request.request_type_with_complex_priority_done
-msgid "Done"
-msgstr "Зроблено"
-
-#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Download"
 msgstr "Завантажити"
 
 #. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_simple_draft
 #: model:request.stage.type,name:generic_request.request_stage_type_draft
 msgid "Draft"
 msgstr "Чорновик"
@@ -1582,11 +1542,6 @@ msgid "From"
 msgstr "Від"
 
 #. module: generic_request
-#: model:request.category,name:generic_request.request_category_demo_general
-msgid "General"
-msgstr "Загальні"
-
-#. module: generic_request
 #: model:res.groups,name:generic_request.group_request_manager_can_archive_request
 msgid "Generic Request (Allow archive)"
 msgstr ""
@@ -1619,21 +1574,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Global settings"
 msgstr "Глобальні налаштування"
-
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_access_sent_to_granted
-msgid "Grant"
-msgstr "Надати"
-
-#. module: generic_request
-#: model:request.type,name:generic_request.request_type_access
-msgid "Grant access"
-msgstr "Надання доступу"
-
-#. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_access_granted
-msgid "Granted"
-msgstr "Надано"
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_line_search
@@ -1694,28 +1634,6 @@ msgstr "Хелпдеск Про"
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Helpdesk Ultimate"
 msgstr "Хелпдеск Ультимейт"
-
-#. module: generic_request
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,instruction_html:generic_request.request_type_sequence
-msgid "Here is just example of instruction."
-msgstr "Це просто приклад інструкції"
-
-#. module: generic_request
-#: model:request.category,description:generic_request.request_category_demo_support
-msgid "Here is right place for support requests"
-msgstr "Це правильне місце для запитів підтримки"
-
-#. module: generic_request
-#: model_terms:request.type,default_request_text:generic_request.request_type_access
-msgid "Here must be default request text..."
-msgstr "Тут має бути текст запиту за замовчуванням..."
-
-#. module: generic_request
-#: model_terms:request.stage.route,default_response_text:generic_request.request_stage_route_type_access_sent_to_rejected
-msgid "Here must be default response text..."
-msgstr "Тут має бути текст відповіді за замовчуванням..."
 
 #. module: generic_request
 #: code:addons/generic_request/constants.py:0
@@ -1844,16 +1762,6 @@ msgstr ""
 "цього маршруту"
 
 #. module: generic_request
-#: model_terms:request.request,help_html:generic_request.request_request_type_access_demo_1
-#: model_terms:request.type,help_html:generic_request.request_type_access
-msgid ""
-"If you have some troubles with access (see access denied errors, etc)\n"
-"             then use this request type"
-msgstr ""
-"Якщо ви маєте якість проблеми з доступом (бачите помилки доступу, і т. п.)\n"
-"             тоді використовуйте цей тип запиту"
-
-#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__impact
 msgid "Impact"
 msgstr "Вплив"
@@ -1865,14 +1773,8 @@ msgstr "Вплив змінився"
 
 #. module: generic_request
 #: model:ir.model.fields.selection,name:generic_request.selection__request_request__kanban_state__normal
-#: model:request.stage,name:generic_request.request_type_with_complex_priority_in_progress
 msgid "In Progress"
 msgstr "В процесі"
-
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_type_with_complex_priority_in_progress_to_done
-msgid "In Progress to Done"
-msgstr ""
 
 #. module: generic_request
 #: model:ir.actions.act_window,name:generic_request.action_request_stage_incoming_routes
@@ -1949,11 +1851,6 @@ msgstr "Чи закритий запит на цьому етапі?"
 #, python-format
 msgid "It is not allowed to change request type"
 msgstr "Змінювати тип запиту заборонено"
-
-#. module: generic_request
-#: model:request.stage,description:generic_request.request_stage_type_sequence_new
-msgid "Just created request"
-msgstr "Щойно створений запит"
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__kanban_state
@@ -2262,6 +2159,11 @@ msgid "My"
 msgstr "Моя"
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_search
 msgid "My requests"
 msgstr "Мої запити"
@@ -2482,6 +2384,11 @@ msgid "Need Install Generic Request Survey"
 msgstr "Потрібно встановити Generic Request Survey"
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_team
+msgid "Need Install Generic Request Team"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__need_install_generic_request_web_conference
 #, fuzzy
 msgid "Need Install Generic Request Web Conference"
@@ -2495,9 +2402,6 @@ msgstr "Потрібно встановити Generic Request Parent"
 
 #. module: generic_request
 #: code:addons/generic_request/models/request_type.py:0
-#: model:request.stage,name:generic_request.request_stage_type_access_new
-#: model:request.stage,name:generic_request.request_stage_type_sequence_new
-#: model:request.stage,name:generic_request.request_type_with_complex_priority_new
 #: model_terms:ir.ui.view,arch_db:generic_request.request_category_view_dashboard
 #: model_terms:ir.ui.view,arch_db:generic_request.request_type_view_dashboard
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_channel_kanban
@@ -2595,11 +2499,6 @@ msgid "New User"
 msgstr "Новий користувач"
 
 #. module: generic_request
-#: model:request.stage.route,name:generic_request.request_type_with_complex_priority_new_to_in_progress
-msgid "New to In Progress"
-msgstr ""
-
-#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_request__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr "Дедлайн наступної дії"
@@ -2668,23 +2567,6 @@ msgstr "Примітка Html"
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
 msgid "Notifications"
 msgstr "Повідомлення"
-
-#. module: generic_request
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_simple_demo_1
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_simple_demo_2
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_simple_demo_3
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_simple_demo_email_no_author
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_simple_demo_long_text_1
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_simple_draft
-msgid ""
-"Now request is in <i>Draft</i> state.<br>\n"
-"            Please click 'Sent' stage on status bar (right-top corner)\n"
-"            to send it to our team."
-msgstr ""
-"На даний момент запит знаходиться в статусі <i>Чорновик</i>.<br>\n"
-"            Будь ласка, натисніть на етап 'Відправлено' у списку етапів "
-"(правий верхній кут)\n"
-"            щоб надіслати запит нашій команді."
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_category__message_needaction_counter
@@ -2815,6 +2697,16 @@ msgid "Open requests"
 msgstr "Відкриті запити"
 
 #. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "Open requests by same author"
+msgstr ""
+
+#. module: generic_request
+#: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
+msgid "Open requests by same partner"
+msgstr ""
+
+#. module: generic_request
 #: code:addons/generic_request/models/request_request.py:0
 #, python-format
 msgid "Operation change active is not allowed!"
@@ -2877,6 +2769,16 @@ msgid "Partner Changed"
 msgstr ""
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__partner_related_request_closed_count
+msgid "Partner Related Request Closed Count"
+msgstr ""
+
+#. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_request_request__partner_related_request_open_count
+msgid "Partner Related Request Open Count"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_request__partner_id
 msgid "Partner related to this request"
 msgstr "Партнер, пов'язаний з цим запитом"
@@ -2913,11 +2815,6 @@ msgstr "Платформа"
 #: model:ir.model.fields,field_description:generic_request.field_request_stage__previous_stage_ids
 msgid "Previous stages"
 msgstr "Попередні етапи"
-
-#. module: generic_request
-#: model:request.type,name:generic_request.request_type_sequence
-msgid "Printer Request"
-msgstr "Запит на принтер"
 
 #. module: generic_request
 #: model:generic.tag,category_name:generic_request.tag_priority_high
@@ -2967,18 +2864,6 @@ msgid "Reassigned"
 msgstr "Переназначено"
 
 #. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_access_sent_to_rejected
-#: model:request.stage.route,name:generic_request.request_stage_route_type_simple_sent_rejected
-msgid "Reject"
-msgstr "Відхилити"
-
-#. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_access_rejected
-#: model:request.stage,name:generic_request.request_stage_type_simple_rejected
-msgid "Rejected"
-msgstr "Відхилено"
-
-#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_wizard_assign__partner_id
 msgid "Related Partner"
 msgstr "Пов'язані партнери"
@@ -2997,11 +2882,6 @@ msgstr "Пов'язаний партнер..."
 #: model:ir.model.fields,help:generic_request.field_request_request__timesheet_remaining_amount
 msgid "Remaining time"
 msgstr "Час, що залишився"
-
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_simple_rejected_draft
-msgid "Reopen"
-msgstr "Перевідкрити"
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_reopen_as
@@ -3233,6 +3113,11 @@ msgid "Request Tags"
 msgstr "Теги запитів"
 
 #. module: generic_request
+#: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_team
+msgid "Request Team"
+msgstr ""
+
+#. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_creation_template__request_text
 #: model:ir.model.fields,field_description:generic_request.field_request_request__request_text
 msgid "Request Text"
@@ -3314,11 +3199,6 @@ msgid "Request Wizard: Stop Work"
 msgstr "Майстер запиту: Закрити"
 
 #. module: generic_request
-#: model:request.type,description:generic_request.request_type_sequence
-msgid "Request access to one of network printers"
-msgstr "Запит доступу до одного з мережевих принтерів"
-
-#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_type_form
 msgid "Request categories..."
 msgstr "Категорії запиту..."
@@ -3356,31 +3236,6 @@ msgstr "Запит створено!"
 #: model:ir.ui.menu,name:generic_request.menu_configuration_request_creation_template
 msgid "Request creation template"
 msgstr ""
-
-#. module: generic_request
-#: model:request.stage,description:generic_request.request_stage_type_sequence_closed
-msgid "Request is closed"
-msgstr "Запит закрито"
-
-#. module: generic_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_simple_confirmed
-msgid ""
-"Request is confirmed!\n"
-"            If you have any questions, then create new request."
-msgstr ""
-"Запит підтверджено!\n"
-"            Якщо маєте ще якість питання, створіть новий запит."
-
-#. module: generic_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_simple_rejected
-msgid ""
-"Request is rejected!\n"
-"            If you do not agree with this,\n"
-"            then move this request to draft stage."
-msgstr ""
-"Запит відхилено!\n"
-"            Якщо ви з цим не згодні,\n"
-"            то перемістіть це запит на етап 'Чернетка'"
 
 #. module: generic_request
 #: model:ir.model,name:generic_request.model_request_kind
@@ -3422,11 +3277,6 @@ msgstr "Запит перевідкрито"
 #: model:mail.message.subtype,description:generic_request.mt_request_reopened
 msgid "Request reopened!"
 msgstr "Запит перевідкрито!"
-
-#. module: generic_request
-#: model:request.stage,description:generic_request.request_stage_type_sequence_sent
-msgid "Request sent"
-msgstr "Запит відправлено"
 
 #. module: generic_request
 #: model:mail.message.subtype,name:generic_request.mt_request_stage_changed
@@ -3531,11 +3381,6 @@ msgid "Request was created by this user"
 msgstr "Цей користувач створив запит"
 
 #. module: generic_request
-#: model:request.type,name:generic_request.request_type_with_complex_priority
-msgid "Request with complex priority"
-msgstr "Запит із комплексним пріоритетом"
-
-#. module: generic_request
 #: model:ir.actions.act_window,name:generic_request.action_request_category_requests
 #: model:ir.actions.act_window,name:generic_request.action_request_type_requests
 #: model:ir.actions.act_window,name:generic_request.action_request_window
@@ -3570,16 +3415,6 @@ msgstr "Запити"
 #: model:ir.model.fields,field_description:generic_request.field_request_wizard_close__require_response
 msgid "Require Response"
 msgstr "Відповідь обов'язкова"
-
-#. module: generic_request
-#: model:request.category,name:generic_request.request_category_demo_resource
-msgid "Resource"
-msgstr "Ресурс"
-
-#. module: generic_request
-#: model:request.category,description:generic_request.request_category_demo_resource
-msgid "Resource related requests"
-msgstr "Запити пов'язані з ресурсами"
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_wizard_close__response_text
@@ -3657,26 +3492,9 @@ msgid "SLA Service"
 msgstr "Використовувати сервіси"
 
 #. module: generic_request
-#: model:request.category,name:generic_request.request_category_demo_technical_security
-msgid "Security"
-msgstr "Безпека"
-
-#. module: generic_request
-#: model:request.category,description:generic_request.request_category_demo_technical_security
-msgid "Security related requests"
-msgstr "Запити пов'язані з безпекою"
-
-#. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_stage__use_custom_colors
 msgid "Select colors from the palette manually"
 msgstr "Оберіть колір вручну на палітрі"
-
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_access_new_to_sent
-#: model:request.stage.route,name:generic_request.request_stage_route_type_sequence_new_to_sent
-#: model:request.stage.route,name:generic_request.request_stage_route_type_simple_draft_to_sent
-msgid "Send"
-msgstr "Відправити"
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_request_type__send_default_assigned_notification
@@ -3709,9 +3527,6 @@ msgid "Send surveys using automated actions"
 msgstr "Відправляти опитування за допомогою автоматичних дій"
 
 #. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_access_sent
-#: model:request.stage,name:generic_request.request_stage_type_sequence_sent
-#: model:request.stage,name:generic_request.request_stage_type_simple_sent
 #: model:request.stage.type,name:generic_request.request_stage_type_sent
 msgid "Sent"
 msgstr "Відправлено"
@@ -3864,11 +3679,6 @@ msgstr ""
 "перезавантажте сторінку."
 
 #. module: generic_request
-#: model:request.type,name:generic_request.request_type_simple
-msgid "Simple Request"
-msgstr "Простий запит"
-
-#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "Specify different SLA limit and warn times per service."
 msgstr ""
@@ -3991,27 +3801,6 @@ msgstr ""
 "Заплановано: майбутні дії."
 
 #. module: generic_request
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,instruction_html:generic_request.request_type_sequence
-msgid "Step 1"
-msgstr "Крок 1"
-
-#. module: generic_request
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,instruction_html:generic_request.request_type_sequence
-msgid "Step 2"
-msgstr "Крок 2"
-
-#. module: generic_request
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,instruction_html:generic_request.request_type_sequence
-msgid "Step N"
-msgstr "Крок N"
-
-#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_kanban
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_tree
@@ -4044,11 +3833,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__request_mail_suggest_global_cc
 msgid "Suggest request's global CC for mail recipients"
 msgstr ""
-
-#. module: generic_request
-#: model:request.category,name:generic_request.request_category_demo_support
-msgid "Support"
-msgstr "Підтримка"
 
 #. module: generic_request
 #: model:ir.model.fields,field_description:generic_request.field_res_config_settings__module_generic_request_survey
@@ -4094,7 +3878,6 @@ msgid "Team Assignments"
 msgstr "Командні призначення"
 
 #. module: generic_request
-#: model:request.category,name:generic_request.request_category_demo_technical
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_request_form
 msgid "Technical"
 msgstr "Технічні"
@@ -4103,11 +3886,6 @@ msgstr "Технічні"
 #: model:ir.model.fields,help:generic_request.field_request_request__original_message_id
 msgid "Technical field. ID of original message that started this request."
 msgstr ""
-
-#. module: generic_request
-#: model:request.category,description:generic_request.request_category_demo_technical
-msgid "Technical requests goes here"
-msgstr "Сюди мають приходити технічні запити"
 
 #. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_creation_template_view_form
@@ -4131,15 +3909,6 @@ msgid "The name of timesheet activity..."
 msgstr ""
 
 #. module: generic_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_simple_sent
-msgid ""
-"The request is sent and awaits a response\n"
-"            from a technical specialist."
-msgstr ""
-"Запит відправлено і він очікує на відповідь\n"
-"            технічного спеціаліста."
-
-#. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_request__email_cc
 msgid ""
 "These email addresses will be added to the CC field of all inbound and "
@@ -4148,59 +3917,10 @@ msgid ""
 msgstr ""
 
 #. module: generic_request
-#: model_terms:request.request,help_html:generic_request.demo_request_with_complex_priority
-#: model_terms:request.type,help_html:generic_request.request_type_with_complex_priority
-msgid ""
-"This is demo request type to demonstrate complex priority.\n"
-"            This priority is automatically computed from impact and Urgency."
-msgstr ""
-"Це демо-запит для демонстрації комлексного пріоритету.\n"
-"            Цей пріоритет автоматично обчислюється від впливу та "
-"терміновості."
-
-#. module: generic_request
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_sequence_new
-msgid ""
-"This is draft request. You can still edit it.\n"
-"             When you think it is finished, send it."
-msgstr ""
-"Це чорновик запиту. Ви можете його редагувати.\n"
-"             Після редагування надішліть запит."
-
-#. module: generic_request
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_1
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_2
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_3
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_email_no_author
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_long_text_1
-#: model_terms:request.type,help_html:generic_request.request_type_simple
-msgid "This is simple request type with simple routes:"
-msgstr "Це простий тип запиту із простими маршрутами:"
-
-#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_line_search
 #: model_terms:ir.ui.view,arch_db:generic_request.view_request_timesheet_report_search
 msgid "This month"
 msgstr "Цього місяця"
-
-#. module: generic_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_sequence_closed
-msgid "This request is closed"
-msgstr "Цей запит закрито"
-
-#. module: generic_request
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_sequence_sent
-msgid "This request is waiting to be processed."
-msgstr "Цей запит очікує на обробку."
-
-#. module: generic_request
-#: model_terms:request.request,help_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,help_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,help_html:generic_request.request_type_sequence
-msgid "This request type is used to request access to printer."
-msgstr "Цей тип запиту використовується для запиту доступу до принтера."
 
 #. module: generic_request
 #: code:addons/generic_request/models/request_stage_route.py:0
@@ -4523,11 +4243,9 @@ msgid "Use requests mail sources"
 msgstr "Використовувати запити поштових джерел"
 
 #. module: generic_request
-#: model_terms:request.category,help_html:generic_request.request_category_demo_resource
-#: model_terms:request.request,category_help_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,category_help_html:generic_request.request_request_type_sequence_printer_request
-msgid "Use this category for requests related to resources"
-msgstr "Використовуйте цю категорію для запитів що пов'язані із ресурсами"
+#: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
+msgid "Use teams and assign requests to teams."
+msgstr ""
 
 #. module: generic_request
 #: model:ir.model.fields,help:generic_request.field_request_type__sequence_id
@@ -4653,13 +4371,6 @@ msgid ""
 msgstr ""
 
 #. module: generic_request
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_demo_1
-#: model_terms:request.request,instruction_html:generic_request.request_request_type_sequence_printer_request
-#: model_terms:request.type,instruction_html:generic_request.request_type_sequence
-msgid "You can use here html, for formatting."
-msgstr "Ви можете використовувати тут html для форматування."
-
-#. module: generic_request
 #: code:addons/generic_request/models/request_request.py:0
 #, python-format
 msgid "You have been assigned to request %(request)s!"
@@ -4759,26 +4470,6 @@ msgid "[W] Week"
 msgstr ""
 
 #. module: generic_request
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_1
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_2
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_3
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_email_no_author
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_long_text_1
-#: model_terms:request.type,help_html:generic_request.request_type_simple
-msgid "draft -&gt; sent -&gt; confirmed"
-msgstr "чорновик -&gt; відправлено -&gt; підтверджено"
-
-#. module: generic_request
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_1
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_2
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_3
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_email_no_author
-#: model_terms:request.request,help_html:generic_request.request_request_type_simple_demo_long_text_1
-#: model_terms:request.type,help_html:generic_request.request_type_simple
-msgid "draft -&gt; sent -&gt; rejected"
-msgstr "чорновик -&gt; відправлено -&gt; відхилено"
-
-#. module: generic_request
 #: model_terms:ir.ui.view,arch_db:generic_request.generic_request_res_config_settings_view_form
 msgid "from Odoo Market."
 msgstr "з Odoo Market."
@@ -4808,78 +4499,219 @@ msgstr "з"
 msgid "to see which modules are included in each bundle."
 msgstr "щоб побачити, які модулі входять в кожен пакет"
 
-#. module: generic_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_non_ascii_sent
-msgid "Ваш запит відправлено на розгляд. Очукуйте на результат."
-msgstr ""
+#~ msgid ""
+#~ "\n"
+#~ "             General requests.\n"
+#~ "             If have no found right category for your request, use this "
+#~ "one.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "             Загальні запити.\n"
+#~ "             Якщо не знайшли категорію для вашго запиту, то "
+#~ "використовуйте цю категорію.\n"
+#~ "        "
 
-#. module: generic_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_non_ascii_rejected
-msgid ""
-"Ваш запит відхилено :(\n"
-"            Ви можете спробувати відправити новий запит."
-msgstr ""
+#~ msgid ""
+#~ "\n"
+#~ "             This is category for demo requsets.\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "             Це категорія для демо-запитів.\n"
+#~ "        "
 
-#. module: generic_request
-#: model_terms:request.request,help_html:generic_request.request_request_type_non_ascii_demo_1
-#: model_terms:request.type,help_html:generic_request.request_type_non_ascii
-msgid ""
-"Використовуючи даний тип запиту, ви можете замовити встановлення\n"
-"             на ваш комп'ютер вашої улюбленої операційної системи."
-msgstr ""
+#~ msgid "Below is example of list, that describes steps to solve request"
+#~ msgstr "Нижче наведено приклад списку, що описує кроки для вирішення запиту"
 
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_non_ascii_draft_to_sent
-msgid "Відправити"
-msgstr ""
+#~ msgid "Choose printer You want to get access for"
+#~ msgstr "Оберіть принтер до якого ви хочете отримати доступ"
 
-#. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_non_ascii_sent
-msgid "Відправлено"
-msgstr ""
+#~ msgid "Configuration related requests"
+#~ msgstr "Запити пов'язані з налаштуванням"
 
-#. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_non_ascii_rejected
-msgid "Відхилено"
-msgstr ""
+#~ msgid "Confirm"
+#~ msgstr "Підтвердити"
 
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_non_ascii_sent_rejected
-msgid "Відхилити"
-msgstr ""
+#~ msgid "Confirmed"
+#~ msgstr "Підтверджено"
 
-#. module: generic_request
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_non_ascii_confirmed
-msgid "Вітаємо! Ваш запит підтверджено."
-msgstr ""
+#~ msgid "Demo"
+#~ msgstr "Демо"
 
-#. module: generic_request
-#: model:request.type,name:generic_request.request_type_non_ascii
-msgid "Запит на встановлення ОС"
-msgstr ""
+#~ msgid "Demo Request"
+#~ msgstr "Демонстраційний запит"
 
-#. module: generic_request
-#: model_terms:request.request,stage_help_html:generic_request.request_request_type_non_ascii_demo_1
-#: model_terms:request.stage,help_html:generic_request.request_stage_type_non_ascii_draft
-msgid ""
-"Не забудьте натиснути кнопку \"Відправлено\" щоб відправити ваш запит\n"
-"            на розгляд."
-msgstr ""
+#~ msgid "Demo requests"
+#~ msgstr "Демонстраційні запити"
 
-#. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_non_ascii_confirmed
-msgid "Підтверджено"
-msgstr ""
+#~ msgid "Done"
+#~ msgstr "Зроблено"
 
-#. module: generic_request
-#: model:request.stage.route,name:generic_request.request_stage_route_type_non_ascii_sent_confirmed
-msgid "Підтвердити"
-msgstr ""
+#~ msgid "General"
+#~ msgstr "Загальні"
 
-#. module: generic_request
-#: model:request.stage,name:generic_request.request_stage_type_non_ascii_draft
-msgid "Чорновик"
-msgstr ""
+#~ msgid "Grant"
+#~ msgstr "Надати"
+
+#~ msgid "Grant access"
+#~ msgstr "Надання доступу"
+
+#~ msgid "Granted"
+#~ msgstr "Надано"
+
+#~ msgid "Here is just example of instruction."
+#~ msgstr "Це просто приклад інструкції"
+
+#~ msgid "Here is right place for support requests"
+#~ msgstr "Це правильне місце для запитів підтримки"
+
+#~ msgid "Here must be default request text..."
+#~ msgstr "Тут має бути текст запиту за замовчуванням..."
+
+#~ msgid "Here must be default response text..."
+#~ msgstr "Тут має бути текст відповіді за замовчуванням..."
+
+#~ msgid ""
+#~ "If you have some troubles with access (see access denied errors, etc)\n"
+#~ "             then use this request type"
+#~ msgstr ""
+#~ "Якщо ви маєте якість проблеми з доступом (бачите помилки доступу, і т. "
+#~ "п.)\n"
+#~ "             тоді використовуйте цей тип запиту"
+
+#~ msgid "Just created request"
+#~ msgstr "Щойно створений запит"
+
+#~ msgid ""
+#~ "Now request is in <i>Draft</i> state.<br>\n"
+#~ "            Please click 'Sent' stage on status bar (right-top corner)\n"
+#~ "            to send it to our team."
+#~ msgstr ""
+#~ "На даний момент запит знаходиться в статусі <i>Чорновик</i>.<br>\n"
+#~ "            Будь ласка, натисніть на етап 'Відправлено' у списку етапів "
+#~ "(правий верхній кут)\n"
+#~ "            щоб надіслати запит нашій команді."
+
+#~ msgid "Printer Request"
+#~ msgstr "Запит на принтер"
+
+#~ msgid "Reject"
+#~ msgstr "Відхилити"
+
+#~ msgid "Rejected"
+#~ msgstr "Відхилено"
+
+#~ msgid "Reopen"
+#~ msgstr "Перевідкрити"
+
+#~ msgid "Request access to one of network printers"
+#~ msgstr "Запит доступу до одного з мережевих принтерів"
+
+#~ msgid "Request is closed"
+#~ msgstr "Запит закрито"
+
+#~ msgid ""
+#~ "Request is confirmed!\n"
+#~ "            If you have any questions, then create new request."
+#~ msgstr ""
+#~ "Запит підтверджено!\n"
+#~ "            Якщо маєте ще якість питання, створіть новий запит."
+
+#~ msgid ""
+#~ "Request is rejected!\n"
+#~ "            If you do not agree with this,\n"
+#~ "            then move this request to draft stage."
+#~ msgstr ""
+#~ "Запит відхилено!\n"
+#~ "            Якщо ви з цим не згодні,\n"
+#~ "            то перемістіть це запит на етап 'Чернетка'"
+
+#~ msgid "Request sent"
+#~ msgstr "Запит відправлено"
+
+#~ msgid "Request with complex priority"
+#~ msgstr "Запит із комплексним пріоритетом"
+
+#~ msgid "Resource"
+#~ msgstr "Ресурс"
+
+#~ msgid "Resource related requests"
+#~ msgstr "Запити пов'язані з ресурсами"
+
+#~ msgid "Security"
+#~ msgstr "Безпека"
+
+#~ msgid "Security related requests"
+#~ msgstr "Запити пов'язані з безпекою"
+
+#~ msgid "Send"
+#~ msgstr "Відправити"
+
+#~ msgid "Simple Request"
+#~ msgstr "Простий запит"
+
+#~ msgid "Step 1"
+#~ msgstr "Крок 1"
+
+#~ msgid "Step 2"
+#~ msgstr "Крок 2"
+
+#~ msgid "Step N"
+#~ msgstr "Крок N"
+
+#~ msgid "Support"
+#~ msgstr "Підтримка"
+
+#~ msgid "Technical requests goes here"
+#~ msgstr "Сюди мають приходити технічні запити"
+
+#~ msgid ""
+#~ "The request is sent and awaits a response\n"
+#~ "            from a technical specialist."
+#~ msgstr ""
+#~ "Запит відправлено і він очікує на відповідь\n"
+#~ "            технічного спеціаліста."
+
+#~ msgid ""
+#~ "This is demo request type to demonstrate complex priority.\n"
+#~ "            This priority is automatically computed from impact and "
+#~ "Urgency."
+#~ msgstr ""
+#~ "Це демо-запит для демонстрації комлексного пріоритету.\n"
+#~ "            Цей пріоритет автоматично обчислюється від впливу та "
+#~ "терміновості."
+
+#~ msgid ""
+#~ "This is draft request. You can still edit it.\n"
+#~ "             When you think it is finished, send it."
+#~ msgstr ""
+#~ "Це чорновик запиту. Ви можете його редагувати.\n"
+#~ "             Після редагування надішліть запит."
+
+#~ msgid "This is simple request type with simple routes:"
+#~ msgstr "Це простий тип запиту із простими маршрутами:"
+
+#~ msgid "This request is closed"
+#~ msgstr "Цей запит закрито"
+
+#~ msgid "This request is waiting to be processed."
+#~ msgstr "Цей запит очікує на обробку."
+
+#~ msgid "This request type is used to request access to printer."
+#~ msgstr "Цей тип запиту використовується для запиту доступу до принтера."
+
+#~ msgid "Use this category for requests related to resources"
+#~ msgstr "Використовуйте цю категорію для запитів що пов'язані із ресурсами"
+
+#~ msgid "You can use here html, for formatting."
+#~ msgstr "Ви можете використовувати тут html для форматування."
+
+#~ msgid "draft -&gt; sent -&gt; confirmed"
+#~ msgstr "чорновик -&gt; відправлено -&gt; підтверджено"
+
+#~ msgid "draft -&gt; sent -&gt; rejected"
+#~ msgstr "чорновик -&gt; відправлено -&gt; відхилено"
 
 #~ msgid ""
 #~ "Cannot create request of type '%s': This type have no start stage defined!"
