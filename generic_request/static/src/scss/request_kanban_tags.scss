@@ -1,6 +1,6 @@
 div.request_kanban_tags {
     height: 9px;
-    margin-top: -1px;
+    margin-top: $o-horizontal-padding;
     margin-left: -8px;
 
     > div.o_kanban_tags > span.o_tag {

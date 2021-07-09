@@ -4,6 +4,9 @@ from odoo.exceptions import UserError, AccessError, ValidationError
 
 class WSDControllerMixin(http.Controller):
     def _id_to_record(self, model, record_id, no_raise=False):
+        """ Get record by it's id.
+            Optionally, do not raise error if record not found.
+        """
         safe_errors = (
             UserError, AccessError, ValidationError, TypeError, ValueError
         )

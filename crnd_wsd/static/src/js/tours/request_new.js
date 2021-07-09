@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 odoo.define('crnd_wsd.tour_request_new', function (require) {
     'use strict';
 
@@ -14,7 +13,7 @@ odoo.define('crnd_wsd.tour_request_new', function (require) {
         },
         {
             content: "Select request category SaAS / Support",
-            trigger: "h4:has(span:containsExact('SaAS / Support'))" +
+            trigger: "h4:has(label:containsExact('SaAS / Support'))" +
                 " input[name='category_id']",
         },
         {
@@ -32,7 +31,7 @@ odoo.define('crnd_wsd.tour_request_new', function (require) {
         },
         {
             content: "Select request type Generic Question",
-            trigger: "h4:has(span:containsExact('Generic Question'))" +
+            trigger: "h4:has(label:containsExact('Generic Question'))" +
                 " input[name='type_id']",
         },
         {
