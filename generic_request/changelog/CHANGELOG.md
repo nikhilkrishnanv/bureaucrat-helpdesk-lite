@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 1.120.0
+
+Show open/closed requests stat for request's partner and author
+
+
 ## Version 1.114.0
 
 - Add new request events (Request Archived / Request Unarchived).
