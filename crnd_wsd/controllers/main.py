@@ -330,8 +330,8 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
         return request.render(
             "crnd_wsd.wsd_requests_new_select_category", values)
 
-    def _request_new_get_public_types(self, type_id=None, category_id=None,
-                                      **kwargs):
+    def _request_new_get_public_types_domain(self, type_id=None,
+                                             category_id=None, **kwargs):
         domain = []
         if not request.env.user.has_group(GROUP_USER_ADVANCED):
             domain += [('website_published', '=', True)]
@@ -344,6 +344,12 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
         domain += [
             '|', ('website_ids', '=', False),
             ('website_ids', 'in', request.website.id)]
+        return domain
+
+    def _request_new_get_public_types(self, type_id=None, category_id=None,
+                                      **kwargs):
+        domain = self._request_new_get_public_types_domain(
+            type_id=type_id, category_id=category_id, **kwargs)
 
         return request.env['request.type'].search(domain)
 

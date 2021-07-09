@@ -4,10 +4,9 @@
               inherit_id="web.assets_backend"
               name="generic_request_kanban_css_assets_backend">
         <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/less" href='/generic_request/static/src/less/request_variables.less'/>
-            <link rel="stylesheet" type="text/less" href='/generic_request/static/src/less/request_form.less'/>
-            <link rel="stylesheet" type="text/less" href='/generic_request/static/src/less/request_kanban.less'/>
-            <link rel="stylesheet" type="text/less" href='/generic_request/static/src/less/request_dashboard_kanban.less'/>
+            <link rel="stylesheet" type="text/scss" href='/generic_request/static/src/scss/request_form.scss'/>
+            <link rel="stylesheet" type="text/scss" href='/generic_request/static/src/scss/request_kanban.scss'/>
+            <link rel="stylesheet" type="text/scss" href='/generic_request/static/src/scss/request_dashboard_kanban.scss'/>
         </xpath>
     </template>
 </odoo>
