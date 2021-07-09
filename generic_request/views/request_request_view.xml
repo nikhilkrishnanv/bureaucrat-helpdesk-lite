@@ -191,13 +191,66 @@
                             </div>
                             <group name="group_author" class="mb0">
                                 <group class="mb0 mt0">
-                                   <field name="author_id" placeholder="Author..."
-                                          attrs="{'readonly': [('can_change_author', '=', False)]}"/>
-                                   <field name="author_name"
-                                          attrs="{'invisible': ['|', ('author_id', '!=', False), ('author_name', '=', False)]}"/>
+                                    <label for="author_id"/>
+                                    <div name="div_author" class="request-partner-author-field o_row">
+                                        <field name="author_id"
+                                               placeholder="Author..."
+                                               attrs="{'readonly': [('can_change_author', '=', False)]}"/>
+                                        <span name="span_request_author_stat">
+                                            <button name="action_show_related_author_requests_opened"
+                                                    type="object"
+                                                    class="btn btn-sm btn-secondary"
+                                                    title="Open requests by same author"
+                                                    attrs="{'invisible': ['|', ('author_id', '=', False), ('author_related_request_open_count', '!=', 0)]}">
+                                                <field name="author_related_request_open_count"/>
+                                            </button>
+                                            <button name="action_show_related_author_requests_opened"
+                                                    type="object"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    title="Open requests by same author"
+                                                    attrs="{'invisible': ['|', ('author_id', '=', False), ('author_related_request_open_count', '=', 0)]}">
+                                                <field name="author_related_request_open_count"/>
+                                            </button>
+                                            <button name="action_show_related_author_requests_closed"
+                                                    type="object"
+                                                    class="btn btn-sm btn-secondary btn-outline-dark ml4"
+                                                    title="Closed requests by same author"
+                                                    attrs="{'invisible': [('author_id', '=', False)]}">
+                                                <field name="author_related_request_closed_count"/>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    <field name="author_name"
+                                           attrs="{'invisible': ['|', ('author_id', '!=', False), ('author_name', '=', False)]}"/>
                                 </group>
-                                <group class="mb0 mt0">
-                                   <field name="partner_id" placeholder="Related partner..."/>
+                                <group name="group_partner" class="mb0 mt0">
+                                    <label for="partner_id"/>
+                                    <div name="div_partner" class="request-partner-author-field o_row">
+                                        <field name="partner_id" placeholder="Related partner..."/>
+                                        <span name="span_request_partner_stat">
+                                            <button name="action_show_related_partner_requests_opened"
+                                                    type="object"
+                                                    class="btn btn-sm btn-secondary"
+                                                    title="Open requests by same partner"
+                                                    attrs="{'invisible': ['|', ('partner_id', '=', False), ('partner_related_request_open_count', '!=', 0)]}">
+                                                <field name="partner_related_request_open_count"/>
+                                            </button>
+                                            <button name="action_show_related_partner_requests_opened"
+                                                    type="object"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    title="Open requests by same partner"
+                                                    attrs="{'invisible': ['|', ('partner_id', '=', False), ('partner_related_request_open_count', '=', 0)]}">
+                                                <field name="partner_related_request_open_count"/>
+                                            </button>
+                                            <button name="action_show_related_partner_requests_closed"
+                                                    type="object"
+                                                    class="btn btn-sm btn-secondary btn-outline-dark ml4"
+                                                    title="Closed requests by same partner"
+                                                    attrs="{'invisible': [('partner_id', '=', False)]}">
+                                                <field name="partner_related_request_closed_count"/>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </group>
                             </group>
                             <div class="request-separator request-separator-request-text mb8" name="request_text_separator">
@@ -288,19 +341,35 @@
                             </group>
                         </page>
                     </notebook>
-                    <div class="row mt8">
-                        <div class="col-md-3">
+                    <div class="row mt8" name="request_user_info_footer">
+                        <div class="col-md-3"
+                             name="request_footer__creator">
                             <div><label for="date_created" string="Created"/></div>
-                            <div><field name="date_created"/></div>
-                            <div><field name="created_by_id"/></div>
+                            <div>
+                                <i class="fa fa-calendar mr4"/>
+                                <field name="date_created"/>
+                            </div>
+                            <div>
+                                <i class="fa fa-user mr4"
+                                   title="Created by user"/>
+                                <field name="created_by_id"/>
+                            </div>
                         </div>
                         <div class="col-md-3"
+                             name="request_footer__moved_by"
                              attrs="{'invisible': [('date_moved', '=', False)]}">
                             <div><label for="date_moved" string="Moved"/></div>
-                            <div><field name="date_moved"/></div>
-                            <div><field name="moved_by_id"/></div>
+                            <div>
+                                <i class="fa fa-calendar mr4"/>
+                                <field name="date_moved"/>
+                            </div>
+                            <div>
+                                <i class="fa fa-user mr4"
+                                   title="Moved by user"/>
+                                <field name="moved_by_id"/></div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3"
+                             name="request_footer__assigned">
                             <div>
                                 <span attrs="{'invisible': [('user_id', '=', False)]}">
                                     <label for="date_assigned" string="Assigned"/>
@@ -341,16 +410,28 @@
                                         class="oe_link"
                                         style="padding: 0px 0px;"/>
                             </div>
-                            <div><field name="date_assigned"/></div>
-                            <div><field name="user_id"
-                                        attrs="{'invisible': [('user_id', '=', False)],
-                                                'readonly': ['|', ('closed', '=', True), ('can_change_assignee', '=', False)]}"/></div>
+                            <div>
+                                <i class="fa fa-calendar mr4" attrs="{'invisible': [('date_assigned', '=', False)]}"/>
+                                <field name="date_assigned"/>
+                            </div>
+                            <div attrs="{'invisible': [('user_id', '=', False)]}">
+                                 <i class="fa fa-user mr4"
+                                    title="Assignee"/>
+                                 <field name="user_id"
+                                        readonly="1"/></div>
                         </div>
                         <div class="col-md-3"
+                             name="request_footer__closed"
                              attrs="{'invisible': [('date_closed', '=', False)]}">
                             <div><label for="date_closed" string="Closed"/></div>
-                            <div><field name="date_closed"/></div>
-                            <div><field name="closed_by_id"/></div>
+                            <div>
+                                <i class="fa fa-calendar mr4"/>
+                                <field name="date_closed"/>
+                            </div>
+                            <div>
+                                <i class="fa fa-user mr4"
+                                   title="Closed by user"/>
+                                <field name="closed_by_id"/></div>
                         </div>
                     </div>
                 </sheet>
@@ -448,8 +529,11 @@
 
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click o_request_kanban" t-att-style="record.closed.raw_value ? 'background-color:rgba(242,242,242,1)' : 'rgba(255,255,255,1)'">
-                            <div t-attf-style="background-color: {{record.type_color.raw_value}}" name="header" class="o_request_kanban_header">
+                        <div class="oe_kanban_global_click o_request_kanban"
+                             t-att-style="record.closed.raw_value ? 'background-color:rgba(242,242,242,1)' : 'rgba(255,255,255,1)'">
+                            <div t-attf-style="background-color: {{record.type_color.raw_value}}"
+                                 name="header"
+                                 class="o_request_kanban_header">
                                 <div name="title_box" class="o_header_title_box">
                                     <div name="title" class="o_header_title o_header_box_item">
                                         <span><field name="name"/></span>

@@ -45,8 +45,18 @@
         }
     }
 
-    .request-notebook {
+    .o_notebook.request-notebook {
         margin-top: 0;
+
+        div.request-partner-author-field {
+            width: 100% !important;
+            display: flex;
+            justify-content: space-between;
+
+            a {
+                flex: auto;
+            }
+        }
     }
 
     // Based on mail chatter date separator

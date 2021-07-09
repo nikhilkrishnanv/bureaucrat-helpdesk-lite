@@ -6,12 +6,12 @@
     .o_request_kanban_header {
         display: flex;
         flex-flow: row nowrap;
-        margin: -@default_padding -@default_padding 0 -@default_padding;
-        padding-left: @default_padding;
+        margin: -$o-kanban-record-margin -$o-kanban-record-margin 0 -$o-kanban-record-margin;
+        padding-left: $o-kanban-record-margin;
         min-height: 3em;
 
         > * {
-            margin: 0 @default_margin;
+            margin: 0 $o-kanban-record-margin/2;
 
             &:first-child {
                 margin: 0;
@@ -23,7 +23,7 @@
         }
 
         .o_header_title_box {
-            padding: @default_padding 0;
+            padding: $o-kanban-record-margin 0;
 
             .o_header_box_item {
                 display: inline-block;
@@ -33,7 +33,7 @@
             .o_header_title {
                 font-size: larger;
                 font-weight: bolder;
-                color: @odoo-brand-optional;
+                color: $o-community-color;
             }
         }
 
@@ -44,7 +44,7 @@
             .icon {
                 display: inline-flex;
                 align-items: center;
-                margin-right: @default_margin;
+                margin-right: $o-kanban-record-margin/2;
             }
         }
 
@@ -59,7 +59,7 @@
                 margin-left: 5px;
                 display: flex;
                 align-items: center;
-                padding: 0 @default_padding;
+                padding: 0 $o-kanban-record-margin;
             }
         }
     }
@@ -73,7 +73,7 @@
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
-            padding: @default_padding/2 0;
+            padding: $o-kanban-record-margin/2 0;
             min-height: 3em;
             border-bottom: 1px solid gainsboro;
 
@@ -114,7 +114,7 @@
                 .oe_kanban_image {
                     max-width: 30px;
                     float: left;
-                    margin: @default_margin @default_margin 0 0;
+                    margin: $o-kanban-record-margin/2 $o-kanban-record-margin/2 0 0;
                 }
 
                 .oe_kanban_hidden_text {
