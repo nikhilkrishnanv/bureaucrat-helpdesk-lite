@@ -34,6 +34,7 @@ FEATURE_MODULES = [
     'generic_request_sla_priority',
     'generic_request_sla_service',
     'generic_request_survey',
+    'generic_request_team',
     'generic_request_web_conference',
     'generic_request_weight',
 ]
@@ -105,6 +106,8 @@ class ResConfigSettings(models.TransientModel):
         string="Request Action Assignment")
     module_generic_request_weight = fields.Boolean(
         string="Request Weight")
+    module_generic_request_team = fields.Boolean(
+        string="Request Team")
     module_crnd_mail_chatter_send_composer = fields.Boolean(
         string="Mail Chatter Send Composer")
     module_crnd_mail_composer_chat_history = fields.Boolean(
@@ -176,6 +179,8 @@ class ResConfigSettings(models.TransientModel):
     need_install_generic_request_action_assignment = fields.Boolean(
         compute="_compute_generic_request_modules_can_install", readonly=True)
     need_install_generic_request_weight = fields.Boolean(
+        compute="_compute_generic_request_modules_can_install", readonly=True)
+    need_install_generic_request_team = fields.Boolean(
         compute="_compute_generic_request_modules_can_install", readonly=True)
     need_install_crnd_mail_chatter_send_composer = fields.Boolean(
         compute="_compute_generic_request_modules_can_install", readonly=True)

@@ -21,6 +21,136 @@
         </ul>
     </template>
 
+    <template id="wsd_request_new_selection_box" name="New request (Selection Box)">
+        <div id="request-selection-box" class="d-none d-lg-block col-lg-6">
+            <div class="pull-right">
+                <div t-if="req_category" id="request-category">
+                    <span class="fa fa-bars mr4" title="Category"/>
+                    <span t-field="req_category.display_name"/>
+                    <span t-if="req_category.description"
+                          role="button" data-toggle="popover"
+                          title="Category"
+                          data-placement="right"
+                          data-trigger="hover"
+                          class="fa fa-question text-muted"
+                          t-attf-data-content="{{ req_category.description }}"/>
+                </div>
+                <div t-if="req_type" id="request-type">
+                    <span class="fa fa-hashtag mr4" title="Type"/>
+                    <span t-field="req_type.name"/>
+                    <span t-if="req_type.description"
+                          role="button" data-toggle="popover"
+                          title="Type"
+                          data-placement="right"
+                          data-trigger="hover"
+                          class="fa fa-question text-muted"
+                          t-attf-data-content="{{ req_type.description }}"/>
+                </div>
+                <div t-if="req_type and req_type.kind_id" id="request-kind">
+                    <span class="fa fa-square mr4" title="Kind"/>
+                    <span t-field="req_type.kind_id.display_name" title="Kind"/>
+                    <span t-if="req_type.kind_id.description"
+                          role="button" data-toggle="popover"
+                          title="Kind"
+                          data-placement="right"
+                          data-trigger="hover"
+                          class="fa fa-question text-muted"
+                          t-attf-data-content="{{ req_type.kind_id.description }}"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="wsd_request_new_select_param__selection__radio"
+               name="New request (select param: selection as radio)">
+            <section class="row">
+                <t t-foreach="wsd_step_form_items" t-as="wsd_step_form_item">
+                    <div class="col-lg-4 col-sm-6 wsd-request-new-select-param-item">
+                        <h4>
+                            <t t-if="wsd_step_form_selected_item and wsd_step_form_item == wsd_step_form_item">
+                                <input t-att-name="wsd_step_form_sel_field_id"
+                                       t-att-id="'%s__%s' % (wsd_step_form_item_id_prefix, wsd_step_form_item.id)"
+                                       required="required"
+                                       type="radio"
+                                       checked="checked"
+                                       t-att-value="wsd_step_form_item.id"
+                                       aria-label="..."/>
+                            </t>
+                            <t t-else="">
+                                <input t-att-name="wsd_step_form_sel_field_id"
+                                       t-att-id="'%s__%s' % (wsd_step_form_item_id_prefix, wsd_step_form_item.id)"
+                                       required="required"
+                                       type="radio"
+                                       t-att-value="wsd_step_form_item.id"
+                                       aria-label="..."/>
+                            </t>
+                            <label t-att-for="'%s__%s' % (wsd_step_form_item_id_prefix, wsd_step_form_item.id)">
+                                <t t-esc="wsd_step_form_item.display_name"/>
+                            </label>
+                            <span t-if="wsd_step_form_item.description"
+                                    role="button" data-toggle="popover"
+                                    title="Description"
+                                    data-placement="right"
+                                    data-trigger="hover"
+                                    class="fa fa-question text-muted"
+                                    t-attf-data-content="{{ wsd_step_form_item.description }}"/>
+                        </h4>
+                    </div>
+                </t>
+            </section>
+    </template>
+
+    <template id="wsd_request_new_select_param" name="New request (select param)">
+        <!-- params
+             wsd_step_form_id (str)
+             wsd_step_form_action (str)
+             wsd_step_form_title (str)
+             wsd_step_form_items (list of recordsets)
+             wsd_step_form_item_id_prefix (str)
+             wsd_step_form_selected_item (record)
+             wsd_step_form_sel_field_id (str): name/id of input field
+        -->
+        <form t-att-id="wsd_step_form_id"
+              t-att-action="keep(wsd_step_form_action)"
+              class="wsd-request-new-select-param"
+              method="POST">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+            <div class="row">
+                <div class="oe_structure col-sm-6">
+                    <h3 class="mt4" t-esc="wsd_step_form_title"></h3>
+                </div>
+                <t t-call="crnd_wsd.wsd_request_new_selection_box"/>
+            </div>
+
+            <t t-call="crnd_wsd.wsd_request_new_select_param__selection__radio"/>
+
+            <div class="row">
+                <div class="oe_structure col-sm-12"/>
+                <div class="col-sm-12 mt24 text-center">
+                    <a class="btn btn-default request-new-btn-back" onclick="window.history.back();">Cancel</a>
+                    <button class="btn btn-primary request-new-btn-next" type="submit">Next</button>
+                </div>
+                <div class="oe_structure col-sm-12"/>
+            </div>
+            <t t-if="request.website.is_public_user()">
+                <div class="row">
+                    <div class="oe_structure text-center col-md-12 mt16">
+                        <p class="text-muted">Please,
+                            <t t-if="request.env['res.users']._get_signup_invitation_scope() == 'b2c'">
+                                <a t-attf-href="/web/signup?{{ get_redirect() }}">Sign Up</a>
+                                or
+                            </t>
+                            <a t-attf-href="/web/login?{{ get_redirect() }}">Sign In</a>
+                            to be able to view and create requests.
+                        </p>
+                    </div>
+                </div>
+            </t>
+
+        </form>
+    </template>
+
     <template id="wsd_requests_new_select_category" name="New request (select category)">
         <t t-call="crnd_wsd.wsd_layout">
             <div class="container wsd_request_new">
@@ -31,81 +161,18 @@
                     </t>
                 </t>
 
-                <form id="request_category"
-                      t-att-action="keep('/requests/new/step/category')"
-                      method="POST">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-
-                    <div class="row">
-                        <div class="oe_structure col-sm-6">
-                            <h3 class="mt4">Select category</h3>
-                        </div>
-                        <div id="request-selection-box" class="d-none d-lg-block col-lg-6">
-                            <div class="pull-right"/>
-                        </div>
-                    </div>
-
-                    <section class="row">
-                        <t t-foreach="req_categories" t-as="req_category">
-                            <div class="col-lg-4 col-sm-6">
-                                <h4>
-                                    <t t-if="req_category_sel and req_category == req_category_sel">
-                                        <input name="category_id"
-                                               required="required"
-                                               type="radio"
-                                               checked="checked"
-                                               t-att-value="req_category.id"
-                                               aria-label="..."/>
-                                    </t>
-                                    <t t-else="">
-                                        <input name="category_id"
-                                               required="required"
-                                               type="radio"
-                                               t-att-value="req_category.id"
-                                               aria-label="..."/>
-                                    </t>
-                                    <span>
-                                        <t t-esc="req_category.display_name"/>
-                                    </span>
-                                    <span t-if="req_category.description"
-                                          role="button" data-toggle="popover"
-                                          title="Description"
-                                          data-placement="right"
-                                          data-trigger="hover"
-                                          class="fa fa-question text-muted"
-                                          t-attf-data-content="{{ req_category.description }}"/>
-                                </h4>
-                            </div>
-                        </t>
-                    </section>
-
-                    <div class="row">
-                        <div class="oe_structure col-sm-12"/>
-                        <div class="col-sm-12 mt24 text-center">
-                            <a class="btn btn-default request-new-btn-back" onclick="window.history.back();">Cancel</a>
-                            <button class="btn btn-primary request-new-btn-next" type="submit">Next</button>
-                        </div>
-                        <div class="oe_structure col-sm-12"/>
-                    </div>
-                    <t t-if="request.website.is_public_user()">
-                        <div class="row">
-                            <div class="oe_structure text-center col-md-12 mt16">
-                                <p class="text-muted">Please,
-                                    <t t-if="request.env['res.users']._get_signup_invitation_scope() == 'b2c'">
-                                        <a t-attf-href="/web/signup?{{ get_redirect() }}">Sign Up</a>
-                                        or
-                                    </t>
-                                    <a t-attf-href="/web/login?{{ get_redirect() }}">Sign In</a>
-                                    to be able to view and create requests.
-                                </p>
-                            </div>
-                        </div>
-                    </t>
-
-                </form>
+                <t t-set="wsd_step_form_id" t-value="'request_category'"/>
+                <t t-set="wsd_step_form_action" t-value="'/requests/new/step/category'"/>
+                <t t-set="wsd_step_form_title">Select category</t>
+                <t t-set="wsd_step_form_items" t-value="req_categories"/>
+                <t t-set="wsd_step_form_item_id_prefix" t-value="'category'"/>
+                <t t-set="wsd_step_form_selected_item" t-value="req_category_sel"/>
+                <t t-set="wsd_step_form_sel_field_id" t-value="'category_id'"/>
+                <t t-call="crnd_wsd.wsd_request_new_select_param"/>
             </div>
         </t>
     </template>
+
     <template id="wsd_requests_new_select_type" name="New request (select type)">
         <t t-call="crnd_wsd.wsd_layout">
             <div class="container wsd_request_new">
@@ -116,91 +183,14 @@
                     </t>
                 </t>
 
-                <form id="request_type"
-                      t-att-action="keep('/requests/new/step/type')"
-                      method="POST">
-                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                    <input type="hidden" name="category_id" t-att-value="req_category.id"/>
-
-                    <div class="row">
-                        <div class="oe_structure col-sm-6">
-                            <h3 class="mt4">Select type</h3>
-                        </div>
-                        <div id="request-selection-box" class="d-none d-lg-block col-lg-6">
-                            <div class="pull-right">
-                                <div t-if="req_category" id="request-category">
-                                    <span class="fa fa-bars mr4" title="Category"/>
-                                    <span t-field="req_category.display_name"/>
-                                    <span t-if="req_category.description"
-                                          role="button" data-toggle="popover"
-                                          title="Category"
-                                          data-placement="right"
-                                          data-trigger="hover"
-                                          class="fa fa-question text-muted"
-                                          t-attf-data-content="{{ req_category.description }}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <section class="row">
-                        <t t-foreach="req_types" t-as="req_type">
-                            <div class="col-lg-4 col-sm-6">
-                                <h4>
-                                    <t t-if="req_type_sel and req_type == req_type_sel">
-                                        <input name="type_id"
-                                               required="required"
-                                               type="radio"
-                                               checked="checked"
-                                               t-att-value="req_type.id"
-                                               aria-label="..."/>
-                                    </t>
-                                    <t t-else="">
-                                        <input name="type_id"
-                                               required="required"
-                                               type="radio"
-                                               t-att-value="req_type.id"
-                                               aria-label="..."/>
-                                    </t>
-                                    <span>
-                                        <t t-esc="req_type.display_name"/>
-                                    </span>
-                                    <span t-if="req_type.description"
-                                          role="button" data-toggle="popover"
-                                          title="Description"
-                                          data-placement="right"
-                                          data-trigger="hover"
-                                          class="fa fa-question text-muted"
-                                          t-attf-data-content="{{ req_type.description }}"/>
-                                </h4>
-                            </div>
-                        </t>
-                    </section>
-
-                    <div class="row">
-                        <div class="oe_structure col-sm-12"/>
-                        <div class="col-sm-12 mt24 text-center">
-                            <a class="btn btn-default request-new-btn-back" onclick="window.history.back();">Cancel</a>
-                            <button class="btn btn-primary request-new-btn-next" type="submit">Next</button>
-                        </div>
-                        <div class="oe_structure col-sm-12"/>
-                    </div>
-                    <t t-if="request.website.is_public_user()">
-                        <div class="row">
-                            <div class="oe_structure text-center col-md-12 mt16">
-                                <p class="text-muted">Please,
-                                    <t t-if="request.env['res.users']._get_signup_invitation_scope() == 'b2c'">
-                                        <a t-attf-href="/web/signup?{{ get_redirect() }}">Sign Up</a>
-                                        or
-                                    </t>
-                                    <a t-attf-href="/web/login?{{ get_redirect() }}">Sign In</a>
-                                    to be able to view and create requests.
-                                </p>
-                            </div>
-                        </div>
-                    </t>
-
-                </form>
+                <t t-set="wsd_step_form_id" t-value="'request_type'"/>
+                <t t-set="wsd_step_form_action" t-value="'/requests/new/step/type'"/>
+                <t t-set="wsd_step_form_title">Select type</t>
+                <t t-set="wsd_step_form_items" t-value="req_types"/>
+                <t t-set="wsd_step_form_item_id_prefix" t-value="'category'"/>
+                <t t-set="wsd_step_form_selected_item" t-value="req_type_sel"/>
+                <t t-set="wsd_step_form_sel_field_id" t-value="'type_id'"/>
+                <t t-call="crnd_wsd.wsd_request_new_select_param"/>
             </div>
         </t>
     </template>
@@ -245,43 +235,7 @@
                                 t-esc="req_type.website_request_title"/>
                             <div t-field="req_type.note_html"></div>
                         </div>
-                        <div id="request-selection-box" class="d-none d-lg-block col-lg-6">
-                            <div class="pull-right">
-                                <div t-if="req_category" id="request-category">
-                                    <span class="fa fa-bars mr4" title="Category"/>
-                                    <span t-field="req_category.display_name"/>
-                                    <span t-if="req_category.description"
-                                          role="button" data-toggle="popover"
-                                          title="Category"
-                                          data-placement="right"
-                                          data-trigger="hover"
-                                          class="fa fa-question text-muted"
-                                          t-attf-data-content="{{ req_category.description }}"/>
-                                </div>
-                                <div id="request-type">
-                                    <span class="fa fa-hashtag mr4" title="Type"/>
-                                    <span t-field="req_type.name"/>
-                                    <span t-if="req_type.description"
-                                          role="button" data-toggle="popover"
-                                          title="Type"
-                                          data-placement="right"
-                                          data-trigger="hover"
-                                          class="fa fa-question text-muted"
-                                          t-attf-data-content="{{ req_type.description }}"/>
-                                </div>
-                                <div t-if="req_type.kind_id" id="request-kind">
-                                    <span class="fa fa-square mr4" title="Kind"/>
-                                    <span t-field="req_type.kind_id.display_name" title="Kind"/>
-                                    <span t-if="req_type.kind_id.description"
-                                        role="button" data-toggle="popover"
-                                        title="Kind"
-                                        data-placement="right"
-                                        data-trigger="hover"
-                                        class="fa fa-question text-muted"
-                                        t-attf-data-content="{{ req_type.kind_id.description }}"/>
-                                </div>
-                            </div>
-                        </div>
+                        <t t-call="crnd_wsd.wsd_request_new_selection_box"/>
                     </div>
                     <section t-if="validation_errors" id="request-error-list" class="row">
                         <div class="alert alert-danger alert-dismissible show col-sm-12" role="alert">

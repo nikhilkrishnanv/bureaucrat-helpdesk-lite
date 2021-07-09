@@ -180,7 +180,7 @@ class RequestRequest(models.Model):
         'res.users', 'Closed by', readonly=True, ondelete='restrict',
         copy=False, help="Request was closed by this user")
     partner_id = fields.Many2one(
-        'res.partner', 'Partner', track_visibility='onchange',
+        'res.partner', 'Partner', index=True, track_visibility='onchange',
         ondelete='restrict', help="Partner related to this request")
     author_id = fields.Many2one(
         'res.partner', 'Author', index=True, required=False,
@@ -256,6 +256,16 @@ class RequestRequest(models.Model):
         readonly=True)
     use_timesheet = fields.Boolean(
         related='type_id.use_timesheet', readonly=True)
+
+    author_related_request_open_count = fields.Integer(
+        compute='_compute_related_a_p_request_ids')
+    author_related_request_closed_count = fields.Integer(
+        compute='_compute_related_a_p_request_ids')
+
+    partner_related_request_open_count = fields.Integer(
+        compute='_compute_related_a_p_request_ids')
+    partner_related_request_closed_count = fields.Integer(
+        compute='_compute_related_a_p_request_ids')
 
     _sql_constraints = [
         ('name_uniq',
@@ -455,6 +465,46 @@ class RequestRequest(models.Model):
         for rec in self:
             if not rec.is_priority_complex:
                 rec._priority = rec.priority
+
+    @api.depends('author_id', 'partner_id')
+    def _compute_related_a_p_request_ids(self):
+        for record in self:
+            # Usually this will be called on request form view and thus
+            # computed only for one record. So, it will lead only to 4
+            # search_counts per request to compute stat
+            if record.id and record.author_id:
+                record.update({
+                    'author_related_request_open_count': self.search_count(
+                        [('author_id', '=', record.author_id.id),
+                         ('closed', '=', False),
+                         ('id', '!=', record.id)]),
+                    'author_related_request_closed_count': self.search_count(
+                        [('author_id', '=', record.author_id.id),
+                         ('closed', '=', True),
+                         ('id', '!=', record.id)]),
+                })
+            else:
+                record.update({
+                    'author_related_request_open_count': 0,
+                    'author_related_request_closed_count': 0,
+                })
+
+            if record.id and record.partner_id:
+                record.update({
+                    'partner_related_request_open_count': self.search_count(
+                        [('partner_id', '=', record.partner_id.id),
+                         ('closed', '=', False),
+                         ('id', '!=', record.id)]),
+                    'partner_related_request_closed_count': self.search_count(
+                        [('partner_id', '=', record.partner_id.id),
+                         ('closed', '=', True),
+                         ('id', '!=', record.id)]),
+                })
+            else:
+                record.update({
+                    'partner_related_request_open_count': 0,
+                    'partner_related_request_closed_count': 0,
+                })
 
     def _create_update_from_type(self, r_type, vals):
         # Name update
@@ -1252,3 +1302,43 @@ class RequestRequest(models.Model):
             context={'default_request_id': self.id},
             domain=[('request_id', '=', self.id)],
         )
+
+    def action_show_related_author_requests_closed(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_window',
+            domain=[('author_id', '=', self.author_id.id),
+                    ('id', '!=', self.id)],
+            context={
+                'search_default_filter_closed': 1,
+            })
+
+    def action_show_related_author_requests_opened(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_window',
+            domain=[('author_id', '=', self.author_id.id),
+                    ('id', '!=', self.id)],
+            context={
+                'search_default_filter_open': 1,
+            })
+
+    def action_show_related_partner_requests_closed(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_window',
+            domain=[('partner_id', '=', self.partner_id.id),
+                    ('id', '!=', self.id)],
+            context={
+                'search_default_filter_closed': 1,
+            })
+
+    def action_show_related_partner_requests_opened(self):
+        self.ensure_one()
+        return self.env['generic.mixin.get.action'].get_action_by_xmlid(
+            'generic_request.action_request_window',
+            domain=[('partner_id', '=', self.partner_id.id),
+                    ('id', '!=', self.id)],
+            context={
+                'search_default_filter_open': 1,
+            })
