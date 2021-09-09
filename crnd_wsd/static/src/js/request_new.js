@@ -11,10 +11,18 @@ odoo.define('crnd_wsd.new_request', function (require) {
     var RequestCreateWidget = snippet_animation.Class.extend({
         selector: '#form_request_text',
 
+        events: {
+            'click a.request-new-btn-back': '_onClickBack',
+        },
+
         start: function () {
-            this.load_editor();
-            this.visual_characters_left_textarea();
-            this.$target.submit(function () {
+            var self = this;
+            self.req_max_size = self.$target.closest(
+                '#wrap.crnd-wsd-wrap').data('max_text_size');
+
+            self.load_editor();
+            self.visual_characters_left_textarea();
+            self.$target.submit(function () {
                 blockui.blockUI();
             });
 
@@ -22,23 +30,25 @@ odoo.define('crnd_wsd.new_request', function (require) {
 
         visual_characters_left_textarea: function () {
             var self = this;
-            var req_max_size = self.$target.find('#request_text')[0]
-                .dataset.max_text_size;
-            if (req_max_size) {
+            if (self.req_max_size) {
                 var request_body = self.$target.find('#request-body');
                 self.check_textarea();
-                request_body.on('keydown', 'div', self.check_textarea);
-                request_body.on('keyup', 'div', self.check_textarea);
-                request_body.on('paste', 'div', self.check_textarea);
+                request_body.on(
+                    'keydown', 'div', self.check_textarea.bind(self));
+                request_body.on(
+                    'keyup', 'div', self.check_textarea.bind(self));
+                request_body.on(
+                    'paste', 'div', self.check_textarea.bind(self));
             }
         },
 
         check_textarea: function () {
-            var max_size = $('#request_text')[0].dataset.max_text_size;
-            var request_text_size = $('#request_text').val().length;
+            var self = this;
+            var request_text_size = self.$target.find(
+                '#request_text').val().replace(/(<([^>]+)>)/ig, '').length;
             var $span_label = $('#characters_left_label');
-            var left_input = max_size - request_text_size;
-            var percent = left_input / max_size;
+            var left_input = self.req_max_size - request_text_size;
+            var percent = left_input / self.req_max_size;
             $span_label.tooltip();
             if (left_input < 0) {
                 left_input = 0;
@@ -46,26 +56,30 @@ odoo.define('crnd_wsd.new_request', function (require) {
 
             if (percent >= 0.2) {
 
-                $span_label.removeClass("label-warning label-danger");
-                $span_label.addClass("label-primary");
+                $span_label.removeClass("badge-warning badge-danger");
+                $span_label.addClass("badge-primary");
 
             } else if (percent < 0.2 && percent > 0.1) {
 
-                $span_label.removeClass("label-primary label-danger");
-                $span_label.addClass("label-warning");
+                $span_label.removeClass("badge-primary badge-danger");
+                $span_label.addClass("badge-warning");
 
             } else {
 
-                $span_label.removeClass("label-primary label-warning");
-                $span_label.addClass("label-danger");
+                $span_label.removeClass("badge-primary badge-warning");
+                $span_label.addClass("badge-danger");
             }
 
-            $span_label.html(left_input + " / " + max_size);
+            $span_label.html(left_input + " / " + self.req_max_size);
         },
 
         load_editor: function () {
             this.$form_request_text = this.$target.find('#request_text');
             this.$form_request_text.trumbowyg(trumbowyg.trumbowygOptions);
+        },
+
+        _onClickBack: function () {
+            window.history.back();
         },
     });
 

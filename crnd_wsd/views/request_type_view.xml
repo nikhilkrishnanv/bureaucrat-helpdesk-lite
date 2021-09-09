@@ -18,6 +18,12 @@
                     <field name="website_custom_label_editor"/>
                     <field name="website_custom_congratulation_note"/>
                 </group>
+                <group name="group_access"
+                    string="Access">
+                    <field name="access_group_ids"
+                        widget="many2many_tags"
+                        options="{'no_create': true, 'no_quick_create': true}"/>
+                </group>
             </group>
         </field>
     </record>

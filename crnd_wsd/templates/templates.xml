@@ -20,6 +20,7 @@
             <script type="text/javascript" src="/crnd_wsd/static/src/js/blockui.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/request_discussion.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/request_new.js"/>
+            <script type="text/javascript" src="/crnd_wsd/static/src/js/request_new_step.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/request_actions.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/enable_popovers.js"/>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/widgets.js"/>
@@ -41,6 +42,7 @@
             <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_new_default_text.js"></script>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_public_user.js"></script>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_public_user_redirect.js"></script>
+            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_public_user_create_req.js"></script>
             <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_filter_kind.js"></script>
 
         </xpath>
@@ -71,7 +73,12 @@
 
     <template id="wsd_layout">
         <t t-call="website.layout">
-            <div id="wrap">
+            <div id="wrap"
+                 class="crnd-wsd-wrap"
+                 t-att-data-max_text_size="request.env.user.company_id.request_limit_max_text_size"
+                 t-att-data-max_file_size="request.env.user.company_id._get_request_max_upload_file_size()"
+                 t-att-data-max_file_size_label_value="request.env.user.company_id._get_request_max_upload_file_size_label()"
+                 t-att-data-allowed_file_types="request.env.user.company_id.request_allowed_upload_file_types">
                 <div class="oe_structure"/>
                 <t t-raw="0"/>
                 <div class="oe_structure"/>
@@ -251,7 +258,7 @@
                 </t>
 
                 <t t-call="crnd_wsd.wsd_requests_filterbox"/>
-                <t t-if="request.website.is_public_user()">
+                <t t-if="request.website.is_request_restricted_ui()">
                     <div class="row">
                         <div class="oe_structure text-center col-md-12 mt24">
                             <h4>Please,
