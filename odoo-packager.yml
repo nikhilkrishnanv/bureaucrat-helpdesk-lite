@@ -14,3 +14,4 @@ known-addons:
     - web_widget_colorpicker
     - generic_tag
     - crnd_web_tree_colored_field
+    - crnd_web_m2o_info_widget
