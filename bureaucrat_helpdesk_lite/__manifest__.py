@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '13.0.1.3.1',
+    'version': '13.0.1.4.0',
     'category': 'Helpdesk',
 
     # any module necessary for this one to work correctly

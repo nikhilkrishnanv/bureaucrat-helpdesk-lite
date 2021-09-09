@@ -24,7 +24,7 @@ ITEMS_PER_PAGE = 20
 
 
 # NOTE: here is name collision with request, so be careful, when use name
-# `request`. To avoid this name collision use names `req` and reqs` for
+# `request`. To avoid this name collision use names `req` and `reqs` for
 # `request.request` records
 
 def can_read_request(record):
@@ -409,20 +409,43 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
                 'request_text': {
                     'error_text': _(
                         "Request text is too long!")}})
-
+        if http.request.website.is_request_create_public():
+            if not data.get('author_id') and not data.get('email_from'):
+                errors['request_author_email'] = {
+                    'error_text': _(
+                        "Please, specify your email address!"),
+                }
         return errors
 
     def _request_new_prepare_data(self, req_type, req_category,
                                   req_text, **post):
         channel_website = request.env.ref(
             'generic_request.request_channel_website')
-        return {
+        res = {
             'category_id': req_category and req_category.id,
             'type_id': req_type.id,
             'request_text': req_text,
             'channel_id': channel_website.id,
             'website_id': request.website.id,
         }
+        company = http.request.env.user.company_id
+        if http.request.website.is_request_create_public():
+            author_id = request.env[
+                'request.request'
+            ].sudo()._get_or_create_partner_from_email(
+                post.get('request_author_email'),
+                force_create=company.request_mail_create_partner_from_email,
+            )
+            if author_id:
+                res['author_id'] = author_id
+            else:
+                res['author_id'] = False
+                author_name, author_email = request.env[
+                    'res.partner'
+                ]._parse_partner_name(post.get('request_author_email'))
+                res['email_from'] = author_email
+                res['author_name'] = author_name
+        return res
 
     @http.route(["/requests/new/step/data"],
                 type='http', auth="public",
@@ -454,8 +477,14 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
                 req_type, req_category, req_text, req_data, **kwargs)
 
             if not validation_errors:
+                Request = request.env['request.request']
+                if request.website.is_request_create_public():
+                    # If it is allowed to create request for public users and
+                    # current user is public user, then we have to use sudo
+                    # to handle access rights issues
+                    Request = Request.sudo()
                 try:
-                    req = request.env['request.request'].create(req_data)
+                    req = Request.create(req_data)
                     req._request_bind_attachments()
                 except (UserError, AccessError, ValidationError) as exc:
                     validation_errors.update({'error': {

@@ -44,8 +44,9 @@ class TestUploadFile(TestPhantomTour):
             'request_id': test_request.id,
         }
         # test upload file
+        file_name = 'crnd_wsd/static/description/index.html'
         files = {
-            'upload': open('crnd_wsd/static/description/index.html', 'rb'),
+            'upload': open(file_name, 'rb'),
         }
         response = self.opener.post(url=url, files=files, data=data)
         response_json = response.json()
@@ -68,9 +69,11 @@ class TestUploadFile(TestPhantomTour):
             'request_id': test_request.id,
             'is_image': True,
         }
+        file_name = 'crnd_wsd/static/description/banner.gif'
         files = {
-            'upload': open('crnd_wsd/static/description/banner.gif', 'rb'),
+            'upload': open(file_name, 'rb'),
         }
+
         response = self.opener.post(url=url, files=files, data=data)
         response_json = response.json()
         self.assertEqual(response_json['status'], 'OK')
@@ -95,9 +98,11 @@ class TestUploadFile(TestPhantomTour):
             'csrf_token': self.get_csrf_token(),
         }
         # test upload file
+        file_name = 'crnd_wsd/static/description/index.html'
         files = {
-            'upload': open('crnd_wsd/static/description/index.html', 'rb'),
+            'upload': open(file_name, 'rb'),
         }
+
         response = self.opener.post(url=url, files=files, data=data)
         response_json = response.json()
         self.assertEqual(response_json['status'], 'OK')
@@ -109,13 +114,15 @@ class TestUploadFile(TestPhantomTour):
         self.assertEqual(attachment_url_file[:13], '/web/content/')
 
         # test upload image
+        file_name = 'crnd_wsd/static/description/banner.gif'
         data = {
             'csrf_token': self.get_csrf_token(),
             'is_image': True,
         }
         files = {
-            'upload': open('crnd_wsd/static/description/banner.gif', 'rb'),
+            'upload': open(file_name, 'rb'),
         }
+
         response = self.opener.post(url=url, files=files, data=data)
         response_json = response.json()
         self.assertEqual(response_json['status'], 'OK')
