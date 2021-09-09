@@ -3,6 +3,7 @@ from odoo.exceptions import UserError, AccessError, ValidationError
 
 
 class WSDControllerMixin(http.Controller):
+
     def _id_to_record(self, model, record_id, no_raise=False):
         """ Get record by it's id.
             Optionally, do not raise error if record not found.
@@ -28,4 +29,7 @@ class WSDControllerMixin(http.Controller):
             :param str xmlid: external ID of view
             :return bool: True if view is active, otherwise False
         """
-        return http.request.env.ref(xmlid).active
+        view = http.request.env.ref(xmlid, raise_if_not_found=False)
+        if view:
+            return view.active
+        return False

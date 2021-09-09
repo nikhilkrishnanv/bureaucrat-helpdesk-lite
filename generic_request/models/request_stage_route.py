@@ -119,14 +119,3 @@ class RequestStageRoute(models.Model):
 
         route._ensure_can_move(request)
         return route
-
-    def hook_before_stage_change(self, request):
-        """ Could be used outside to do some work before request stage changed
-        """
-        self.ensure_one()
-
-    def hook_after_stage_change(self, request):
-        """ Could be redefined, by other modules, to add more logic
-            on stage move of request
-        """
-        self.ensure_one()

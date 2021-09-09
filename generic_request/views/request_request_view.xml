@@ -195,7 +195,9 @@
                                     <div name="div_author" class="request-partner-author-field o_row">
                                         <field name="author_id"
                                                placeholder="Author..."
-                                               attrs="{'readonly': [('can_change_author', '=', False)]}"/>
+                                               attrs="{'readonly': [('can_change_author', '=', False)]}"
+                                               widget="m2o_info"
+                                               options="{'info_fields': ['name', 'commercial_company_name', 'website', 'email', 'phone', 'mobile']}"/>
                                         <span name="span_request_author_stat">
                                             <button name="action_show_related_author_requests_opened"
                                                     type="object"
@@ -226,7 +228,10 @@
                                 <group name="group_partner" class="mb0 mt0">
                                     <label for="partner_id"/>
                                     <div name="div_partner" class="request-partner-author-field o_row">
-                                        <field name="partner_id" placeholder="Related partner..."/>
+                                        <field name="partner_id"
+                                               placeholder="Related partner..."
+                                               widget="m2o_info"
+                                               options="{'info_fields': ['name', 'commercial_company_name', 'website', 'email', 'phone', 'mobile']}"/>
                                         <span name="span_request_partner_stat">
                                             <button name="action_show_related_partner_requests_opened"
                                                     type="object"
@@ -287,7 +292,7 @@
                                            sum="Total Duration (Hours)"/>
                                 </tree>
                             </field>
-                            <group class="mt0">
+                            <group name="group_time_log_footer" class="mt0">
                                 <group class="oe_subtotal_footer oe_right mt0">
                                     <field name="timesheet_amount" widget="float_time" readonly="1"/>
                                     <field name="timesheet_remaining_amount" widget="float_time"
@@ -295,16 +300,33 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Help" name="page_help"
-                              attrs="{'invisible': [('help_html', '=', False),
-                                                    ('stage_help_html', '=', False),
-                                                    ('category_help_html', '=', False)]}">
-                            <separator string="Stage" colspan="4" attrs="{'invisible': [('stage_help_html', '=', False)]}"/>
-                            <field colspan="4" name="stage_help_html" attrs="{'invisible': [('stage_help_html', '=', False)]}"/>
-                            <separator string="Category" colspan="4" attrs="{'invisible': [('category_help_html', '=', False)]}"/>
-                            <field colspan="4" name="category_help_html" attrs="{'invisible': [('category_help_html', '=', False)]}"/>
-                            <separator string="Type" colspan="4" attrs="{'invisible': [('help_html', '=', False)]}"/>
-                            <field colspan="4" name="help_html" attrs="{'invisible': [('help_html', '=', False)]}"/>
+                        <page string="Help"
+                              name="page_help"
+                              attrs="{'invisible': [
+                                    '&amp;',
+                                    '|', ('help_html', '=', False), ('help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+                                    '|', ('stage_help_html', '=', False), ('stage_help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'),
+                                    '|', ('category_help_html', '=', False), ('category_help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;')]}">
+                            <separator string="Stage"
+                                       colspan="4"
+                                       attrs="{'invisible': ['|', ('stage_help_html', '=', False), ('stage_help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;')]}"/>
+                            <field colspan="4"
+                                   name="stage_help_html"
+                                   attrs="{'invisible': ['|', ('stage_help_html', '=', False), ('stage_help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;')]}"/>
+
+                            <separator string="Category"
+                                       colspan="4"
+                                       attrs="{'invisible': ['|', ('category_help_html', '=', False), ('category_help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;')]}"/>
+                            <field colspan="4"
+                                   name="category_help_html"
+                                   attrs="{'invisible': ['|', ('category_help_html', '=', False), ('category_help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;')]}"/>
+
+                            <separator string="Type"
+                                       colspan="4"
+                                       attrs="{'invisible': ['|', ('help_html', '=', False), ('help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;')]}"/>
+                            <field colspan="4"
+                                   name="help_html"
+                                   attrs="{'invisible': ['|', ('help_html', '=', False), ('help_html', '=', '&lt;p&gt;&lt;br&gt;&lt;/p&gt;')]}"/>
                         </page>
                         <page string="Instruction"
                               name="page_instruction"
@@ -352,7 +374,9 @@
                             <div>
                                 <i class="fa fa-user mr4"
                                    title="Created by user"/>
-                                <field name="created_by_id"/>
+                                <field name="created_by_id"
+                                       widget="m2o_info"
+                                       options="{'info_fields': ['name', 'commercial_company_name', 'website', 'email', 'phone', 'mobile']}"/>
                             </div>
                         </div>
                         <div class="col-md-3"
@@ -366,7 +390,9 @@
                             <div>
                                 <i class="fa fa-user mr4"
                                    title="Moved by user"/>
-                                <field name="moved_by_id"/></div>
+                                <field name="moved_by_id"
+                                       widget="m2o_info"
+                                       options="{'info_fields': ['name', 'commercial_company_name', 'website', 'email', 'phone', 'mobile']}"/></div>
                         </div>
                         <div class="col-md-3"
                              name="request_footer__assigned">
@@ -418,7 +444,10 @@
                                  <i class="fa fa-user mr4"
                                     title="Assignee"/>
                                  <field name="user_id"
-                                        readonly="1"/></div>
+                                        readonly="1"
+                                        widget="m2o_info"
+                                        options="{'info_fields': ['name', 'commercial_company_name', 'website', 'email', 'phone', 'mobile']}"/>
+                            </div>
                         </div>
                         <div class="col-md-3"
                              name="request_footer__closed"
@@ -431,7 +460,10 @@
                             <div>
                                 <i class="fa fa-user mr4"
                                    title="Closed by user"/>
-                                <field name="closed_by_id"/></div>
+                                <field name="closed_by_id"
+                                       widget="m2o_info"
+                                       options="{'info_fields': ['name', 'commercial_company_name', 'website', 'email', 'phone', 'mobile']}"/>
+                            </div>
                         </div>
                     </div>
                 </sheet>

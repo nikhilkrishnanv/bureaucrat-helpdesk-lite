@@ -13,8 +13,17 @@
             <xpath expr="//notebook/page[@name='page_info']/group/group/field[@name='request_type_ids']" position="before">
                 <field name="website_ids" widget="many2many_tags"/>
             </xpath>
+            <xpath expr="//notebook/page[@name='page_info']/group" position="inside">
+                <group name="group_access"
+                    string="Access">
+                    <field name="access_group_ids"
+                        widget="many2many_tags"
+                        options="{'no_create': true, 'no_quick_create': true}"/>
+                </group>
+            </xpath>
         </field>
     </record>
+
     <record model="ir.ui.view" id="view_request_category_search">
         <field name="model">request.category</field>
         <field name="inherit_id" ref="generic_request.view_request_category_search"/>
