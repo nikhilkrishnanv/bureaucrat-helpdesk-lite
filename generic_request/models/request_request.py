@@ -48,37 +48,28 @@ class RequestRequest(models.Model):
 
     # Priority
     _priority = fields.Char(
-        readonly=True,
-        default='3',
-        string='Priority (Technical)'
-    )
+        default='3', readonly=True,
+        string='Priority (Technical)')
     priority = fields.Selection(
         selection=AVAILABLE_PRIORITIES,
         track_visibility='onchange',
-        index=True,
-        store=True,
+        index=True, store=True,
         compute='_compute_priority',
         inverse='_inverse_priority',
-        help="Actual priority of request",
-    )
+        help="Actual priority of request")
     impact = fields.Selection(
-        selection=AVAILABLE_IMPACTS,
-        index=True,
-    )
+        selection=AVAILABLE_IMPACTS, index=True)
     urgency = fields.Selection(
-        selection=AVAILABLE_URGENCIES,
-        index=True,
-    )
+        selection=AVAILABLE_URGENCIES, index=True)
     is_priority_complex = fields.Boolean(
-        related='type_id.complex_priority', readonly=True,
-    )
+        related='type_id.complex_priority', readonly=True)
 
     # Type and stage related fields
     type_id = fields.Many2one(
         'request.type', 'Type', ondelete='restrict',
         required=True, index=True, track_visibility='always',
         help="Type of request")
-    type_color = fields.Char(related="type_id.color")
+    type_color = fields.Char(related="type_id.color", readonly=True)
     kind_id = fields.Many2one(
         'request.kind', related='type_id.kind_id',
         store=True, index=True, readonly=True,
@@ -88,8 +79,7 @@ class RequestRequest(models.Model):
         required=False, ondelete="restrict", track_visibility='onchange',
         help="Category of request")
     channel_id = fields.Many2one(
-        'request.channel', 'Channel', index=True,
-        required=False,
+        'request.channel', 'Channel', index=True, required=False,
         default=lambda self: self.env.ref(
             'generic_request.request_channel_other', raise_if_not_found=False),
         help="Channel of request")
@@ -109,8 +99,7 @@ class RequestRequest(models.Model):
     can_be_closed = fields.Boolean(
         compute='_compute_can_be_closed', readonly=True)
     is_assigned = fields.Boolean(
-        compute="_compute_is_assigned",
-        store=True, readonly=True)
+        compute="_compute_is_assigned", store=True, readonly=True)
 
     kanban_state = fields.Selection(
         selection=[
@@ -136,8 +125,8 @@ class RequestRequest(models.Model):
     # [1, '=', 1] -> True,
     # [0, '=', 1] -> False
     is_new_request = fields.Integer(
-        compute='_compute_is_new_request', readonly=True,
-        default=1)
+        compute='_compute_is_new_request', readonly=True, default=1)
+
     # UI change restriction fields
     can_change_request_text = fields.Boolean(
         compute='_compute_can_change_request_text', readonly=True,
@@ -203,8 +192,7 @@ class RequestRequest(models.Model):
         'Email', help="Email address of the contact", index=True,
         readonly=True)
     email_cc = fields.Text(
-        'Global CC',
-        readonly=True,
+        'Global CC', readonly=True,
         help="These email addresses will be added to the CC field "
              "of all inbound and outbound emails for this record "
              "before being sent. "
@@ -258,8 +246,7 @@ class RequestRequest(models.Model):
     timesheet_start_status = fields.Selection(
         [('started', 'Started'),
          ('not-started', 'Not Started')],
-        compute='_compute_timesheet_start_status',
-        readonly=True)
+        compute='_compute_timesheet_start_status', readonly=True)
     use_timesheet = fields.Boolean(
         related='type_id.use_timesheet', readonly=True)
 
@@ -442,7 +429,8 @@ class RequestRequest(models.Model):
                     self.env.user.has_group(
                         'generic_request.group_request_manager')
                 ) and (
-                    rec.instruction_html
+                    rec.instruction_html and
+                    rec.instruction_html != '<p><br></p>'
                 )
             )
 
@@ -511,6 +499,48 @@ class RequestRequest(models.Model):
                     'partner_related_request_open_count': 0,
                     'partner_related_request_closed_count': 0,
                 })
+
+    @api.depends('timesheet_line_ids', 'timesheet_line_ids.amount',
+                 'timesheet_planned_amount')
+    def _compute_timesheet_line_data(self):
+        for rec in self:
+            timesheet_amount = 0.0
+            for line in rec.timesheet_line_ids:
+                timesheet_amount += line.amount
+            rec.timesheet_amount = timesheet_amount
+
+            if rec.timesheet_planned_amount:
+                rec.timesheet_remaining_amount = (
+                    rec.timesheet_planned_amount - timesheet_amount)
+                rec.timesheet_progress = (
+                    100.0 * (timesheet_amount / rec.timesheet_planned_amount))
+            else:
+                rec.timesheet_remaining_amount = 0.0
+                rec.timesheet_progress = 0.0
+
+    @api.depends('timesheet_line_ids', 'timesheet_line_ids.date_start',
+                 'timesheet_line_ids.date_end')
+    def _compute_timesheet_start_status(self):
+        TimesheetLines = self.env['request.timesheet.line']
+        domain = expression.AND([
+            TimesheetLines._get_running_lines_domain(),
+            [('request_id', 'in', self.ids)],
+        ])
+        grouped = self.env["request.timesheet.line"].read_group(
+            domain=domain,
+            fields=["id", 'request_id'],
+            groupby=['request_id'],
+        )
+        lines_per_record = {
+            group['request_id'][0]: group["request_id_count"]
+            for group in grouped
+        }
+
+        for record in self:
+            if lines_per_record.get(record.id, 0) > 0:
+                record.timesheet_start_status = 'started'
+            else:
+                record.timesheet_start_status = 'not-started'
 
     def _create_update_from_type(self, r_type, vals):
         # Name update
@@ -585,6 +615,8 @@ class RequestRequest(models.Model):
     def _get_generic_tracking_fields(self):
         """ Compute list of fields that have to be tracked
         """
+        # TODO: Do we need it? it seems that we have migrated most of code to
+        # use pre/post_write decorators
         return super(
             RequestRequest, self
         )._get_generic_tracking_fields() | TRACK_FIELD_CHANGES
@@ -615,7 +647,6 @@ class RequestRequest(models.Model):
         Route = self.env['request.stage.route']
         old_stage, new_stage = changes['stage_id']
         route = Route.ensure_route(self, new_stage.id)
-        route.hook_before_stage_change(self)
 
         vals = {}
         vals['last_route_id'] = route.id
@@ -632,7 +663,6 @@ class RequestRequest(models.Model):
 
     @post_write('stage_id')
     def _after_stage_id_changed(self, changes):
-        self.last_route_id.hook_after_stage_change(self)
         old_stage, new_stage = changes['stage_id']
         event_data = {
             'route_id': self.last_route_id.id,
@@ -845,11 +875,6 @@ class RequestRequest(models.Model):
 
     def ensure_can_assign(self):
         for record in self:
-            if record.closed:
-                raise exceptions.UserError(_(
-                    "You can not assign this request (%(request)s), "
-                    "because this request is closed."
-                ) % {'request': record.display_name})
             if not record.can_change_assignee:
                 raise exceptions.UserError(_(
                     "You can not assign this (%(request)s) request"
@@ -863,9 +888,7 @@ class RequestRequest(models.Model):
 
     def action_request_assign_to_me(self):
         self.ensure_can_assign()
-        self.write({
-            'user_id': self.env.user.id,
-        })
+        self.write({'user_id': self.env.user.id})
 
     # Default notifications
     def _send_default_notification__get_email_from(self, **kw):
@@ -877,9 +900,7 @@ class RequestRequest(models.Model):
         """ Compute context for default notification
         """
         values = event.get_context()
-        values.update({
-            'company': self.env.user.company_id,
-        })
+        values['company'] = self.env.user.company_id
         return values
 
     def _send_default_notification__get_msg_params(self, **kw):
@@ -1083,61 +1104,140 @@ class RequestRequest(models.Model):
 
             :return: List of emails
         """
+        # TODO: do we need to parse 'to' header here?
         return tools.email_split(
             (msg.get('to') or '') + ',' + (msg.get('cc') or ''))
 
+    def _get_or_create_partner_from_email(self, email, force_create=False):
+        """ This method will try to find partner by email.
+            And if "force_create" is set to True, then it will try to create
+            new partner (contact) for this email
+        """
+        partner_ids = self._mail_find_partner_from_emails(
+            [email], force_create=force_create)
+        if partner_ids:
+            return partner_ids[0].id
+        return False
+
     @api.model
-    def message_new(self, msg, custom_values=None):
+    def _ensure_email_from_is_not_alias(self, msg_dict):
+        """ Check that email is not come from alias.
+
+            This needed to protect from infinite loops.
+            If email come to odoo from alias managed by odoo,
+            then it seems that there is going on something strage.
+        """
+        __, from_email = (
+            self.env['res.partner']._parse_partner_name(msg_dict['from'])
+            if msg_dict.get('from')
+            else (False, False)
+        )
+        email_addr, email_domain = from_email.split('@')
+
+        alias_domain = self.sudo().env["ir.config_parameter"].get_param(
+            "mail.catchall.domain")
+        if not alias_domain:
+            # If alias domain is no configured, then assume that everything is
+            # ok
+            return
+        if alias_domain.lower().strip() != email_domain.lower().strip():
+            # If email come from different domain then everything seems to be
+            # ok
+            return
+
+        check_domain = [
+            ('alias_name', 'ilike', email_addr),
+        ]
+        if self.env['mail.alias'].search(check_domain, limit=1):
+            raise ValueError(
+                "Cannot create request from email sent from alias '%s'!\n"
+                "Possible infinite loop, thus this email will be skipped!\n"
+                "Subject: %s\n"
+                "From: %s\n"
+                "To: %s\n"
+                "Message ID: %s" % (from_email,
+                                    msg_dict.get('subject'),
+                                    msg_dict.get('from'),
+                                    msg_dict.get('to'),
+                                    msg_dict.get('message_id')))
+
+    def _validate_incoming_message(self, msg_dict):
+        """ Validate incoming message, and if it is not acceptable,
+            then raise error.
+
+            This method could be overriden in third-party modules
+            to provide extra validation options.
+        """
+        self._ensure_email_from_is_not_alias(msg_dict)
+
+    @api.model
+    def message_new(self, msg_dict, custom_values=None):
         """ Overrides mail_thread message_new that is called by the mailgateway
             through message_process.
             This override updates the document according to the email.
         """
+        self._validate_incoming_message(msg_dict)
+        company = self.env.user.company_id
         Partner = self.env['res.partner']
         defaults = dict(custom_values) if custom_values is not None else {}
 
         # Ensure we have message_id
-        if not msg.get('message_id'):
-            msg['message_id'] = self.env['mail.message']._get_message_id(msg)
+        if not msg_dict.get('message_id'):
+            msg_dict['message_id'] = self.env['mail.message']._get_message_id(
+                msg_dict)
 
         # Compute default request text
         request_text = MAIL_REQUEST_TEXT_TMPL % {
-            'subject': msg.get('subject', _("No Subject")),
-            'body': msg.get('body', ''),
+            'subject': msg_dict.get('subject', _("No Subject")),
+            'body': msg_dict.get('body', ''),
         }
+
+        author_name, author_email = (
+            Partner._parse_partner_name(msg_dict['from'])
+            if msg_dict.get('from')
+            else (False, False)
+        )
 
         # Update defaults with partner and created_by_id if possible
         defaults.update({
             'name': "###new###",  # Spec name to avoid using subj as req name
             'request_text': request_text,
-            'original_message_id': msg['message_id'],
-            'email_from': msg.get('from', ''),
-            'email_cc': msg.get('cc', ''),
+            'original_message_id': msg_dict['message_id'],
+            'email_from': author_email,
+            'email_cc': msg_dict.get('cc', ''),
         })
-        author_id = msg.get('author_id')
+        author_id = msg_dict.get('author_id')
+
+        # Create author from email if needed
+        if not author_id and company.request_mail_create_partner_from_email:
+            author_id = self._get_or_create_partner_from_email(
+                msg_dict['from'], force_create=True)
+            if author_id:
+                msg_dict['author_id'] = author_id
+
         if author_id:
             author = self.env['res.partner'].browse(author_id)
-            defaults['partner_id'] = author.commercial_partner_id.id
             defaults['author_id'] = author.id
+            # TODO: May be we have to rely on autodetection of partner?
+            #       (without explicitly setting it here)
+            defaults['partner_id'] = author.commercial_partner_id.id
             if len(author.user_ids) == 1:
                 defaults['created_by_id'] = author.user_ids[0].id
         else:
             author = False
             defaults['author_id'] = False
             defaults['partner_id'] = False
-            defaults['author_name'] = Partner._parse_partner_name(
-                msg['from'])[0] if msg.get('from') else False
+            defaults['author_name'] = author_name
 
         defaults.update({'channel_id': self.env.ref(
             'generic_request.request_channel_email').id})
 
         request = super(RequestRequest, self).message_new(
-            msg, custom_values=defaults)
+            msg_dict, custom_values=defaults)
 
-        # Find partners from email and subscribe them
-        company = self.env.user.company_id
-        email_list = self._find_emails_from_msg(msg)
+        # Find partners from emails (cc) and subscribe them
         partner_ids = request._mail_find_partner_from_emails(
-            email_list,
+            self._find_emails_from_msg(msg_dict),
             force_create=company.request_mail_create_partner_from_email)
         partner_ids = [p.id for p in partner_ids if p]
 
@@ -1150,6 +1250,9 @@ class RequestRequest(models.Model):
     def message_update(self, msg, update_vals=None):
         # Subscribe partners found in received email
         email_list = self._find_emails_from_msg(msg)
+
+        # TODO: Add option in settings that could allow to force create
+        # contacts mentioned in cc
         partner_ids = self._mail_find_partner_from_emails(
             email_list, force_create=False)
         partner_ids = [p.id for p in partner_ids if p]
@@ -1167,7 +1270,8 @@ class RequestRequest(models.Model):
                     recipients, partner=record.author_id, reason=reason)
             elif record.email_from:
                 record._message_add_suggested_recipient(
-                    recipients, email=record.email_from,
+                    recipients,
+                    email="%s <%s>" % (record.author_name, record.email_from),
                     reason=_('Author Email'))
             if (record.email_cc and
                     self.env.user.company_id.request_mail_suggest_global_cc):
@@ -1220,49 +1324,6 @@ class RequestRequest(models.Model):
             'generic_request.action_request_event_view',
             domain=[('request_id', '=', self.id)])
 
-    # Timesheets
-    @api.depends('timesheet_line_ids', 'timesheet_line_ids.amount',
-                 'timesheet_planned_amount')
-    def _compute_timesheet_line_data(self):
-        for rec in self:
-            timesheet_amount = 0.0
-            for line in rec.timesheet_line_ids:
-                timesheet_amount += line.amount
-            rec.timesheet_amount = timesheet_amount
-
-            if rec.timesheet_planned_amount:
-                rec.timesheet_remaining_amount = (
-                    rec.timesheet_planned_amount - timesheet_amount)
-                rec.timesheet_progress = (
-                    100.0 * (timesheet_amount / rec.timesheet_planned_amount))
-            else:
-                rec.timesheet_remaining_amount = 0.0
-                rec.timesheet_progress = 0.0
-
-    @api.depends('timesheet_line_ids', 'timesheet_line_ids.date_start',
-                 'timesheet_line_ids.date_start')
-    def _compute_timesheet_start_status(self):
-        TimesheetLines = self.env['request.timesheet.line']
-        domain = expression.AND([
-            TimesheetLines._get_running_lines_domain(),
-            [('request_id', 'in', self.ids)],
-        ])
-        grouped = self.env["request.timesheet.line"].read_group(
-            domain=domain,
-            fields=["id", 'request_id'],
-            groupby=['request_id'],
-        )
-        lines_per_record = {
-            group['request_id'][0]: group["request_id_count"]
-            for group in grouped
-        }
-
-        for record in self:
-            if lines_per_record.get(record.id, 0) > 0:
-                record.timesheet_start_status = 'started'
-            else:
-                record.timesheet_start_status = 'not-started'
-
     def _request_timesheet_get_defaults(self):
         return {
             'request_id': self.id,
@@ -1281,9 +1342,7 @@ class RequestRequest(models.Model):
                 })
 
         data = self._request_timesheet_get_defaults()
-        data.update({
-            'date_start': fields.Datetime.now(),
-        })
+        data['date_start'] = fields.Datetime.now()
         timesheet_line = TimesheetLines.create(data)
         self.trigger_event('timetracking-start-work', {
             'timesheet_line_id': timesheet_line.id,

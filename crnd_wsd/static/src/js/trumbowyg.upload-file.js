@@ -78,18 +78,28 @@ odoo.define('crnd_wsd.trumbowyg.upload-file', function (require) {
 
     // Pluging to enable file upload in trumbowyg
     $.extend(true, $.trumbowyg, {
+
         langs: {
             en: {
                 uploadFile: 'Attach File',
                 file: 'File',
+                uploadErrorLargeFileSize: 'File too large',
+                note: 'Note',
+                max_file_size: 'Maximum file size ',
             },
             ua: {
                 uploadFile: 'Завантажити файл',
                 file: 'Файл',
+                uploadErrorLargeFileSize: 'Файл завеликий',
+                note: 'Примітка',
+                max_file_size: 'Максимальний розмір файлу ',
             },
             ru: {
                 uploadFile: 'Загрузить файл',
                 file: 'Файл',
+                uploadErrorLargeFileSize: 'Файл слишком большой',
+                note: 'Примечание',
+                max_file_size: 'Максимальный размер файла ',
             },
         },
         plugins: {
@@ -111,14 +121,20 @@ odoo.define('crnd_wsd.trumbowyg.upload-file', function (require) {
                             var file = null,
                                 fileName = null,
                                 fileType = null,
+                                fileSize = null,
                                 prefix = trumbowyg.o.prefix;
 
+                            var allowed_file_types = trumbowyg.$box.closest(
+                                '#wrap.crnd-wsd-wrap'
+                            ).data('allowed_file_types');
+
                             var fields = {
+
                                 file: {
                                     type: 'file',
                                     required: true,
                                     attributes: {
-                                        // Accept: 'image/*'
+                                        'accept': allowed_file_types,
                                     },
                                 },
                                 alt: {
@@ -141,6 +157,7 @@ odoo.define('crnd_wsd.trumbowyg.upload-file', function (require) {
                                         trumbowyg.o.plugins.uploadFile.fileFieldName, file);
 
                                     var request_id = trumbowyg.$box.closest('.wsd_request').data('request-id');
+
                                     if (request_id) {
                                         data.append(
                                             'request_id', request_id);
@@ -230,7 +247,7 @@ odoo.define('crnd_wsd.trumbowyg.upload-file', function (require) {
                                             } else {
                                                 trumbowyg.addErrorOnModalField(
                                                     $('input[type=file]', $modal),
-                                                    trumbowyg.lang[success_data.message]
+                                                    success_data.message
                                                 );
                                                 trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg, success_data]);
                                             }
@@ -255,8 +272,47 @@ odoo.define('crnd_wsd.trumbowyg.upload-file', function (require) {
                                     // In IE8, multiple files not allowed
                                     file = e.target.value;
                                 }
-                                fileName = file.name;
-                                fileType = file.type;
+
+                                if (file) {
+                                    fileName = file.name;
+                                    fileType = file.type;
+                                    fileSize = file.size;
+                                } else {
+                                    fileName = null;
+                                    fileType = null;
+                                    fileSize = null;
+                                }
+
+                                // Check filesize
+                                var file_max_size = trumbowyg.$box.closest('#wrap.crnd-wsd-wrap').data('max_file_size');
+                                var $field = $('input[type=file]', $modal),
+                                    spanErrorClass = prefix + 'msg-error',
+                                    $label = $field.parent();
+                                if (file_max_size && fileSize > file_max_size) {
+                                    // Disable submit button
+                                    $modal.find('.trumbowyg-modal-submit').attr('disabled', 'disabled').hide();
+
+                                    // Show error message if it is not shown yet
+                                    if (!$field.parent().hasClass('trumbowyg-input-error')) {
+                                        // Show error message
+                                        $label
+                                            .addClass(prefix + 'input-error')
+                                            .find('input+span')
+                                            .append(
+                                                $('<span/>', {
+                                                    class: spanErrorClass,
+                                                    text: trumbowyg.lang.uploadErrorLargeFileSize,
+                                                })
+                                            );
+                                        trumbowyg.$c.trigger('tbwuploaderror', [trumbowyg]);
+                                    }
+                                } else {
+                                    $modal.find('.trumbowyg-modal-submit').removeAttr('disabled').show();
+
+                                    // Hide error message
+                                    $label.removeClass(prefix + 'input-error');
+                                    $label.find('.' + spanErrorClass).remove();
+                                }
                             });
                         },
                     };

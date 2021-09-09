@@ -11,7 +11,6 @@
     </record>
 
     <record id="generic_request_res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">generic.request.config.settings.view.form</field>
         <field name="model">res.config.settings</field>
         <field name="priority" eval="20"/>
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
@@ -70,7 +69,7 @@
                                     <div class="mt16">
                                         <label for="request_event_live_time"/>
                                     </div>
-                                    <div class="mt8">
+                                    <div>
                                         <field name="request_event_live_time"
                                                style="width: auto;"
                                         />
@@ -78,6 +77,19 @@
                                                style="width: auto; margin-left: 8px;"
                                         />
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="group_request_show_stat_on_kanban_views"
+                                       string="Show request stat on kanban views"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_request_show_stat_on_kanban_views"/>
+                                <div class="text-muted">
+                                    If enabled then users will see request statistics on kanban views
+                                    of request related models like: Request Type, Request Category, etc
                                 </div>
                             </div>
                         </div>
@@ -108,22 +120,14 @@
                                 <field name="request_mail_create_partner_from_email"/>
                             </div>
                             <div class="o_setting_right_pane">
-                                <label for="request_mail_create_partner_from_email"/>
+                                <label for="request_mail_create_partner_from_email"
+                                       string="Automatically create contacts for requests"/>
                                 <div class="text-muted">
-                                    When request created from incoming email, and author of email is not present in odoo's contacts database, then create new contact (partner) for this email address.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-6 o_setting_box">
-                            <div class="o_setting_left_pane">
-                                <field name="group_request_show_stat_on_kanban_views"
-                                       string="Show request stat on kanban views"/>
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="group_request_show_stat_on_kanban_views"/>
-                                <div class="text-muted">
-                                    If enabled then users will see request statistics on kanban views
-                                    of request related models like: Request Type, Request Category, etc
+                                    <p>When request created from incoming email or by unregistered user on website,
+                                    and author is not present in odoo's contacts database,
+                                    then create new contact (partner) for this email address.</p>
+                                    <p>Also, if the checkbox is checked, for any email mentioned in CC header new contact will be created (if not exists yet)</p>
+                                    <p>Same bechavior will be applied to requests created on website by unregistered users.</p>
                                 </div>
                             </div>
                         </div>

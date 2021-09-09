@@ -10,7 +10,7 @@ class ResCompany(models.Model):
         ('weeks', 'Weeks'),
         ('months', 'Months')], default='days')
     request_event_auto_remove = fields.Boolean(
-        string='Automatically remove events older then',
+        string='Automatically remove events older than',
         default=True)
 
     request_mail_suggest_partner = fields.Boolean(
@@ -21,4 +21,6 @@ class ResCompany(models.Model):
     request_mail_create_partner_from_email = fields.Boolean(
         string="Create partners from incoming emails",
         help="If set to True, then if request came from email that has no "
-             "related partner, then partner will be created automatically.")
+             "related partner, then partner will be created automatically. "
+             "Also, same logic applied to requests created from website by "
+             "unregistered users.")
