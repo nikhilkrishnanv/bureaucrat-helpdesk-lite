@@ -1,3 +1,4 @@
+import os
 import json
 import base64
 import logging
@@ -14,11 +15,15 @@ _logger = logging.getLogger(__name__)
 
 class WSDHelpers(WSDControllerMixin, http.Controller):
 
+    def _get_max_upload_size(self):
+        """ Get configuration for max upload size
+        """
+        return request.env.user.company_id._get_request_max_upload_file_size()
+
     @http.route('/crnd_wsd/file_upload', type='http',
                 auth='user', methods=['POST'], website=True)
     def wsd_upload_file(self, upload, alt='File', filename=None,
                         is_image=False, **post_data):
-        Attachments = request.env['ir.attachment'].sudo()
         attachment_data = {
             'description': alt,
             'name': filename or 'upload',
@@ -36,6 +41,21 @@ class WSDHelpers(WSDControllerMixin, http.Controller):
             else:
                 attachment_data['res_model'] = 'request.request'
 
+        # Check max filesize and return error if file is too big
+        upload.seek(0, os.SEEK_END)
+        file_size = upload.tell()
+        max_size = self._get_max_upload_size()
+        if max_size and file_size > max_size:
+            _logger.warning(
+                "File size is too big: %s > %s", file_size, max_size)
+            return json.dumps({
+                'status': 'FAIL',
+                'success': False,
+                'message': _(
+                    "File size is too big!"),
+            })
+        upload.seek(0, os.SEEK_SET)
+
         try:
             data = upload.read()
             data_base64 = base64.b64encode(data)
@@ -44,7 +64,7 @@ class WSDHelpers(WSDControllerMixin, http.Controller):
                 data_base64 = tools.image_process(
                     data_base64, verify_resolution=True)
 
-            attachment = Attachments.create(dict(
+            attachment = request.env['ir.attachment'].sudo().create(dict(
                 attachment_data,
                 datas=data_base64,
             ))

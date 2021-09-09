@@ -6,7 +6,7 @@ class RequestWizardStopWork(models.TransientModel):
     _description = 'Request Wizard: Stop Work'
 
     timesheet_line_id = fields.Many2one(
-        'request.timesheet.line', required=True)
+        'request.timesheet.line', required=True, ondelete='cascade')
     date_start = fields.Datetime(
         related='timesheet_line_id.date_start', readonly=True)
     request_id = fields.Many2one(

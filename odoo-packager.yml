@@ -11,3 +11,4 @@ known-addons:
     - crnd_web_list_popover_widget
     - generic_tag
     - crnd_web_tree_colored_field
+    - crnd_web_m2o_info_widget
