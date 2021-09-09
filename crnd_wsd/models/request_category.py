@@ -11,6 +11,14 @@ class RequestCategory(models.Model):
         'Visible in Website', copy=False)
     website_ids = fields.Many2many('website')
 
+    # Access rignts
+    access_group_ids = fields.Many2many(
+        'res.groups', string='Access groups',
+        help="If user belongs to one of groups specified in this field,"
+             " then he will be able to select this category during request"
+             " creation on website, even if this category is not published."
+    )
+
     def website_publish_button(self):
         for rec in self:
             rec.website_published = not rec.website_published

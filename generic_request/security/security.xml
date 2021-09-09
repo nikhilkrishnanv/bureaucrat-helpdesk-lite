@@ -44,9 +44,18 @@
         </field>
     </record>
 
+    <record id="group_request_user_read_all_request_types" model="res.groups">
+        <field name="name">Request user (Read all types)</field>
+        <field name="category_id" ref="base.module_category_generic_request"/>
+        <field name="comment">
+            Users of this group can read all request types
+        </field>
+    </record>
+
+
     <record id="group_request_manager" model="res.groups">
         <field name="name">Request manager</field>
-        <field name="implied_ids" eval="[(4, ref('generic_request.group_request_user'))]"/>
+        <field name="implied_ids" eval="[(4, ref('generic_request.group_request_user')), (4, ref('generic_request.group_request_user_read_all_request_types'))]"/>
         <field name="category_id" ref="base.module_category_generic_request"/>
         <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
         <field name="comment">
@@ -132,6 +141,16 @@
         <field eval="1" name="perm_read"/>
         <field eval="0" name="perm_create"/>
     </record>
+    <record id="rule_request_type_user_read_all_types" model="ir.rule">
+        <field name="name">request types (read all)</field>
+        <field name="model_id" ref="generic_request.model_request_type"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('generic_request.group_request_user_read_all_request_types'))]"/>
+        <field eval="0" name="perm_unlink"/>
+        <field eval="0" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="0" name="perm_create"/>
+    </record>
     <record id="rule_request_request_by_subscription" model="ir.rule">
         <field name="name">Followed requests</field>
         <field name="model_id" ref="generic_request.model_request_request"/>
@@ -176,7 +195,7 @@
     <record id="rule_request_request_see_all_requests" model="ir.rule">
         <field name="name">See all requests</field>
         <field name="model_id" ref="generic_request.model_request_request"/>
-        <field name="domain_force">[]</field>
+        <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('generic_request.group_request_user_see_all_requests'))]"/>
         <field eval="0" name="perm_unlink"/>
         <field eval="0" name="perm_write"/>
@@ -187,7 +206,7 @@
     <record id="rule_request_request_write_all_requests" model="ir.rule">
         <field name="name">Read/Write all requests</field>
         <field name="model_id" ref="generic_request.model_request_request"/>
-        <field name="domain_force">[]</field>
+        <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('generic_request.group_request_user_write_all_requests'))]"/>
         <field eval="0" name="perm_unlink"/>
         <field eval="1" name="perm_write"/>
@@ -200,16 +219,6 @@
     <record id="rule_request_category_manager" model="ir.rule">
         <field name="name">Manager request categories</field>
         <field name="model_id" ref="generic_request.model_request_category"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
-        <field name="groups" eval="[(4, ref('generic_request.group_request_manager'))]"/>
-        <field eval="0" name="perm_unlink"/>
-        <field eval="0" name="perm_write"/>
-        <field eval="1" name="perm_read"/>
-        <field eval="0" name="perm_create"/>
-    </record>
-    <record id="rule_request_type_manager" model="ir.rule">
-        <field name="name">Manager request types</field>
-        <field name="model_id" ref="generic_request.model_request_type"/>
         <field name="domain_force">[(1, '=', 1)]</field>
         <field name="groups" eval="[(4, ref('generic_request.group_request_manager'))]"/>
         <field eval="0" name="perm_unlink"/>

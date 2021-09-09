@@ -5,6 +5,7 @@ from odoo import models, fields, api, _
 
 class RequestTimesheetLine(models.Model):
     _name = 'request.timesheet.line'
+    _inherit = 'generic.mixin.track.changes'
     _description = 'Request Timesheet Line'
     _order = 'date DESC, date_start DESC'
 

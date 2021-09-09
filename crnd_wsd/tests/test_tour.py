@@ -106,3 +106,30 @@ class TestWebsiteServiceDesk(TestPhantomTour):
         self.env.user.company_id.request_wsd_public_ui_visibility = 'redirect'
         self._test_phantom_tour(
             '/', 'crnd_wsd_tour_request_public_user_redirect')
+
+    def test_tour_public_user_create_request(self):
+        self.env.user.company_id.request_wsd_public_ui_visibility = (
+            'create-request')
+        request = self._test_phantom_tour_requests(
+            '/', 'crnd_wsd_tour_request_public_user_create_request')
+
+        self.assertEqual(len(request), 1)
+        self.assertFalse(request.author_id)
+        self.assertFalse(request.partner_id)
+        self.assertEqual(request.author_name, 'John Doe')
+        self.assertEqual(request.email_from, 'john@doe.net')
+
+    def test_tour_public_user_create_request_create_contact(self):
+        self.env.user.company_id.request_wsd_public_ui_visibility = (
+            'create-request')
+        self.env.user.company_id.request_mail_create_partner_from_email = True
+        request = self._test_phantom_tour_requests(
+            '/', 'crnd_wsd_tour_request_public_user_create_request')
+
+        self.assertEqual(len(request), 1)
+        self.assertTrue(request.author_id)
+        self.assertFalse(request.partner_id)
+        self.assertFalse(request.author_name)
+        self.assertFalse(request.email_from)
+        self.assertEqual(request.author_id.name, 'John Doe')
+        self.assertEqual(request.author_id.email, 'john@doe.net')

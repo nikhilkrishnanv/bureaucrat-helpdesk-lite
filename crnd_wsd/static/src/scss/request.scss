@@ -19,6 +19,28 @@
 $discussion-comment-height: 80px;
 $request-text-height: 200px;
 
+/* Colors for Tiles style */
+$request_parameter_bg_color_element: theme-color('light');
+$request_parameter_font_color_light: theme-color('light');
+$request_parameter_font_color: transparentize(theme-color('dark'), 0.3);
+
+@mixin request_layout_style_tile {  /* stylelint-disable-line at-rule-no-unknown */
+    background-color: $request_parameter_bg_color_element;
+    box-shadow: 0 0 0 0.15rem transparentize(theme-color('primary'), 0.4);
+    border-radius: 0.25rem;
+    font-weight: normal;
+    text-align: center;
+    color: $request_parameter_font_color !important;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+
+    &:hover {
+        background-color: theme-color('primary');
+        border-radius: 0.25rem;
+        color: $request_parameter_font_color_light !important;
+    }
+}
+
 .wsd_request {
     #request-head {
         > hr {
@@ -289,8 +311,53 @@ $request-text-height: 200px;
         }
     }
 
-    .wsd-request-new-select-param .wsd-request-new-select-param-item label {
-        font-weight: unset;
+    .wsd-request-new-select-param {
+        .wsd-request-new-select-param-item label {
+            font-weight: unset;
+        }
+
+        &.wsd-request-new-select-param-tiles {
+            .wsd-request-new-select-param-item {
+                input {
+                    display: none;
+                }
+
+                label {
+                    @include request_layout_style_tile; /* stylelint-disable-line at-rule-no-unknown */
+
+                    width: 100%;
+                    padding: 1rem;
+                }
+
+                span {
+                    display: none;
+                }
+            }
+
+            a.request-new-btn-back {
+                @include request_layout_style_tile; /* stylelint-disable-line at-rule-no-unknown */
+
+                display: inline-flex;
+                padding: 0.25rem 2rem;
+                font-size: 3em;
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+    .wsd-request-create-form-layout-tiles {
+        .request-new-btn-back,
+        .request-new-btn-next {
+            @include request_layout_style_tile; /* stylelint-disable-line at-rule-no-unknown */
+
+            display: inline-flex;
+            padding: 0.25rem 2rem;
+            font-size: 3em;
+            border: none;
+            outline: none;
+            margin: 0 8px;
+        }
     }
 }
 
