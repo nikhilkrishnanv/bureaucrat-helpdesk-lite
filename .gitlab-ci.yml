@@ -15,6 +15,7 @@ cache: {}
 
 stages:
     - package
+    - build
     - deploy
 
 .do_package_definition: &do_package_definition
@@ -48,6 +49,7 @@ do_package_manual_or_api:
     only:
         - web
         - api
+
 
 
 
