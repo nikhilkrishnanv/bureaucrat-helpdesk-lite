@@ -1,6 +1,6 @@
 import logging
 from odoo import http
-from odoo.addons.mail.controllers.main import MailController
+from odoo.addons.mail.controllers.mail import MailController
 
 _logger = logging.getLogger(__name__)
 

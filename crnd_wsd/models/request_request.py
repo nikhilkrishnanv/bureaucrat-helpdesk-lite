@@ -13,13 +13,13 @@ class RequestRequest(models.Model):
     # Set this to compute with sudo to avoid access rights conflicts
     activity_date_deadline = fields.Date(compute_sudo=True)
     created_by_avatar = fields.Binary(
-        "Creator (Avatar)", related='created_by_id.image_small')
+        "Creator (Avatar)", related='created_by_id.image_128')
     author_avatar = fields.Binary(
-        "Author (Avatar)", related='author_id.image_small')
+        "Author (Avatar)", related='author_id.image_128')
     assignee_avatar = fields.Binary(
-        "Assignee (Avatar)", related='user_id.image_small')
+        "Assignee (Avatar)", related='user_id.image_128')
     closed_by_avatar = fields.Binary(
-        "Closed By (Avatar)", related='closed_by_id.image_small')
+        "Closed By (Avatar)", related='closed_by_id.image_128')
     website_id = fields.Many2one('website')
 
     def _compute_access_url(self):
@@ -35,7 +35,7 @@ class RequestRequest(models.Model):
         user, record = self.env.user, self
         if access_uid:
             user = self.env['res.users'].sudo().browse(access_uid)
-            record = self.sudo(user)
+            record = self.with_user(user)
         if user.share:
             return {
                 'type': 'ir.actions.act_url',
@@ -53,7 +53,7 @@ class RequestRequest(models.Model):
             att_id = int(m[1])
             attachment_ids.append(att_id)
 
-        self.env['ir.attachment'].search([
+        self.env['ir.attachment'].sudo().search([
             ('res_model', '=', False),
             ('res_id', '=', False),
             ('id', 'in', attachment_ids),

@@ -96,12 +96,12 @@ class RequestCase(AccessRulesFixMixinST,
         if user is None:
             user = self.env.user
 
-        close_route = self.env['request.stage.route'].sudo(user).search([
+        close_route = self.env['request.stage.route'].with_user(user).search([
             ('request_type_id', '=', request.type_id.id),
             ('stage_to_id', '=', stage.id),
         ])
         close_route.ensure_one()
-        wiz = self.env['request.wizard.close'].sudo(user).create({
+        wiz = self.env['request.wizard.close'].with_user(user).create({
             'request_id': request.id,
             'close_route_id': close_route.id,
             'response_text': response_text,
@@ -146,10 +146,10 @@ class AccessRightsCase(AccessRulesFixMixinST,
 
     def _read_request_fields(self, user, request):
         fields = list(
-            self.env['request.request'].sudo(
+            self.env['request.request'].with_user(
                 user
             ).load_views(
                 self.request_action.views
             )['fields_views']['form']['fields']
         )
-        return request.sudo(user).read(fields)
+        return request.with_user(user).read(fields)

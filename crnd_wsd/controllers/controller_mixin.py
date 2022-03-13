@@ -29,7 +29,7 @@ class WSDControllerMixin(http.Controller):
             :param str xmlid: external ID of view
             :return bool: True if view is active, otherwise False
         """
-        view = http.request.env.ref(xmlid, raise_if_not_found=False)
+        view = http.request.env(su=True).ref(xmlid, raise_if_not_found=False)
         if view:
             return view.active
         return False

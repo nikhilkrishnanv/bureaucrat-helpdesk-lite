@@ -1,53 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-
-    <template id="wsd_assets"
-              inherit_id="website.assets_frontend"
-              name="Service Desk Website Assets">
-        <xpath expr="." position="inside">
-            <!-- Trumbowyg -->
-            <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/trumbowyg.min.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/langs/ua.min.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/langs/ru.min.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/plugins/table/trumbowyg.table.min.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/lib/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js"/>
-            <link rel='stylesheet' type="text/css" href="/crnd_wsd/static/lib/trumbowyg/dist/ui/trumbowyg.min.css"/>
-            <link rel='stylesheet' type="text/css" href="/crnd_wsd/static/lib/trumbowyg/dist/plugins/table/ui/trumbowyg.table.min.css"/>
-            <link rel='stylesheet' type="text/css" href="/crnd_wsd/static/lib/trumbowyg/dist/plugins/colors/ui/trumbowyg.colors.min.css"/>
-            <!-- *** -->
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/trumbowyg.upload-file.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/trumbowyg.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/blockui.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/request_discussion.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/request_new.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/request_new_step.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/request_actions.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/enable_popovers.js"/>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/widgets.js"/>
-            <link rel='stylesheet' type="text/scss" href='/crnd_wsd/static/src/scss/request.scss'/>
-            <link rel='stylesheet' type="text/css" href="/crnd_wsd/static/src/scss/blockui_spin.css"/>
-        </xpath>
-    </template>
-
-    <template id="wsd_tests"
-              name="Website Service Desk Tests"
-              inherit_id="web.assets_common">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_mail_login_portal.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_action_no_actions.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_action_actions.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_action_actions_redirect.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_base.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_new.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_new_default_text.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_public_user.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_public_user_redirect.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_public_user_create_req.js"></script>
-            <script type="text/javascript" src="/crnd_wsd/static/src/js/tours/request_filter_kind.js"></script>
-
-        </xpath>
-    </template>
-
     <template id="wsd_request_navigation">
         <div class="request_navigation row mt16">
             <div class="oe_structure col-sm-12"/>

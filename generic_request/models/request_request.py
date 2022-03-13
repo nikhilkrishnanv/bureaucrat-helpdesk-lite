@@ -2,7 +2,7 @@
 import logging
 from datetime import datetime
 from odoo import models, fields, api, tools, _, http, exceptions, SUPERUSER_ID
-from odoo.addons.generic_mixin import pre_write, post_write
+from odoo.addons.generic_mixin import pre_write, post_write, pre_create
 from odoo.osv import expression
 from ..tools.utils import html2text
 from ..constants import (
@@ -52,22 +52,28 @@ class RequestRequest(models.Model):
         string='Priority (Technical)')
     priority = fields.Selection(
         selection=AVAILABLE_PRIORITIES,
-        track_visibility='onchange',
-        index=True, store=True,
+        tracking=True,
+        index=True,
+        store=True,
         compute='_compute_priority',
         inverse='_inverse_priority',
-        help="Actual priority of request")
+        help="Actual priority of request"
+    )
     impact = fields.Selection(
-        selection=AVAILABLE_IMPACTS, index=True)
+        selection=AVAILABLE_IMPACTS,
+        index=True
+    )
     urgency = fields.Selection(
-        selection=AVAILABLE_URGENCIES, index=True)
+        selection=AVAILABLE_URGENCIES,
+        index=True
+    )
     is_priority_complex = fields.Boolean(
         related='type_id.complex_priority', readonly=True)
 
     # Type and stage related fields
     type_id = fields.Many2one(
         'request.type', 'Type', ondelete='restrict',
-        required=True, index=True, track_visibility='always',
+        required=True, index=True, tracking=True,
         help="Type of request")
     type_color = fields.Char(related="type_id.color", readonly=True)
     kind_id = fields.Many2one(
@@ -76,7 +82,7 @@ class RequestRequest(models.Model):
         help="Kind of request")
     category_id = fields.Many2one(
         'request.category', 'Category', index=True,
-        required=False, ondelete="restrict", track_visibility='onchange',
+        required=False, ondelete="restrict", tracking=True,
         help="Category of request")
     channel_id = fields.Many2one(
         'request.channel', 'Channel', index=True, required=False,
@@ -85,7 +91,7 @@ class RequestRequest(models.Model):
         help="Channel of request")
     stage_id = fields.Many2one(
         'request.stage', 'Stage', ondelete='restrict',
-        required=True, index=True, track_visibility="onchange", copy=False)
+        required=True, index=True, tracking=True, copy=False)
     stage_type_id = fields.Many2one(
         'request.stage.type', related="stage_id.type_id", string="Stage Type",
         index=True, readonly=True, store=True)
@@ -108,7 +114,7 @@ class RequestRequest(models.Model):
             ('done', 'Ready for next stage')],
         required='True',
         default='normal',
-        track_visibility='onchange',
+        tracking=True,
         help="A requests kanban state indicates special"
              " situations affecting it:\n"
              " * Grey is the default situation\n"
@@ -129,15 +135,20 @@ class RequestRequest(models.Model):
 
     # UI change restriction fields
     can_change_request_text = fields.Boolean(
-        compute='_compute_can_change_request_text', readonly=True)
+        compute='_compute_can_change_request_text', readonly=True,
+        compute_sudo=False)
     can_change_assignee = fields.Boolean(
-        compute='_compute_can_change_assignee', readonly=True)
+        compute='_compute_can_change_assignee', readonly=True,
+        compute_sudo=False)
     can_change_author = fields.Boolean(
-        compute='_compute_can_change_author', readonly=True)
+        compute='_compute_can_change_author', readonly=True,
+        compute_sudo=False)
     can_change_category = fields.Boolean(
-        compute='_compute_can_change_category', readonly=True)
+        compute='_compute_can_change_category', readonly=True,
+        compute_sudo=False)
     can_change_deadline = fields.Boolean(
-        compute='_compute_can_change_deadline', readonly=True)
+        compute='_compute_can_change_deadline', readonly=True,
+        compute_sudo=False)
     next_stage_ids = fields.Many2many(
         'request.stage', compute="_compute_next_stage_ids", readonly=True)
 
@@ -145,7 +156,7 @@ class RequestRequest(models.Model):
     request_text = fields.Html(required=True)
     response_text = fields.Html(required=False)
     request_text_sample = fields.Text(
-        compute="_compute_request_text_sample", track_visibility="always",
+        compute="_compute_request_text_sample", tracking=True,
         string='Request text')
 
     deadline_date = fields.Date('Deadline')
@@ -169,17 +180,17 @@ class RequestRequest(models.Model):
         'res.users', 'Closed by', readonly=True, ondelete='restrict',
         copy=False, help="Request was closed by this user")
     partner_id = fields.Many2one(
-        'res.partner', 'Partner', index=True, track_visibility='onchange',
+        'res.partner', 'Partner', index=True, tracking=True,
         ondelete='restrict', help="Partner related to this request")
     author_id = fields.Many2one(
         'res.partner', 'Author', index=True, required=False,
-        ondelete='restrict', track_visibility='onchange',
+        ondelete='restrict', tracking=True,
         domain=[('is_company', '=', False)],
         default=lambda self: self.env.user.partner_id,
         help="Author of this request")
     user_id = fields.Many2one(
         'res.users', 'Assigned to',
-        ondelete='restrict', track_visibility='onchange', index=True,
+        ondelete='restrict', tracking=True, index=True,
         help="User responsible for next action on this request.")
 
     # Email support
@@ -208,7 +219,8 @@ class RequestRequest(models.Model):
         string='Attachments')
 
     instruction_visible = fields.Boolean(
-        compute='_compute_instruction_visible', default=False)
+        compute='_compute_instruction_visible', default=False,
+        compute_sudo=False)
 
     # We have to explicitly set compute_sudo to True to avoid access errors
     activity_date_deadline = fields.Date(compute_sudo=True)
@@ -594,13 +606,11 @@ class RequestRequest(models.Model):
 
     @api.model
     def create(self, vals):
-        # Update date_assigned
-        if vals.get('user_id'):
-            vals['date_assigned'] = fields.Datetime.now()
         if vals.get('type_id', False):
             r_type = self.env['request.type'].browse(vals['type_id'])
             vals = self._create_update_from_type(r_type, vals)
-        self_ctx = self.with_context(mail_create_nolog=True)
+
+        self_ctx = self.with_context(mail_create_nolog=False)
         request = super(RequestRequest, self_ctx).create(vals)
         request.trigger_event('created')
         return request
@@ -628,10 +638,10 @@ class RequestRequest(models.Model):
         raise exceptions.ValidationError(_(
             'It is not allowed to change request type'))
 
+    @pre_create('user_id')
     @pre_write('user_id')
     def _before_user_id_changed(self, changes):
-        new_user = changes['user_id'][1]  # (old_user, new_user)
-        if new_user:
+        if changes['user_id'].new_val:
             return {'date_assigned': fields.Datetime.now()}
         return {'date_assigned': False}
 
@@ -764,6 +774,11 @@ class RequestRequest(models.Model):
         self.trigger_event(event_code, {
             'request_active': event_code})
 
+    def _creation_subtype(self):
+        """ Determine mail subtype for request creation message/notification
+        """
+        return self.env.ref('generic_request.mt_request_created')
+
     def _track_subtype(self, init_values):
         """ Give the subtypes triggered by the changes on the record according
         to values that have been updated.
@@ -776,19 +791,16 @@ class RequestRequest(models.Model):
         self.ensure_one()
         if 'stage_id' in init_values:
             init_stage = init_values['stage_id']
-            if not init_stage and \
-                    self.stage_id == self.type_id.sudo().start_stage_id:
-                return 'generic_request.mt_request_created'
             if init_stage and init_stage != self.stage_id and \
                     self.stage_id.closed and not init_stage.closed:
-                return 'generic_request.mt_request_closed'
+                return self.env.ref('generic_request.mt_request_closed')
             if init_stage and init_stage != self.stage_id and \
                     not self.stage_id.closed and init_stage.closed:
-                return 'generic_request.mt_request_reopened'
+                return self.env.ref('generic_request.mt_request_reopened')
             if init_stage != self.stage_id:
-                return 'generic_request.mt_request_stage_changed'
+                return self.env.ref('generic_request.mt_request_stage_changed')
 
-        return 'generic_request.mt_request_updated'
+        return self.env.ref('generic_request.mt_request_updated')
 
     @api.onchange('type_id')
     def onchange_type_id(self):
@@ -1048,12 +1060,12 @@ class RequestRequest(models.Model):
         """
         return "/mail/view/request/%s" % self.id
 
-    def _notify_get_groups(self, message, groups):
+    def _notify_get_groups(self, *args, **kwargs):
         """ Use custom url for *button_access* in notification emails
         """
         self.ensure_one()
         groups = super(RequestRequest, self)._notify_get_groups(
-            message, groups)
+            *args, **kwargs)
 
         view_title = _('View Request')
         access_link = self.get_mail_url()
@@ -1104,10 +1116,10 @@ class RequestRequest(models.Model):
             And if "force_create" is set to True, then it will try to create
             new partner (contact) for this email
         """
-        partner_ids = self._find_partner_from_emails(
+        partner_ids = self._mail_find_partner_from_emails(
             [email], force_create=force_create)
         if partner_ids:
-            return partner_ids[0]
+            return partner_ids[0].id
         return False
 
     @api.model
@@ -1227,10 +1239,10 @@ class RequestRequest(models.Model):
             msg_dict, custom_values=defaults)
 
         # Find partners from emails (cc) and subscribe them
-        partner_ids = request._find_partner_from_emails(
+        partner_ids = request._mail_find_partner_from_emails(
             self._find_emails_from_msg(msg_dict),
             force_create=company.request_mail_create_partner_from_email)
-        partner_ids = [pid for pid in partner_ids if pid]
+        partner_ids = [p.id for p in partner_ids if p]
 
         if author:
             partner_ids += [author.id]
@@ -1244,9 +1256,9 @@ class RequestRequest(models.Model):
 
         # TODO: Add option in settings that could allow to force create
         # contacts mentioned in cc
-        partner_ids = self._find_partner_from_emails(
+        partner_ids = self._mail_find_partner_from_emails(
             email_list, force_create=False)
-        partner_ids = [pid for pid in partner_ids if pid]
+        partner_ids = [p.id for p in partner_ids if p]
         if partner_ids:
             self.message_subscribe(partner_ids)
 
@@ -1276,19 +1288,17 @@ class RequestRequest(models.Model):
                 record._message_add_suggested_recipient(
                     recipients, partner=record.partner_id, reason=reason)
 
-    def message_get_suggested_recipients(self):
+    def _message_get_suggested_recipients(self):
         recipients = super(
             RequestRequest, self
-        ).message_get_suggested_recipients()
+        )._message_get_suggested_recipients()
         try:
             self.request_add_suggested_recipients(recipients)
         except exceptions.AcccessError:  # pylint: disable=except-pass
             pass
         return recipients
 
-    def _message_post_after_hook(self, message, msg_vals,
-                                 model_description=False,
-                                 mail_auto_delete=True):
+    def _message_post_after_hook(self, message, msg_vals, *args, **kwargs):
         # Overridden to add update request text with data from original message
         # This is required to make images display correctly,
         # because usualy, in emails, image's src looks liks:
@@ -1308,9 +1318,7 @@ class RequestRequest(models.Model):
             })
 
         return super(RequestRequest, self)._message_post_after_hook(
-            message, msg_vals,
-            model_description=model_description,
-            mail_auto_delete=mail_auto_delete,
+            message, msg_vals, *args, **kwargs
         )
 
     def action_show_request_events(self):

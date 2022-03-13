@@ -63,7 +63,7 @@ odoo.define('crnd_wsd.tour_request_new', function (require) {
         {
             content: "Check that error message shown",
             trigger: "#request-error-list" +
-                " ul > li:containsExact('Test user_error')",
+                " ul > li > p:containsExact('Test user_error')",
         },
         {
             content: "Close error message",
@@ -82,7 +82,7 @@ odoo.define('crnd_wsd.tour_request_new', function (require) {
         },
         {
             content: "Check that error message shown",
-            trigger: "#request-error-list ul > li:containsExact('Unknown" +
+            trigger: "#request-error-list ul > li > p:containsExact('Unknown" +
                 " server error. See server logs.')",
         },
         {

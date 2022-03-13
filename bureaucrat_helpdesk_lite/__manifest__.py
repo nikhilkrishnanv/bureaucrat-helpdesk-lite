@@ -7,7 +7,7 @@
 
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
-    'version': '12.0.1.4.0',
+    'version': '15.0.1.0.0',
     'category': 'Helpdesk',
 
     # any module necessary for this one to work correctly
@@ -30,5 +30,5 @@
     'price': 0.0,
     'currency': 'EUR',
     "live_test_url": "https://yodoo.systems/saas/"
-                     "template/helpdesk-lite-demo-data-69",
+                     "template/bureaucrat-helpdesk-lite-14-0-demo-246",
 }

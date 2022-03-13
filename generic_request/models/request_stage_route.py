@@ -1,7 +1,6 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import (ValidationError,
                              AccessError)
-from odoo import SUPERUSER_ID
 
 
 class RequestStageRoute(models.Model):
@@ -15,16 +14,16 @@ class RequestStageRoute(models.Model):
 
     name = fields.Char(readonly=False, translate=True)
     sequence = fields.Integer(
-        default=5, index=True, required=True, track_visibility='onchange')
+        default=5, index=True, required=True, tracking=True)
     stage_from_id = fields.Many2one(
         'request.stage', 'From', ondelete='restrict',
-        required=True, index=True, track_visibility='onchange')
+        required=True, index=True, tracking=True)
     stage_to_id = fields.Many2one(
         'request.stage', 'To', ondelete='restrict',
-        required=True, index=True, track_visibility='onchange')
+        required=True, index=True, tracking=True)
     request_type_id = fields.Many2one(
         'request.type', 'Request Type', ondelete='cascade',
-        required=True, index=True, track_visibility='onchange')
+        required=True, index=True, tracking=True)
 
     allowed_group_ids = fields.Many2many(
         'res.groups', string='Allowed groups')
@@ -62,7 +61,7 @@ class RequestStageRoute(models.Model):
     def _ensure_can_move(self, request):
         self.ensure_one()
 
-        if self.env.user.id == SUPERUSER_ID:
+        if self.env.su:
             # no access rights checks for superuser
             return
 

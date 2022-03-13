@@ -196,7 +196,7 @@ class ResConfigSettings(models.TransientModel):
     request_event_live_time_uom = fields.Selection(
         related='company_id.request_event_live_time_uom',
         readonly=False,
-        help='Units of Measure'
+        help='Units of Measure', ondelete='cascade'
     )
     request_event_auto_remove = fields.Boolean(
         related='company_id.request_event_auto_remove', readonly=False)

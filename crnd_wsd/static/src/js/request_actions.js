@@ -208,7 +208,7 @@ odoo.define('crnd_wsd.request_actions', function (require) {
                 self.do_readreset();
                 self.toggle_readmore_mode();
 
-            }).fail(function (error) {
+            }, function (error) {
                 blockui.unblockUI();
                 return Dialog.alert(null, error.message, {
                     title: _t("Error"),
@@ -238,7 +238,7 @@ odoo.define('crnd_wsd.request_actions', function (require) {
                 } else {
                     window.location.reload(true);
                 }
-            }).fail(function (error) {
+            }, function (error) {
                 blockui.unblockUI();
                 return Dialog.alert(null, error.message, {
                     title: _t("Error"),

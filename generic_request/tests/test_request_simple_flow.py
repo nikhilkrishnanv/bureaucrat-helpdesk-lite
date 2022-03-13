@@ -22,7 +22,7 @@ class TestRequestSimpleFlow(RequestCase):
         # If no user specified for wizard, current user will be automaticaly
         # selected
         AssignWizard = self.env['request.wizard.assign']
-        assign_wizard = AssignWizard.sudo(manager).create({
+        assign_wizard = AssignWizard.with_user(manager).create({
             'request_ids': [(6, 0, self.request_1.ids)],
         })
         self.assertEqual(assign_wizard.user_id, manager)
@@ -33,7 +33,7 @@ class TestRequestSimpleFlow(RequestCase):
 
         # Undo assign request
         manager = self.request_manager
-        self.request_1.sudo(manager).write({'user_id': False})
+        self.request_1.with_user(manager).write({'user_id': False})
         self.assertFalse(self.request_1.user_id)
         self.assertFalse(self.request_1.date_assigned)
 
@@ -52,7 +52,7 @@ class TestRequestSimpleFlow(RequestCase):
         # If no user specified for wizard, current user will be automaticaly
         # selected
         AssignWizard = self.env['request.wizard.assign']
-        assign_wizard = AssignWizard.sudo(manager).create({
+        assign_wizard = AssignWizard.with_user(manager).create({
             'request_ids': [(6, 0, self.request_1.ids)],
             'comment': 'Test Comment',
         })
@@ -65,7 +65,6 @@ class TestRequestSimpleFlow(RequestCase):
             ('model', '=', 'request.request'),
             ('res_id', '=', self.request_1.id),
             ('body', 'ilike', 'Test Comment'),
-            ('subtype_id', '=', self.env.ref('mail.mt_note').id),
         ]))
 
     def test_098_simple_flow_assign_self_assign_to_me(self):
@@ -82,7 +81,7 @@ class TestRequestSimpleFlow(RequestCase):
 
         # If no user specified for wizard, current user will be automaticaly
         # selected
-        self.request_1.sudo(manager).action_request_assign_to_me()
+        self.request_1.with_user(manager).action_request_assign_to_me()
         self.assertEqual(self.request_1.user_id, manager)
         self.assertTrue(self.request_1.date_assigned)
 
@@ -123,7 +122,7 @@ class TestRequestSimpleFlow(RequestCase):
         self.assertEqual(self.request_1.stage_id, self.stage_draft)
 
         # Make request sent
-        self.request_1.sudo(user).write({'stage_id': self.stage_sent.id})
+        self.request_1.with_user(user).write({'stage_id': self.stage_sent.id})
         self.assertEqual(self.request_1.stage_id, self.stage_sent)
 
         # Make request confirmed
@@ -138,7 +137,7 @@ class TestRequestSimpleFlow(RequestCase):
         self.assertEqual(self.request_1.stage_id, self.stage_draft)
 
         # Make request sent
-        self.request_1.sudo(user).write({'stage_id': self.stage_sent.id})
+        self.request_1.with_user(user).write({'stage_id': self.stage_sent.id})
         self.assertEqual(self.request_1.stage_id, self.stage_sent)
         self.assertFalse(self.request_1.date_closed)
         self.assertFalse(self.request_1.closed_by_id)
@@ -155,13 +154,13 @@ class TestRequestSimpleFlow(RequestCase):
         self.assertEqual(self.request_1.stage_id, self.stage_draft)
 
         # Make request sent
-        self.request_1.sudo(user).write({'stage_id': self.stage_sent.id})
+        self.request_1.with_user(user).write({'stage_id': self.stage_sent.id})
         self.assertEqual(self.request_1.stage_id, self.stage_sent)
 
         # Make request confirmed
         # (User cannot reject request)
         with self.assertRaises(AccessError):
-            self.request_1.sudo(user).write(
+            self.request_1.with_user(user).write(
                 {'stage_id': self.stage_rejected.id})
 
     def test_145_simple_flow_access_reject_access_error_user_2(self):
@@ -171,13 +170,13 @@ class TestRequestSimpleFlow(RequestCase):
         self.assertEqual(self.request_1.stage_id, self.stage_draft)
 
         # Make request sent
-        self.request_1.sudo(user).write({'stage_id': self.stage_sent.id})
+        self.request_1.with_user(user).write({'stage_id': self.stage_sent.id})
         self.assertEqual(self.request_1.stage_id, self.stage_sent)
 
         # Make request reject
         # (Manager alson cannot reject request)
         with self.assertRaises(AccessError):
-            self.request_1.sudo(manager).write(
+            self.request_1.with_user(manager).write(
                 {'stage_id': self.stage_rejected.id})
 
     def test_150_simple_flow_access_reject_access_ok(self):
@@ -187,7 +186,7 @@ class TestRequestSimpleFlow(RequestCase):
         self.assertEqual(self.request_1.stage_id, self.stage_draft)
 
         # Make request sent
-        self.request_1.sudo(user).write({'stage_id': self.stage_sent.id})
+        self.request_1.with_user(user).write({'stage_id': self.stage_sent.id})
         self.assertEqual(self.request_1.stage_id, self.stage_sent)
         self.assertFalse(self.request_1.date_closed)
         self.assertFalse(self.request_1.closed_by_id)
@@ -195,7 +194,7 @@ class TestRequestSimpleFlow(RequestCase):
         # Make request rejected
         # Manager 2 can do it, because it is in list of allowed users for
         # this route
-        self.request_1.sudo(manager_2).write(
+        self.request_1.with_user(manager_2).write(
             {'stage_id': self.stage_rejected.id})
         self.assertEqual(self.request_1.stage_id, self.stage_rejected)
         self.assertTrue(self.request_1.date_closed)
@@ -209,20 +208,20 @@ class TestRequestSimpleFlow(RequestCase):
         self.assertEqual(self.request_1.stage_id, self.stage_draft)
 
         # Make request sent
-        self.request_1.sudo(user).write({'stage_id': self.stage_sent.id})
+        self.request_1.with_user(user).write({'stage_id': self.stage_sent.id})
         self.assertEqual(self.request_1.stage_id, self.stage_sent)
         self.assertFalse(self.request_1.date_closed)
         self.assertFalse(self.request_1.closed_by_id)
 
         # Make request rejected
-        self.request_1.sudo(manager_2).write(
+        self.request_1.with_user(manager_2).write(
             {'stage_id': self.stage_rejected.id})
         self.assertEqual(self.request_1.stage_id, self.stage_rejected)
         self.assertTrue(self.request_1.date_closed)
         self.assertEqual(self.request_1.closed_by_id, manager_2)
 
         # Go to draft state again
-        self.request_1.sudo(user).write({'stage_id': self.stage_draft.id})
+        self.request_1.with_user(user).write({'stage_id': self.stage_draft.id})
         self.assertEqual(self.request_1.stage_id, self.stage_draft)
         self.assertFalse(self.request_1.closed)
 

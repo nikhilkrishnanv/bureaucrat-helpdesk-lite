@@ -3,11 +3,10 @@ odoo.define('generic_request.field_request_html', function (require) {
 
     var registry = require('web.field_registry');
     var core = require('web.core');
-    var editor_backend = require('web_editor.backend');
 
     var _t = core._t;
 
-    var FieldRequestHtml = editor_backend.FieldTextHtmlSimple.extend({
+    var FieldRequestHtml = require('web_editor.field.html').extend({
         className: 'oe_form_field oe_form_field_html_text request-html-field',
 
         init: function () {

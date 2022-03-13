@@ -25,6 +25,11 @@ class TestRequestMailNotificationLinks(AccessRulesFixMixinMT, HttpCase):
             'generic_request.request_type_sequence'
         ).message_subscribe(self.request_demo_user.partner_id.ids)
 
+    def flush_tracking(self):
+        """ Force the creation of tracking values. """
+        self.env['base'].flush()
+        self.cr.precommit.run()
+
     @mute_logger('odoo.addons.mail.models.mail_mail',
                  'requests.packages.urllib3.connectionpool',
                  'odoo.models.unlink')
@@ -66,7 +71,7 @@ class TestRequestMailNotificationLinks(AccessRulesFixMixinMT, HttpCase):
                  'requests.packages.urllib3.connectionpool',
                  'odoo.models.unlink')
     def test_change_employee(self):
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.request_demo_user
         ).with_context(
             mail_create_nolog=True,
@@ -76,6 +81,7 @@ class TestRequestMailNotificationLinks(AccessRulesFixMixinMT, HttpCase):
                 'generic_request.request_type_sequence').id,
             'request_text': 'Test',
         })
+        self.flush_tracking()
 
         request.message_subscribe(
             partner_ids=self.request_demo_user.partner_id.ids,
@@ -84,14 +90,16 @@ class TestRequestMailNotificationLinks(AccessRulesFixMixinMT, HttpCase):
                 self.env.ref(
                     'generic_request.mt_request_stage_changed')
             ).ids)
+        self.flush_tracking()
         with disable_mail_auto_delete(self.env):
-            request.sudo(self.user_root).with_context(
+            request.with_user(self.user_root).with_context(
                 mail_notrack=False,
             ).write({
                 'stage_id': self.env.ref(
                     'generic_request.'
                     'request_stage_type_sequence_sent').id,
             })
+            self.flush_tracking()
 
         messages = self.env['mail.mail'].search([
             ('model', '=', 'request.request'),
@@ -99,6 +107,7 @@ class TestRequestMailNotificationLinks(AccessRulesFixMixinMT, HttpCase):
             ('body_html', 'ilike',
              '%%/mail/view/request/%s%%' % request.id),
         ])
+        self.flush_tracking()  # TODO: Do we need it here?
         self.assertEqual(len(messages), 1)
 
         self.authenticate(self.request_demo_user.login, 'demo')

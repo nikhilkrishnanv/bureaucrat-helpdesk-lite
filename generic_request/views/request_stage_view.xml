@@ -51,8 +51,8 @@
                 <field name="name"/>
                 <field name="code"/>
                 <field name="type_id"/>
-                <field name="res_bg_color" widget="colorpicker"/>
-                <field name="res_label_color" widget="colorpicker"/>
+                <field name="res_bg_color" widget="color"/>
+                <field name="res_label_color" widget="color"/>
                 <field name="closed"/>
                 <field name="route_in_count"/>
                 <field name="route_out_count"/>
@@ -80,13 +80,11 @@
                             <field string="Routes Out" name="route_out_count"
                                    widget="statinfo"/>
                         </button>
-                        <button name="toggle_active" type="object"
-                                groups="generic_request.group_request_manager"
-                                class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button"
-                                   options='{"terminology": "archive"}'/>
-                        </button>
                     </div>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived"
+                            bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
                     <div class="oe_title">
                         <h1><label for="name" class="oe_edit_only"/><field name="name"/></h1>
                         <h2><field name="request_type_id" readonly="1"/></h2>
@@ -102,12 +100,12 @@
                                     <field name="use_custom_colors"/>
                                 </group>
                                 <group attrs="{'invisible': [('use_custom_colors', '=', True)]}">
-                                    <field name="res_bg_color" widget="colorpicker"/>
-                                    <field name="res_label_color" widget="colorpicker"/>
+                                    <field name="res_bg_color" widget="color"/>
+                                    <field name="res_label_color" widget="color"/>
                                 </group>
                                 <group attrs="{'invisible': [('use_custom_colors', '=', False)]}">
-                                    <field name="bg_color" widget="colorpicker"/>
-                                    <field name="label_color" widget="colorpicker"/>
+                                    <field name="bg_color" widget="color"/>
+                                    <field name="label_color" widget="color"/>
                                 </group>
                             </group>
                         </page>

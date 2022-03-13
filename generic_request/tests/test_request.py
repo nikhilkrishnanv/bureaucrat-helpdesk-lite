@@ -329,6 +329,10 @@ class TestRequestBase(RequestCase):
             # Change request text
             request.request_text = 'Test 42'
 
+            # Refresh cache. This is required to read request_event_ids in
+            # correct order
+            request.refresh()
+
             # Check that new event generated
             self.assertEqual(request.request_event_count, 2)
             self.assertEqual(
@@ -439,7 +443,7 @@ class TestRequestBase(RequestCase):
             {'created', 'priority-changed'})
 
     def test_unlink_just_created(self):
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.request_manager
         ).create({
             'type_id': self.simple_type.id,
@@ -455,7 +459,7 @@ class TestRequestBase(RequestCase):
         request.unlink()
 
     def test_unlink_processed(self):
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.request_manager
         ).create({
             'type_id': self.simple_type.id,
@@ -552,7 +556,7 @@ class TestRequestBase(RequestCase):
 
         # By default suggestion for partner disabled, thus no partner
         # have to be suggested
-        result = request.message_get_suggested_recipients()[request.id]
+        result = request._message_get_suggested_recipients()[request.id]
         partner_ids = [r[0] for r in result if r[0]]
         self.assertFalse(partner_ids)
 
@@ -565,7 +569,7 @@ class TestRequestBase(RequestCase):
         # Enable suggestion for partner
         self.env.user.company_id.request_mail_suggest_partner = True
 
-        result = request.message_get_suggested_recipients()[request.id]
+        result = request._message_get_suggested_recipients()[request.id]
         partner_ids = [r[0] for r in result if r[0]]
         self.assertEqual(len(partner_ids), 1)
 
@@ -580,7 +584,7 @@ class TestRequestBase(RequestCase):
 
         # Ensure that after we subscribe partner it disappears from suggested
         # list
-        result = request.message_get_suggested_recipients()[request.id]
+        result = request._message_get_suggested_recipients()[request.id]
         partner_ids = [r[0] for r in result if r[0]]
         self.assertFalse(partner_ids)
 
@@ -811,7 +815,7 @@ class TestRequestBase(RequestCase):
         self.assertEqual(request.request_event_count, 2)
 
     def test_access_request_to_change_active(self):
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.request_manager
         ).create({
             'type_id': self.simple_type.id,
@@ -828,18 +832,18 @@ class TestRequestBase(RequestCase):
 
         # User wihout Request group allow archive can't change active
         with self.assertRaises(exceptions.AccessError):
-            request.sudo(self.request_manager).write({
+            request.with_user(self.request_manager).write({
                 'active': False})
 
         self.request_manager.groups_id |= group_allow_archive
         self.assertIn(
             group_allow_archive.id, self.request_manager.groups_id.ids)
-        request.sudo(self.request_manager).write({
+        request.with_user(self.request_manager).write({
             'active': False})
 
         # SUPERUSER can archive request witout group
         user_admin = self.env.ref('base.user_root')
         self.assertNotIn(
             group_allow_archive.id, user_admin.groups_id.ids)
-        self.request_1.sudo(user_admin).write({
+        self.request_1.with_user(user_admin).write({
             'active': True})

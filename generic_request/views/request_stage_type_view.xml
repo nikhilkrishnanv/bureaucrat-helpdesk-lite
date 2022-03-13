@@ -8,8 +8,8 @@
                 <field name="name"/>
                 <field name="code"/>
                 <field name="active"/>
-                <field name="bg_color" widget="colorpicker"/>
-                <field name="label_color" widget="colorpicker"/>
+                <field name="bg_color" widget="color"/>
+                <field name="label_color" widget="color"/>
                 <button name="action_show_requests"
                         type="object"
                         class="oe_stat_button" icon="fa-comments-o">
@@ -26,19 +26,18 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
+                   <div class="oe_button_box" name="button_box">
                         <button name="action_show_requests"
                                 type="object"
                                 class="oe_stat_button" icon="fa-comments-o">
                             <field string="Requests" name="request_count"
                                    widget="statinfo"/>
                         </button>
-                        <button name="toggle_active" type="object" groups="base.group_user"
-                                class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button"
-                                   options='{"terminology": "archive"}'/>
-                        </button>
                     </div>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived"
+                            bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Name..."/>
@@ -49,8 +48,8 @@
                     </div>
                     <group>
                         <group>
-                            <field name="bg_color" widget="colorpicker"/>
-                            <field name="label_color" widget="colorpicker"/>
+                            <field name="bg_color" widget="color"/>
+                            <field name="label_color" widget="color"/>
                         </group>
                     </group>
                 </sheet>

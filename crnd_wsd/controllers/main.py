@@ -4,9 +4,9 @@ import functools
 import werkzeug
 
 from odoo import _
+from odoo import SUPERUSER_ID
 from odoo import http
 from odoo.http import request
-from odoo.tools import ustr
 from odoo.osv import expression
 from odoo.exceptions import UserError, AccessError, ValidationError
 
@@ -34,7 +34,7 @@ def can_read_request(record):
     :return: True or False
     """
     try:
-        record = record.sudo(http.request.env.user)
+        record = record.with_user(http.request.env.user)
         record.check_access_rights('read')
         record.check_access_rule('read')
     except AccessError:
@@ -315,7 +315,7 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
                 lambda r: self._request_new_get_public_types(
                     category_id=r.id, **kwargs))
 
-        if len(public_categories) <= 1 and not http.request.debug:
+        if len(public_categories) <= 1 and not http.request.session.debug:
             return request.redirect(keep(
                 '/requests/new/step/type',
                 category_id=public_categories.id, **kwargs))
@@ -370,7 +370,7 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
         public_types = self._request_new_get_public_types(
             type_id=type_id, category_id=req_category.id, **kwargs)
 
-        if len(public_types) == 1 and not http.request.debug:
+        if len(public_types) == 1 and not http.request.session.debug:
             return request.redirect(keep(
                 '/requests/new/step/data', type_id=public_types.id,
                 category_id=req_category.id, **kwargs))
@@ -430,6 +430,7 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
         }
         company = http.request.env.user.company_id
         if http.request.website.is_request_create_public():
+            res['created_by_id'] = http.request.env.ref('base.user_root').id
             author_id = request.env[
                 'request.request'
             ].sudo()._get_or_create_partner_from_email(
@@ -482,13 +483,16 @@ class WebsiteRequest(WSDControllerMixin, http.Controller):
                     # If it is allowed to create request for public users and
                     # current user is public user, then we have to use sudo
                     # to handle access rights issues
-                    Request = Request.sudo()
+                    Request = Request.with_user(SUPERUSER_ID)
                 try:
                     req = Request.create(req_data)
                     req._request_bind_attachments()
                 except (UserError, AccessError, ValidationError) as exc:
+                    error_msg = "\n".join(
+                        str(a) for a in exc.args if a
+                    )
                     validation_errors.update({'error': {
-                        'error_text': ustr(exc)}})
+                        'error_text': error_msg}})
                 except Exception:
                     _logger.error(
                         "Error caught during request creation", exc_info=True)

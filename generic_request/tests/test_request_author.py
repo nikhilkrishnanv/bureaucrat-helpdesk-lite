@@ -1,4 +1,3 @@
-from odoo import SUPERUSER_ID
 from .common import RequestCase
 
 
@@ -31,7 +30,7 @@ class TestRequestAuthor(RequestCase):
         self.assertEqual(request.partner_id.id, self.partner1.id)
 
     def test_can_change_author(self):
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.request_manager).create({
                 'type_id': self.simple_type.id,
                 'category_id': self.general_category.id,
@@ -146,7 +145,7 @@ class TestRequestAuthor(RequestCase):
 
         self.simple_type.message_subscribe(self.demo_user.partner_id.ids)
 
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.demo_user
         ).create({
             'type_id': self.simple_type.id,
@@ -169,7 +168,7 @@ class TestRequestAuthor(RequestCase):
 
         self.simple_type.message_subscribe(self.demo_user.partner_id.ids)
 
-        request = self.env['request.request'].sudo(
+        request = self.env['request.request'].with_user(
             self.demo_user
         ).with_context(
             default_author_id=partner.id
@@ -187,7 +186,7 @@ class TestRequestAuthor(RequestCase):
         self.assertTrue(notification_msg)
         self.assertEqual(
             notification_msg[0].author_id,
-            self.env['res.users'].browse(SUPERUSER_ID).partner_id)
+            self.demo_user.partner_id)
 
     def test_author_compute_user_explicit(self):
         partner = self.env.ref('base.res_partner_3')

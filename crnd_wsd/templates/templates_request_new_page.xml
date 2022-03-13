@@ -276,20 +276,24 @@
                         <t t-call="crnd_wsd.wsd_request_new_selection_box"/>
                     </div>
 
-                    <section t-if="validation_errors" id="request-error-list" class="row">
-                        <div class="alert alert-danger alert-dismissible show col-sm-12" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span>X</span>
-                            </button>
-                            <h4 class="alert-heading">Following errors happened during request creation!</h4>
-                            <hr/>
-                            <ul>
-                                <t t-foreach="validation_errors.keys()" t-as="error_field">
-                                    <li t-esc="validation_errors[error_field]['error_text']"/>
-                                </t>
-                            </ul>
-                        </div>
-                    </section>
+                    <div t-if="validation_errors" class="row">
+                        <section id="request-error-list" class="col-sm-12">
+                            <div class="alert alert-danger alert-dismissible show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span>X</span>
+                                </button>
+                                <h4 class="alert-heading">Following errors happened during request creation!</h4>
+                                <hr/>
+                                <ul>
+                                    <li t-foreach="validation_errors.keys()" t-as="error_field">
+                                        <t t-foreach="validation_errors[error_field]['error_text'].split('\n')" t-as="error_line">
+                                            <p t-esc="error_line"/>
+                                        </t>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
 
                     <t t-if="request.website.is_public_user()">
                         <div t-if="request.website.get_request_public_ui() == 'restrict'"

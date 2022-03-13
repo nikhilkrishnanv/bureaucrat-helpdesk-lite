@@ -118,6 +118,7 @@ class TestWebsiteServiceDesk(TestPhantomTour):
         self.assertFalse(request.partner_id)
         self.assertEqual(request.author_name, 'John Doe')
         self.assertEqual(request.email_from, 'john@doe.net')
+        self.assertEqual(request.created_by_id, self.env.ref('base.user_root'))
 
     def test_tour_public_user_create_request_create_contact(self):
         self.env.user.company_id.request_wsd_public_ui_visibility = (
@@ -133,3 +134,4 @@ class TestWebsiteServiceDesk(TestPhantomTour):
         self.assertFalse(request.email_from)
         self.assertEqual(request.author_id.name, 'John Doe')
         self.assertEqual(request.author_id.email, 'john@doe.net')
+        self.assertEqual(request.created_by_id, self.env.ref('base.user_root'))

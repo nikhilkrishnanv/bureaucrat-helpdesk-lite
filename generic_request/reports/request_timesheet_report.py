@@ -1,4 +1,4 @@
-from odoo import models, fields, api, tools
+from odoo import models, fields, tools
 
 
 class RequestTimesheetReport(models.Model):
@@ -39,7 +39,6 @@ class RequestTimesheetReport(models.Model):
             ('partner_id', 'request_partner_id'),
         ]
 
-    @api.model_cr
     def init(self):
         # pylint: disable=sql-injection
         tools.drop_view_if_exists(self.env.cr, self._table)

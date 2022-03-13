@@ -259,4 +259,39 @@
         <field eval="0" name="perm_read"/>
         <field eval="1" name="perm_create"/>
     </record>
+
+    <!-- Rules for wizards -->
+    <record id="rule_wizard_request_wizard_assign" model="ir.rule">
+        <field name="name">access for request wizard assign</field>
+        <field name="model_id" ref="generic_request.model_request_wizard_assign"/>
+        <field name="domain_force">[
+                ('create_uid', '=', user.id),
+            ]</field>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+    <record id="rule_wizard_request_wizard_close" model="ir.rule">
+        <field name="name">access for request wizard close</field>
+        <field name="model_id" ref="generic_request.model_request_wizard_close"/>
+        <field name="domain_force">[
+                ('create_uid', '=', user.id),
+            ]</field>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
+    <record id="rule_wizard_request_wizard_stop_work" model="ir.rule">
+        <field name="name">access for request wizard stop work</field>
+        <field name="model_id" ref="generic_request.model_request_wizard_stop_work"/>
+        <field name="domain_force">[
+                ('create_uid', '=', user.id),
+            ]</field>
+        <field eval="1" name="perm_unlink"/>
+        <field eval="1" name="perm_write"/>
+        <field eval="1" name="perm_read"/>
+        <field eval="1" name="perm_create"/>
+    </record>
 </odoo>

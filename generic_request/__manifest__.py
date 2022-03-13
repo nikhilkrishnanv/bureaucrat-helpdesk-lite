@@ -10,10 +10,17 @@
     'author': "Center of Research and Development",
     'website': "https://crnd.pro",
     'category': 'Generic Request',
-    'version': '12.0.1.133.0',
+    'version': '15.0.1.1.0',
     'external_dependencies': {
         'python': [
             'html2text',
+        ],
+    },
+    'assets': {
+        'web.assets_backend': [
+            'generic_request/static/src/js/request_tag_widget.js'
+            'generic_request/static/src/js/field_request_html.js'
+            'generic_request/static/src/scss/*.scss',
         ],
     },
 
@@ -27,8 +34,6 @@
         'crnd_web_list_popover_widget',
         'crnd_web_tree_colored_field',
         'crnd_web_m2o_info_widget',
-        'web_widget_colorpicker',
-        'web_settings_dashboard',
         'base_setup',
     ],
 
@@ -48,7 +53,6 @@
         'data/request_timesheet_activity.xml',
         'data/request_channel.xml',
 
-        'views/templates.xml',
         'views/request_views.xml',
         'views/res_config_settings_view.xml',
         'views/request_category_view.xml',
@@ -73,14 +77,9 @@
         'wizard/request_wizard_assign.xml',
         'wizard/request_wizard_stop_work.xml',
 
-        'templates/templates.xml',
-
         'reports/request_timesheet_report.xml',
         'reports/request_graph_reports.xml',
     ],
-
-    'qweb': [
-        'static/src/xml/dashboard.xml'],
 
     'demo': [
         'demo/request_demo_users.xml',

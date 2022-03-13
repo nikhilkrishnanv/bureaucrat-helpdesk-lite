@@ -59,8 +59,8 @@ odoo.define('crnd_wsd.tour_request_base', function (require) {
         },
         {
             content: "Click on button 'Send'",
-            trigger: "#discussion form " +
-                "button[type='submit'].o_website_message_post_helper",
+            trigger: "#discussion form.o_portal_chatter_composer_form " +
+                "button[type='submit']:containsExact('Send')",
         },
         {
             content: "Check that message added to request",

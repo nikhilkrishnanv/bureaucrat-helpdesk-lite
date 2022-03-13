@@ -44,7 +44,7 @@ odoo.define('crnd_wsd.trumbowyg', function (require) {
                                 ajax.post(
                                     '/crnd_wsd/file_upload',
                                     ajax_data
-                                ).done(function (result) {
+                                ).then(function (result) {
                                     var data = JSON.parse(result);
                                     if (data.status === 'OK') {
                                         trumbowyg.execCmd(

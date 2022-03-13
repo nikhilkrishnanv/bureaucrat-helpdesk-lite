@@ -144,7 +144,7 @@
                                             icon="fa-stop"
                                             title="Stop"
                                             class="btn-xs btn-warning ml4"
-                                            attrs="{'invisible': [('timesheet_start_status', '=', 'not-started')]}"/>
+                                            attrs="{'invisible': ['|', ('timesheet_start_status', '=', 'not-started'), ('id', '=', False)]}"/>
                                 </span>
                             </div>
                             <div colspan="2" name="header_deadline" class="request-head-info-item">
@@ -468,9 +468,9 @@
                     </div>
                 </sheet>
                 <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
-                    <field name="activity_ids" widget="mail_activity"/>
-                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
                 </div>
             </form>
         </field>
@@ -677,7 +677,7 @@
                                 <t t-if="record.partner_id.raw_value">
                                     <div>
                                         <a type="open">
-                                            <img t-att-src="kanban_image('res.partner', 'image_small', record.partner_id.raw_value)"
+                                            <img t-att-src="kanban_image('res.partner', 'image_128', record.partner_id.raw_value)"
                                                  t-att-title="record.partner_id.value"
                                                  t-att-alt="record.partner_id.value"
                                                  class="oe_kanban_image"/>
@@ -698,7 +698,7 @@
                                          t-att-title="'Created by\n' + record.author_id.value + '\n' + record.date_created.value">
                                         <t t-if="record.author_id.raw_value">
                                             <a type="open">
-                                                <img t-att-src="kanban_image('res.partner', 'image_small', record.author_id.raw_value)"
+                                                <img t-att-src="kanban_image('res.partner', 'image_128', record.author_id.raw_value)"
                                                      t-att-alt="record.author_id.value"
                                                      class="oe_kanban_image"/>
                                             </a>
@@ -714,7 +714,7 @@
                                          t-att-title="'Assigned to\n' + record.user_id.value + '\n' + record.date_assigned.value">
                                         <t t-if="record.user_id.raw_value">
                                             <a type="open">
-                                                <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)"
+                                                <img t-att-src="kanban_image('res.users', 'image_128', record.user_id.raw_value)"
                                                      t-att-alt="record.user_id.value"
                                                      class="oe_kanban_image"/>
                                             </a>
@@ -730,7 +730,7 @@
                                          t-att-title="'Closed by\n' + record.closed_by_id.value + '\n' + record.date_closed.value">
                                         <t t-if="record.closed_by_id.raw_value">
                                             <a type="open">
-                                                <img t-att-src="kanban_image('res.users', 'image_small', record.closed_by_id.raw_value)"
+                                                <img t-att-src="kanban_image('res.users', 'image_128', record.closed_by_id.raw_value)"
                                                      t-att-alt="record.closed_by_id.value"
                                                      class="oe_kanban_image"/>
                                             </a>

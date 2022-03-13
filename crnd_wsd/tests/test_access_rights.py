@@ -34,7 +34,7 @@ class TestWSDRequestAccessRights(AccessRightsCase):
         with mute_logger('odoo.models'):
             with self.assertRaises(exceptions.AccessError):
                 # pylint: disable=pointless-statement
-                self.ut_category_demo_general.sudo(
+                self.ut_category_demo_general.with_user(
                     self.demo_test_user_1).read(['name'])
 
         simple_group = self.env['res.groups'].create({
@@ -56,7 +56,7 @@ class TestWSDRequestAccessRights(AccessRightsCase):
         with mute_logger('odoo.models'):
             with self.assertRaises(exceptions.AccessError):
                 # pylint: disable=pointless-statement
-                self.ut_category_demo_general.sudo(
+                self.ut_category_demo_general.with_user(
                     self.demo_test_user_1).read(['name'])
 
         website_user = self.env.ref(
@@ -70,14 +70,15 @@ class TestWSDRequestAccessRights(AccessRightsCase):
         # Ensure, after adding to group simple_group the
         # simple_category is readable
         self.assertTrue(
-            self.ut_category_demo_general.sudo(
+            self.ut_category_demo_general.with_user(
                 self.demo_test_user_1).read(['name']))
 
     def test_type_access_rights_0010(self):
         with mute_logger('odoo.models'):
             with self.assertRaises(exceptions.AccessError):
                 # pylint: disable=pointless-statement
-                self.ut_simple_type.sudo(self.demo_test_user_1).read(['name'])
+                self.ut_simple_type.with_user(
+                    self.demo_test_user_1).read(['name'])
 
         simple_group = self.env['res.groups'].create({
             'name': 'Test simple group'
@@ -98,7 +99,8 @@ class TestWSDRequestAccessRights(AccessRightsCase):
         with mute_logger('odoo.models'):
             with self.assertRaises(exceptions.AccessError):
                 # pylint: disable=pointless-statement
-                self.ut_simple_type.sudo(self.demo_test_user_1).read(['name'])
+                self.ut_simple_type.with_user(
+                    self.demo_test_user_1).read(['name'])
 
         website_user = self.env.ref(
             'crnd_wsd.group_service_desk_website_user')
@@ -114,5 +116,5 @@ class TestWSDRequestAccessRights(AccessRightsCase):
 
         # Ensure, after adding to group simple_group the
         # simple_category is readable
-        self.assertTrue(self.ut_simple_type.sudo(
+        self.assertTrue(self.ut_simple_type.with_user(
             self.demo_test_user_1).read(['name']))

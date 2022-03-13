@@ -4,11 +4,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0+e\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-21 16:26+0000\n"
-"PO-Revision-Date: 2020-05-21 16:26+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2020-07-27 15:52+0000\n"
+"PO-Revision-Date: 2020-07-27 15:52+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -96,19 +96,20 @@ msgid "<strong>Created</strong>"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/helpers.py:104
-#: code:addons/crnd_wsd/controllers/helpers.py:110
-#: code:addons/crnd_wsd/controllers/helpers.py:117
-#: code:addons/crnd_wsd/controllers/helpers.py:143
-#: code:addons/crnd_wsd/controllers/helpers.py:154
+#: code:addons/crnd_wsd/controllers/helpers.py:0
 #, python-format
 msgid "Access denied"
 msgstr ""
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request__access_warning
+msgid "Access warning"
+msgstr ""
+
+#. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_filterbox
 msgid "All"
-msgstr "Alle"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_type__website_comments_closed
@@ -133,7 +134,7 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
 msgid "Author"
-msgstr "Autor"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request__author_avatar
@@ -143,7 +144,7 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Back"
-msgstr "Zurück"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.view_request_stage_route_form
@@ -157,11 +158,11 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/xml/templates.xml:11
+#: code:addons/crnd_wsd/static/src/xml/templates.xml:0
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_new_select_param
 #, python-format
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.request_short_info
@@ -169,7 +170,7 @@ msgstr "Abbrechen"
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_new_selection_box
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 msgid "Category"
-msgstr "Kategorie"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
@@ -181,7 +182,7 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Close"
-msgstr "Schließen"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_filterbox
@@ -206,22 +207,22 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 msgid "Comments"
-msgstr "Kommentare"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model,name:crnd_wsd.model_res_company
 msgid "Companies"
-msgstr "Unternehmen"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model,name:crnd_wsd.model_res_config_settings
 msgid "Config Settings"
-msgstr "Konfiguration "
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "Create"
-msgstr "Anlegen"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request
@@ -232,7 +233,7 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_action_log
 msgid "Created by"
-msgstr "Erstellt von"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
@@ -255,12 +256,17 @@ msgid "Current stage"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields,help:crnd_wsd.field_request_request__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__danger
 msgid "Danger"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__dark
 msgid "Dark"
 msgstr ""
 
@@ -285,14 +291,14 @@ msgid "Deadline: {{req.deadline_date}}"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__default
 msgid "Default"
 msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_new_select_param__selection__radio
 msgid "Description"
-msgstr "Beschreibung"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,help:crnd_wsd.field_request_type__website_comments_closed
@@ -301,15 +307,26 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:31
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:261
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #, python-format
 msgid "Discard"
 msgstr ""
 
 #. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_ir_http__display_name
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_category__display_name
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_kind__display_name
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request__display_name
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route__display_name
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__display_name
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_company__display_name
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/blockui.js:13
+#: code:addons/crnd_wsd/static/src/js/blockui.js:0
 #, python-format
 msgid "Don't leave yet,<br />it's still loading..."
 msgstr ""
@@ -317,14 +334,11 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:201
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:214
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:233
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:244
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #, python-format
 msgid "Error"
 msgstr ""
@@ -347,17 +361,22 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
 msgid "Hours"
-msgstr "Stunden"
-
-#. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/helpers.py:24
-#, python-format
-msgid ""
-"Image size excessive, uploaded images must be smaller than 42 million pixel"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields,field_description:crnd_wsd.field_ir_http__id
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_category__id
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_kind__id
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request__id
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route__id
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type__id
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_company__id
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__info
 msgid "Info"
 msgstr ""
 
@@ -375,25 +394,37 @@ msgid "Kind"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields,field_description:crnd_wsd.field_ir_http____last_update
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_category____last_update
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_kind____last_update
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request____last_update
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_stage_route____last_update
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_type____last_update
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_company____last_update
+#: model:ir.model.fields,field_description:crnd_wsd.field_res_config_settings____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__light
 msgid "Light"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__link
 msgid "Link"
 msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/blockui.js:10
+#: code:addons/crnd_wsd/static/src/js/blockui.js:0
 #, python-format
 msgid "Loading..."
 msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/blockui.js:20
+#: code:addons/crnd_wsd/static/src/js/blockui.js:0
 #, python-format
 msgid "Maybe you should consider reloading the application by pressing F5..."
 msgstr ""
@@ -406,22 +437,22 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_navigation
 msgid "New"
-msgstr "Neu"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_new_select_param
 msgid "Next"
-msgstr "Weiter"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:ir.model.fields,field_description:crnd_wsd.field_request_request__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr "Nächste Aktivitätsfrist"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_filterbox
 msgid "Open"
-msgstr "Offen"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
@@ -437,13 +468,18 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:259
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
 #, python-format
 msgid "Please, fill response text!"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__primary
 msgid "Primary"
 msgstr ""
 
@@ -455,15 +491,15 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 msgid "Read more"
-msgstr "Mehr lesen"
+msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_extra_action:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_extra_action__redirect_to_my
 msgid "Redirect to My Requests"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:res.company,request_wsd_public_ui_visibility:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__res_company__request_wsd_public_ui_visibility__redirect
 msgid "Redirect to login"
 msgstr ""
 
@@ -521,13 +557,13 @@ msgid "Request kind"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:403
+#: code:addons/crnd_wsd/controllers/main.py:0
 #, python-format
 msgid "Request text is empty!"
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:410
+#: code:addons/crnd_wsd/controllers/main.py:0
 #, python-format
 msgid "Request text is too long!"
 msgstr ""
@@ -539,15 +575,14 @@ msgid "Requests"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:res.company,request_wsd_public_ui_visibility:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__res_company__request_wsd_public_ui_visibility__restrict
 msgid "Restricted UI"
 msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:26
-#: code:addons/crnd_wsd/static/src/js/request_actions.js:260
-#: code:addons/crnd_wsd/static/src/xml/templates.xml:10
+#: code:addons/crnd_wsd/static/src/js/request_actions.js:0
+#: code:addons/crnd_wsd/static/src/xml/templates.xml:0
 #, python-format
 msgid "Save"
 msgstr ""
@@ -558,8 +593,13 @@ msgid "Search by name, type, category or request message"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__secondary
 msgid "Secondary"
+msgstr ""
+
+#. module: crnd_wsd
+#: model:ir.model.fields,field_description:crnd_wsd.field_request_request__access_token
+msgid "Security Token"
 msgstr ""
 
 #. module: crnd_wsd
@@ -575,7 +615,7 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
 msgid "Send"
-msgstr "Senden"
+msgstr ""
 
 #. module: crnd_wsd
 #: model:website.menu,name:crnd_wsd.menu_service_desk
@@ -617,46 +657,32 @@ msgid "Sign Up"
 msgstr ""
 
 #. module: crnd_wsd
-#: model:ir.model.fields,help:crnd_wsd.field_request_request__assignee_avatar
-#: model:ir.model.fields,help:crnd_wsd.field_request_request__author_avatar
-#: model:ir.model.fields,help:crnd_wsd.field_request_request__closed_by_avatar
-#: model:ir.model.fields,help:crnd_wsd.field_request_request__created_by_avatar
-msgid ""
-"Small-sized image of this contact. It is automatically resized as a 64x64px "
-"image, with aspect ratio preserved. Use this field anywhere a small image is "
-"required."
-msgstr ""
-"Miniaturbild des Kontakts. Es wird automatisch auf 64x64px heruntergerechnet "
-"unter Beibehaltung der Seitenverhältnisse. Benutzen Sie dieses Feld überall, "
-"wo ein Miniaturbild benötigt wird."
-
-#. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_body
 msgid "Stage"
-msgstr "Stufe"
+msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/blockui.js:11
+#: code:addons/crnd_wsd/static/src/js/blockui.js:0
 #, python-format
 msgid "Still loading..."
 msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/blockui.js:12
+#: code:addons/crnd_wsd/static/src/js/blockui.js:0
 #, python-format
 msgid "Still loading...<br />Please be patient."
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__success
 msgid "Success"
 msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/blockui.js:17
+#: code:addons/crnd_wsd/static/src/js/blockui.js:0
 #, python-format
 msgid "Take a minute to get a coffee,<br />because it's loading..."
 msgstr ""
@@ -693,7 +719,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_simplified_line
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_table
 msgid "Type"
-msgstr "Typ"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_progress
@@ -703,7 +729,7 @@ msgid ""
 msgstr ""
 
 #. module: crnd_wsd
-#: code:addons/crnd_wsd/controllers/main.py:468
+#: code:addons/crnd_wsd/controllers/main.py:0
 #, python-format
 msgid "Unknown server error. See server logs."
 msgstr ""
@@ -731,7 +757,7 @@ msgid "Visible in Website"
 msgstr ""
 
 #. module: crnd_wsd
-#: selection:request.stage.route,website_button_style:0
+#: model:ir.model.fields.selection,name:crnd_wsd.selection__request_stage_route__website_button_style__warning
 msgid "Warning"
 msgstr ""
 
@@ -800,7 +826,7 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/blockui.js:14
+#: code:addons/crnd_wsd/static/src/js/blockui.js:0
 #, python-format
 msgid ""
 "You may not believe it, <br/> but the application is actually loading..."
@@ -813,7 +839,7 @@ msgstr ""
 
 #. module: crnd_wsd
 #. openerp-web
-#: code:addons/crnd_wsd/static/src/js/widgets.js:80
+#: code:addons/crnd_wsd/static/src/js/widgets.js:0
 #, python-format
 msgid "less"
 msgstr ""
@@ -821,14 +847,14 @@ msgstr ""
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_timesheet_info
 msgid "of"
-msgstr "von"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_new_select_param
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_requests_new_request_data
 msgid "or"
-msgstr "oder"
+msgstr ""
 
 #. module: crnd_wsd
 #: model_terms:ir.ui.view,arch_db:crnd_wsd.wsd_request_new_select_param

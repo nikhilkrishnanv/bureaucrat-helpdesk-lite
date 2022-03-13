@@ -29,7 +29,6 @@ class RequestEventType(models.Model):
             return self.browse(event_type_id)
         return self.browse()
 
-    @api.multi
     def name_get(self):
         return [(rec.id, '%s / %s' % (
             rec.category_id.name, rec.name)) for rec in self]

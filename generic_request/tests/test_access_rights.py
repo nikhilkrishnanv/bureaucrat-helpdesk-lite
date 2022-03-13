@@ -114,10 +114,10 @@ class TestRequestAccessRights(AccessRightsCase):
 
             with self.assertRaises(exceptions.AccessError):
                 with self.env.cr.savepoint():
-                    request.sudo(self.demo_user).write({
+                    request.with_user(self.demo_user).write({
                         'request_text': 'Test',
                     })
 
             with self.assertRaises(exceptions.AccessError):
                 with self.env.cr.savepoint():
-                    request.sudo(self.demo_user).unlink()
+                    request.with_user(self.demo_user).unlink()

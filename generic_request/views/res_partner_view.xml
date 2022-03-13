@@ -9,7 +9,7 @@
             <field name="mobile" position="after">
                 <field name="request_count"/>
             </field>
-            <xpath expr="//div[hasclass('oe_kanban_partner_links')]" position="inside">
+            <xpath expr="//span[hasclass('oe_kanban_partner_links')]" position="after">
                 <span t-if="record.request_count.value>0"
                       title="Requests"
                       class="badge">
